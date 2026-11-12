@@ -1,0 +1,425 @@
+{
+  "ticket_count": 500,
+  "configurations": [
+    {
+      "top_k": 1,
+      "min_score": 0.0,
+      "answerable": 357,
+      "hit_rate": 90.5,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 100.0,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 1,
+      "min_score": 0.3,
+      "answerable": 357,
+      "hit_rate": 90.5,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 100.0,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 1,
+      "min_score": 0.35,
+      "answerable": 357,
+      "hit_rate": 90.5,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 99.3,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 1,
+      "min_score": 0.4,
+      "answerable": 357,
+      "hit_rate": 90.5,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 99.3,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 1,
+      "min_score": 0.45,
+      "answerable": 357,
+      "hit_rate": 90.5,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 92.3,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 1,
+      "min_score": 0.5,
+      "answerable": 357,
+      "hit_rate": 90.5,
+      "abstain_rate_on_answerable": 0.3,
+      "noise_rate_on_unanswerable": 91.6,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 1,
+      "min_score": 0.55,
+      "answerable": 357,
+      "hit_rate": 90.2,
+      "abstain_rate_on_answerable": 1.4,
+      "noise_rate_on_unanswerable": 90.9,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 3,
+      "min_score": 0.0,
+      "answerable": 357,
+      "hit_rate": 95.0,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 100.0,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 3,
+      "min_score": 0.3,
+      "answerable": 357,
+      "hit_rate": 95.0,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 100.0,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 3,
+      "min_score": 0.35,
+      "answerable": 357,
+      "hit_rate": 95.0,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 99.3,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 3,
+      "min_score": 0.4,
+      "answerable": 357,
+      "hit_rate": 95.0,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 99.3,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 3,
+      "min_score": 0.45,
+      "answerable": 357,
+      "hit_rate": 94.7,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 92.3,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 3,
+      "min_score": 0.5,
+      "answerable": 357,
+      "hit_rate": 94.7,
+      "abstain_rate_on_answerable": 0.3,
+      "noise_rate_on_unanswerable": 91.6,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 3,
+      "min_score": 0.55,
+      "answerable": 357,
+      "hit_rate": 93.6,
+      "abstain_rate_on_answerable": 1.4,
+      "noise_rate_on_unanswerable": 90.9,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 5,
+      "min_score": 0.0,
+      "answerable": 357,
+      "hit_rate": 97.2,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 100.0,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 5,
+      "min_score": 0.3,
+      "answerable": 357,
+      "hit_rate": 97.2,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 100.0,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 5,
+      "min_score": 0.35,
+      "answerable": 357,
+      "hit_rate": 97.2,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 99.3,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 5,
+      "min_score": 0.4,
+      "answerable": 357,
+      "hit_rate": 97.2,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 99.3,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 5,
+      "min_score": 0.45,
+      "answerable": 357,
+      "hit_rate": 96.9,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 92.3,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 5,
+      "min_score": 0.5,
+      "answerable": 357,
+      "hit_rate": 96.1,
+      "abstain_rate_on_answerable": 0.3,
+      "noise_rate_on_unanswerable": 91.6,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 5,
+      "min_score": 0.55,
+      "answerable": 357,
+      "hit_rate": 93.8,
+      "abstain_rate_on_answerable": 1.4,
+      "noise_rate_on_unanswerable": 90.9,
+      "strategy": "section",
+      "chunks": 145
+    },
+    {
+      "top_k": 1,
+      "min_score": 0.0,
+      "answerable": 357,
+      "hit_rate": 89.1,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 100.0,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 1,
+      "min_score": 0.3,
+      "answerable": 357,
+      "hit_rate": 89.1,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 97.2,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 1,
+      "min_score": 0.35,
+      "answerable": 357,
+      "hit_rate": 89.1,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 93.0,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 1,
+      "min_score": 0.4,
+      "answerable": 357,
+      "hit_rate": 89.1,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 92.3,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 1,
+      "min_score": 0.45,
+      "answerable": 357,
+      "hit_rate": 89.1,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 92.3,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 1,
+      "min_score": 0.5,
+      "answerable": 357,
+      "hit_rate": 88.8,
+      "abstain_rate_on_answerable": 0.3,
+      "noise_rate_on_unanswerable": 89.5,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 1,
+      "min_score": 0.55,
+      "answerable": 357,
+      "hit_rate": 88.5,
+      "abstain_rate_on_answerable": 1.7,
+      "noise_rate_on_unanswerable": 87.4,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 3,
+      "min_score": 0.0,
+      "answerable": 357,
+      "hit_rate": 93.6,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 100.0,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 3,
+      "min_score": 0.3,
+      "answerable": 357,
+      "hit_rate": 93.6,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 97.2,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 3,
+      "min_score": 0.35,
+      "answerable": 357,
+      "hit_rate": 93.3,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 93.0,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 3,
+      "min_score": 0.4,
+      "answerable": 357,
+      "hit_rate": 93.3,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 92.3,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 3,
+      "min_score": 0.45,
+      "answerable": 357,
+      "hit_rate": 93.3,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 92.3,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 3,
+      "min_score": 0.5,
+      "answerable": 357,
+      "hit_rate": 92.4,
+      "abstain_rate_on_answerable": 0.3,
+      "noise_rate_on_unanswerable": 89.5,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 3,
+      "min_score": 0.55,
+      "answerable": 357,
+      "hit_rate": 91.3,
+      "abstain_rate_on_answerable": 1.7,
+      "noise_rate_on_unanswerable": 87.4,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 5,
+      "min_score": 0.0,
+      "answerable": 357,
+      "hit_rate": 96.9,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 100.0,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 5,
+      "min_score": 0.3,
+      "answerable": 357,
+      "hit_rate": 96.9,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 97.2,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 5,
+      "min_score": 0.35,
+      "answerable": 357,
+      "hit_rate": 96.6,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 93.0,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 5,
+      "min_score": 0.4,
+      "answerable": 357,
+      "hit_rate": 96.4,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 92.3,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 5,
+      "min_score": 0.45,
+      "answerable": 357,
+      "hit_rate": 95.0,
+      "abstain_rate_on_answerable": 0.0,
+      "noise_rate_on_unanswerable": 92.3,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 5,
+      "min_score": 0.5,
+      "answerable": 357,
+      "hit_rate": 93.3,
+      "abstain_rate_on_answerable": 0.3,
+      "noise_rate_on_unanswerable": 89.5,
+      "strategy": "document",
+      "chunks": 29
+    },
+    {
+      "top_k": 5,
+      "min_score": 0.55,
+      "answerable": 357,
+      "hit_rate": 91.3,
+      "abstain_rate_on_answerable": 1.7,
+      "noise_rate_on_unanswerable": 87.4,
+      "strategy": "document",
+      "chunks": 29
+    }
+  ]
+}

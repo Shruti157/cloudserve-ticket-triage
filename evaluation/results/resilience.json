@@ -1,0 +1,109 @@
+{
+  "marker": "f0627004",
+  "note": "Each case uses ticket text containing a run-unique marker, so the response cache cannot serve a previous answer and make an outage look like a healthy run.",
+  "cases": [
+    {
+      "case": "provider disconnected",
+      "condition_induced": "The model endpoint points at a closed port; the socket is refused.",
+      "expectation": "Every ticket escalates with confidence 0.0 and the run continues.",
+      "tickets": 3,
+      "crashed": false,
+      "actions": [
+        "escalate"
+      ],
+      "all_escalated_or_answered": true,
+      "every_ticket_has_a_reason": true,
+      "degraded_flagged": 3,
+      "confidences": [
+        0.0
+      ],
+      "seconds": 6.03,
+      "example_reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Classifier unavailable; routed to a human by the confidence floor. (ModelUnavailable)"
+    },
+    {
+      "case": "provider timeout",
+      "condition_induced": "Every call raises a read timeout after the configured 60 seconds.",
+      "expectation": "Same as an outage: escalate, flag degraded, continue.",
+      "tickets": 3,
+      "crashed": false,
+      "actions": [
+        "escalate"
+      ],
+      "all_escalated_or_answered": true,
+      "every_ticket_has_a_reason": true,
+      "degraded_flagged": 3,
+      "confidences": [
+        0.0
+      ],
+      "seconds": 0.01,
+      "example_reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Classifier unavailable; routed to a human by the confidence floor. (ModelUnavailable)"
+    },
+    {
+      "case": "rate limited after retries",
+      "condition_induced": "429 on every attempt, backoff exhausted.",
+      "expectation": "Escalate rather than crash; the allowance is not burned further.",
+      "tickets": 3,
+      "crashed": false,
+      "actions": [
+        "escalate"
+      ],
+      "all_escalated_or_answered": true,
+      "every_ticket_has_a_reason": true,
+      "degraded_flagged": 3,
+      "confidences": [
+        0.0
+      ],
+      "seconds": 0.01,
+      "example_reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Classifier unavailable; routed to a human by the confidence floor. (ModelUnavailable)"
+    },
+    {
+      "case": "no retrieval hit",
+      "condition_induced": "A query with no lexical overlap with any article.",
+      "expectation": "Retrieval returns nothing and routing escalates with a readable reason.",
+      "tickets": 1,
+      "crashed": false,
+      "actions": [
+        "escalate"
+      ],
+      "all_escalated_or_answered": true,
+      "every_ticket_has_a_reason": true,
+      "degraded_flagged": 0,
+      "confidences": [
+        0.45
+      ],
+      "seconds": 1.35,
+      "example_reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Text is too vague to determine a specific issue."
+    },
+    {
+      "case": "malformed input",
+      "condition_induced": "Empty, null, nested, oversized and control-character bodies.",
+      "expectation": "Each produces a decision; none raises.",
+      "tickets": 6,
+      "crashed": false,
+      "actions": [
+        "escalate"
+      ],
+      "all_escalated_or_answered": true,
+      "every_ticket_has_a_reason": true,
+      "degraded_flagged": 0,
+      "confidences": [
+        0.0,
+        0.55,
+        0.65,
+        0.92
+      ],
+      "seconds": 5.57,
+      "example_reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. The ticket has no usable content."
+    },
+    {
+      "case": "corpus missing",
+      "condition_induced": "data/documentation.json is absent.",
+      "expectation": "This is the one condition that must NOT degrade. An empty index would process every ticket, escalate all of them for want of a passage, and report a completed run \u2014 a failure that looks like success. A named exception is raised at startup instead.",
+      "raised": true,
+      "exception": "CorpusMissingError",
+      "message": "The documentation corpus is missing at /Users/jarvis/Workspace/assignment/FDE_Capstone_Complete 2/data/this_file_does_not_exist.json. Every answer this system produces is grounded in it, so a run without it would escalate every ticket and still report success. Restore data/documentation.json from the project pack and run again.",
+      "result": "correct: refused to start with an empty index"
+    }
+  ],
+  "all_conditions_survived": true
+}

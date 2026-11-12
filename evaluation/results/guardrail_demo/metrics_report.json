@@ -1,0 +1,793 @@
+{
+  "run": {
+    "run_id": "run-20261112T183151Z",
+    "system_version": "1.0.0",
+    "completed_at": "2026-11-12T18:32:29+00:00",
+    "input_file": "data/guardrail_trigger_tickets.json",
+    "tickets_in_file": 5,
+    "labels_present": true,
+    "model": "openai/gpt-oss-20b",
+    "provider": "groq",
+    "retrieval_backend": "lexical",
+    "confidence_threshold": 0.75,
+    "retrieval_min_score": 0.45,
+    "retrieval_top_k": 3,
+    "wall_clock_seconds": 38.5,
+    "unattended": true,
+    "model_calls": {
+      "llm_calls": 8,
+      "cache_hits": 0,
+      "tokens_used": 7551,
+      "failures": 0
+    },
+    "tokens_per_ticket": 1510.2
+  },
+  "volume": {
+    "tickets_processed": 5,
+    "answered_automatically": 1,
+    "escalated": 4,
+    "blocked_by_guardrails": 2,
+    "degraded": 0,
+    "by_channel": {
+      "chat": 1,
+      "email": 3,
+      "forum": 1
+    }
+  },
+  "business": {
+    "first_contact_resolution_pct": 20.0,
+    "first_contact_resolution_baseline_pct": 42.0,
+    "first_contact_resolution_target_pct": 60.0,
+    "escalation_rate_pct": 80.0,
+    "escalation_rate_baseline_pct": 58.0,
+    "escalation_rate_target_pct": 30.0,
+    "mean_time_to_first_reply_minutes": 0.401,
+    "median_time_to_first_reply_minutes": 0.401,
+    "mean_time_to_first_reply_baseline_minutes": 600.0,
+    "note": "Time to first reply is the system's own processing latency. It excludes the queueing a production deployment would add and is therefore a floor, not a forecast."
+  },
+  "technical": {
+    "classification": {
+      "available": true,
+      "labelled_tickets": 5,
+      "accuracy_pct": 80.0,
+      "weighted_precision_pct": 80.0,
+      "macro_precision_pct": 66.7,
+      "macro_recall_pct": 66.7,
+      "target_precision_pct": 85.0,
+      "per_class": {
+        "account_access": {
+          "support": 1,
+          "precision_pct": 100.0,
+          "recall_pct": 100.0,
+          "f1_pct": 100.0
+        },
+        "authentication_failure": {
+          "support": 1,
+          "precision_pct": 100.0,
+          "recall_pct": 100.0,
+          "f1_pct": 100.0
+        },
+        "configuration_help": {
+          "support": 0,
+          "precision_pct": 0.0,
+          "recall_pct": 0.0,
+          "f1_pct": 0.0
+        },
+        "data_residency": {
+          "support": 1,
+          "precision_pct": 0.0,
+          "recall_pct": 0.0,
+          "f1_pct": 0.0
+        },
+        "rate_limit": {
+          "support": 1,
+          "precision_pct": 100.0,
+          "recall_pct": 100.0,
+          "f1_pct": 100.0
+        },
+        "security_incident": {
+          "support": 1,
+          "precision_pct": 100.0,
+          "recall_pct": 100.0,
+          "f1_pct": 100.0
+        }
+      },
+      "top_confusions": [
+        {
+          "actual": "data_residency",
+          "predicted": "configuration_help",
+          "count": 1
+        }
+      ]
+    },
+    "latency_seconds": {
+      "mean": 7.707,
+      "median": 3.058,
+      "p95": 24.038,
+      "max": 24.038,
+      "target_p95": 3.0
+    },
+    "citation_accuracy_pct": 100.0,
+    "citation_target_pct": 95.0,
+    "citations_checked": 1,
+    "retrieval": {
+      "answerable_tickets": 2,
+      "hit_rate_pct": 100.0,
+      "abstain_rate_on_answerable_pct": 0.0,
+      "correct_abstain_on_unanswerable_pct": 0.0
+    },
+    "routing": {
+      "agreement_with_expected_route_pct": 100.0,
+      "answered_when_a_human_was_expected": 0,
+      "escalated_when_an_answer_was_expected": 0,
+      "note": "The two error columns are not interchangeable. Answering when a human was expected reaches a customer; escalating when an answer was expected costs agent time."
+    }
+  },
+  "governance": {
+    "decisions_logged": 22,
+    "tickets_with_decisions": 5,
+    "decision_log_coverage_complete": true,
+    "decisions_by_stage": {
+      "classification": {
+        "decisions": 5,
+        "tickets": 5
+      },
+      "generation": {
+        "decisions": 4,
+        "tickets": 4
+      },
+      "retrieval": {
+        "decisions": 5,
+        "tickets": 5
+      },
+      "routing": {
+        "decisions": 5,
+        "tickets": 5
+      },
+      "validation": {
+        "decisions": 3,
+        "tickets": 3
+      }
+    },
+    "guardrail_checks_run": {
+      "confidence_floor": 3,
+      "grounding": 3,
+      "instruction_integrity": 3,
+      "private_data": 3,
+      "tone_and_scope": 3
+    },
+    "guardrail_activations": {
+      "instruction_integrity": 1,
+      "private_data": 1
+    },
+    "private_data_detections": 1,
+    "must_not_auto_respond_breaches": 0,
+    "must_not_auto_respond_breach_ids": []
+  },
+  "calibration": {
+    "available": true,
+    "bands": [
+      {
+        "band": "0.6-0.8",
+        "tickets": 1,
+        "stated_confidence_pct": 75.0,
+        "observed_accuracy_pct": 0.0,
+        "gap_pct_points": 75.0
+      },
+      {
+        "band": "0.8-1.0",
+        "tickets": 4,
+        "stated_confidence_pct": 92.2,
+        "observed_accuracy_pct": 100.0,
+        "gap_pct_points": -7.8
+      }
+    ],
+    "largest_gap_pct_points": 75.0,
+    "within_five_points": false,
+    "condition": "Governance condition: stated confidence within five points of observed."
+  },
+  "fairness": {
+    "segments": {
+      "customer_tier": {
+        "business": {
+          "answered_automatically": {
+            "n": 1,
+            "rate_pct": 0.0,
+            "ci95": [
+              0.0,
+              79.3
+            ]
+          },
+          "retrieval_found_a_source": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          },
+          "routing_chose_to_answer": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          },
+          "guardrail_blocked": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          },
+          "mean_confidence": 0.85,
+          "classification_correct": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          }
+        },
+        "enterprise": {
+          "answered_automatically": {
+            "n": 2,
+            "rate_pct": 0.0,
+            "ci95": [
+              0.0,
+              65.8
+            ]
+          },
+          "retrieval_found_a_source": {
+            "n": 2,
+            "rate_pct": 100.0,
+            "ci95": [
+              34.2,
+              100.0
+            ]
+          },
+          "routing_chose_to_answer": {
+            "n": 2,
+            "rate_pct": 50.0,
+            "ci95": [
+              9.5,
+              90.5
+            ]
+          },
+          "guardrail_blocked": {
+            "n": 2,
+            "rate_pct": 50.0,
+            "ci95": [
+              9.5,
+              90.5
+            ]
+          },
+          "mean_confidence": 0.96,
+          "classification_correct": {
+            "n": 2,
+            "rate_pct": 100.0,
+            "ci95": [
+              34.2,
+              100.0
+            ]
+          },
+          "retrieval_hit": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          }
+        },
+        "standard": {
+          "answered_automatically": {
+            "n": 2,
+            "rate_pct": 50.0,
+            "ci95": [
+              9.5,
+              90.5
+            ]
+          },
+          "retrieval_found_a_source": {
+            "n": 2,
+            "rate_pct": 100.0,
+            "ci95": [
+              34.2,
+              100.0
+            ]
+          },
+          "routing_chose_to_answer": {
+            "n": 2,
+            "rate_pct": 50.0,
+            "ci95": [
+              9.5,
+              90.5
+            ]
+          },
+          "guardrail_blocked": {
+            "n": 2,
+            "rate_pct": 0.0,
+            "ci95": [
+              0.0,
+              65.8
+            ]
+          },
+          "mean_confidence": 0.835,
+          "classification_correct": {
+            "n": 2,
+            "rate_pct": 50.0,
+            "ci95": [
+              9.5,
+              90.5
+            ]
+          },
+          "retrieval_hit": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          }
+        }
+      },
+      "language_fluency": {
+        "fluent": {
+          "answered_automatically": {
+            "n": 5,
+            "rate_pct": 20.0,
+            "ci95": [
+              3.6,
+              62.4
+            ]
+          },
+          "retrieval_found_a_source": {
+            "n": 5,
+            "rate_pct": 100.0,
+            "ci95": [
+              56.6,
+              100.0
+            ]
+          },
+          "routing_chose_to_answer": {
+            "n": 5,
+            "rate_pct": 60.0,
+            "ci95": [
+              23.1,
+              88.2
+            ]
+          },
+          "guardrail_blocked": {
+            "n": 5,
+            "rate_pct": 40.0,
+            "ci95": [
+              11.8,
+              76.9
+            ]
+          },
+          "mean_confidence": 0.888,
+          "classification_correct": {
+            "n": 5,
+            "rate_pct": 80.0,
+            "ci95": [
+              37.6,
+              96.4
+            ]
+          },
+          "retrieval_hit": {
+            "n": 2,
+            "rate_pct": 100.0,
+            "ci95": [
+              34.2,
+              100.0
+            ]
+          }
+        }
+      },
+      "customer_region": {
+        "asia_pacific": {
+          "answered_automatically": {
+            "n": 1,
+            "rate_pct": 0.0,
+            "ci95": [
+              0.0,
+              79.3
+            ]
+          },
+          "retrieval_found_a_source": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          },
+          "routing_chose_to_answer": {
+            "n": 1,
+            "rate_pct": 0.0,
+            "ci95": [
+              0.0,
+              79.3
+            ]
+          },
+          "guardrail_blocked": {
+            "n": 1,
+            "rate_pct": 0.0,
+            "ci95": [
+              0.0,
+              79.3
+            ]
+          },
+          "mean_confidence": 1.0,
+          "classification_correct": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          }
+        },
+        "europe": {
+          "answered_automatically": {
+            "n": 3,
+            "rate_pct": 33.3,
+            "ci95": [
+              6.1,
+              79.2
+            ]
+          },
+          "retrieval_found_a_source": {
+            "n": 3,
+            "rate_pct": 100.0,
+            "ci95": [
+              43.8,
+              100.0
+            ]
+          },
+          "routing_chose_to_answer": {
+            "n": 3,
+            "rate_pct": 66.7,
+            "ci95": [
+              20.8,
+              93.9
+            ]
+          },
+          "guardrail_blocked": {
+            "n": 3,
+            "rate_pct": 33.3,
+            "ci95": [
+              6.1,
+              79.2
+            ]
+          },
+          "mean_confidence": 0.84,
+          "classification_correct": {
+            "n": 3,
+            "rate_pct": 66.7,
+            "ci95": [
+              20.8,
+              93.9
+            ]
+          },
+          "retrieval_hit": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          }
+        },
+        "north_america": {
+          "answered_automatically": {
+            "n": 1,
+            "rate_pct": 0.0,
+            "ci95": [
+              0.0,
+              79.3
+            ]
+          },
+          "retrieval_found_a_source": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          },
+          "routing_chose_to_answer": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          },
+          "guardrail_blocked": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          },
+          "mean_confidence": 0.92,
+          "classification_correct": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          },
+          "retrieval_hit": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          }
+        }
+      },
+      "channel": {
+        "chat": {
+          "answered_automatically": {
+            "n": 1,
+            "rate_pct": 0.0,
+            "ci95": [
+              0.0,
+              79.3
+            ]
+          },
+          "retrieval_found_a_source": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          },
+          "routing_chose_to_answer": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          },
+          "guardrail_blocked": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          },
+          "mean_confidence": 0.92,
+          "classification_correct": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          },
+          "retrieval_hit": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          }
+        },
+        "email": {
+          "answered_automatically": {
+            "n": 3,
+            "rate_pct": 33.3,
+            "ci95": [
+              6.1,
+              79.2
+            ]
+          },
+          "retrieval_found_a_source": {
+            "n": 3,
+            "rate_pct": 100.0,
+            "ci95": [
+              43.8,
+              100.0
+            ]
+          },
+          "routing_chose_to_answer": {
+            "n": 3,
+            "rate_pct": 66.7,
+            "ci95": [
+              20.8,
+              93.9
+            ]
+          },
+          "guardrail_blocked": {
+            "n": 3,
+            "rate_pct": 33.3,
+            "ci95": [
+              6.1,
+              79.2
+            ]
+          },
+          "mean_confidence": 0.923,
+          "classification_correct": {
+            "n": 3,
+            "rate_pct": 100.0,
+            "ci95": [
+              43.8,
+              100.0
+            ]
+          },
+          "retrieval_hit": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          }
+        },
+        "forum": {
+          "answered_automatically": {
+            "n": 1,
+            "rate_pct": 0.0,
+            "ci95": [
+              0.0,
+              79.3
+            ]
+          },
+          "retrieval_found_a_source": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          },
+          "routing_chose_to_answer": {
+            "n": 1,
+            "rate_pct": 0.0,
+            "ci95": [
+              0.0,
+              79.3
+            ]
+          },
+          "guardrail_blocked": {
+            "n": 1,
+            "rate_pct": 0.0,
+            "ci95": [
+              0.0,
+              79.3
+            ]
+          },
+          "mean_confidence": 0.75,
+          "classification_correct": {
+            "n": 1,
+            "rate_pct": 0.0,
+            "ci95": [
+              0.0,
+              79.3
+            ]
+          }
+        }
+      },
+      "ticket_length": {
+        "long (500+)": {
+          "answered_automatically": {
+            "n": 1,
+            "rate_pct": 0.0,
+            "ci95": [
+              0.0,
+              79.3
+            ]
+          },
+          "retrieval_found_a_source": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          },
+          "routing_chose_to_answer": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          },
+          "guardrail_blocked": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          },
+          "mean_confidence": 0.85,
+          "classification_correct": {
+            "n": 1,
+            "rate_pct": 100.0,
+            "ci95": [
+              20.7,
+              100.0
+            ]
+          }
+        },
+        "medium (200-500)": {
+          "answered_automatically": {
+            "n": 4,
+            "rate_pct": 25.0,
+            "ci95": [
+              4.6,
+              69.9
+            ]
+          },
+          "retrieval_found_a_source": {
+            "n": 4,
+            "rate_pct": 100.0,
+            "ci95": [
+              51.0,
+              100.0
+            ]
+          },
+          "routing_chose_to_answer": {
+            "n": 4,
+            "rate_pct": 50.0,
+            "ci95": [
+              15.0,
+              85.0
+            ]
+          },
+          "guardrail_blocked": {
+            "n": 4,
+            "rate_pct": 25.0,
+            "ci95": [
+              4.6,
+              69.9
+            ]
+          },
+          "mean_confidence": 0.897,
+          "classification_correct": {
+            "n": 4,
+            "rate_pct": 75.0,
+            "ci95": [
+              30.1,
+              95.4
+            ]
+          },
+          "retrieval_hit": {
+            "n": 2,
+            "rate_pct": 100.0,
+            "ci95": [
+              34.2,
+              100.0
+            ]
+          }
+        }
+      }
+    },
+    "findings": [],
+    "largest_variation_pct_points": 0.0,
+    "condition_under_five_points": true,
+    "note": "The condition in the Evaluation Framework is under five percentage points of variation. Where a gap exceeds it, the per-stage columns say which stage produced it, and the confidence intervals say whether the segment is large enough for the point estimate to mean anything."
+  },
+  "not_measured_automatically": {
+    "satisfaction_proxy": "Requires human review against a rubric. The framework asks for two independent assessors; this project has one. The sampled figure and its limitations are in the report rather than here, because a number produced automatically would imply a method that was not used.",
+    "hallucination_rate_pct": "Requires human judgement over at least fifty responses by two assessors. The automated proxy that comes closest is citation_accuracy_pct, which is reported above and measures a narrower thing: whether each citation quotes the passage it names.",
+    "repeat_contact_rate_pct": "Needs a week of subsequent traffic from the same customers. A single evaluation run over a static file cannot observe it."
+  }
+}

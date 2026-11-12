@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # No key, no secret, no network call. The suite stands in for the
+      # provider with a fake client, which is what lets it run on a fork and
+      # what makes the outage tests honest: a suite that needs the provider
+      # cannot test losing it.
+      - name: Tests
+        run: python -m pytest tests/ -v
+
+      - name: Discovery analysis runs on the standard library alone
+        run: python -m scripts.discovery
+
+      - name: Retrieval tuning reproduces the recorded figures
+        run: python -m scripts.tune_retrieval
+
+      # The gate's own procedure, in miniature: the harness is pointed at a
+      # file that is not in the repository, with no credentials available.
+      # It must complete and write a report rather than refuse to start.
+      - name: Harness runs unattended against an unseen file with no key
+        env:
+          GROQ_API_KEY: ""
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          tickets = json.loads(pathlib.Path("data/validation_tickets.json").read_text())[:8]
+          for i, t in enumerate(tickets):
+              t["ticket_id"] = f"CI-{i:04d}"
+          pathlib.Path("/tmp/unseen_tickets.json").write_text(json.dumps(tickets))
+          PY
+          python -m evaluation.harness --input /tmp/unseen_tickets.json --output /tmp/ci_results
+          python - <<'PY'
+          import json, pathlib, sys
+          report = json.loads(pathlib.Path("/tmp/ci_results/metrics_report.json").read_text())
+          assert report["volume"]["tickets_processed"] == 8, report["volume"]
+          assert report["governance"]["decision_log_coverage_complete"], "decision log has gaps"
+          assert report["governance"]["must_not_auto_respond_breaches"] == 0
+          print("Unattended run completed and the decision log reconciles.")
+          PY
+
+      - name: No credential is committed anywhere in the tree or its history
+        run: python scripts/scan_for_secrets.py --history
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install flake8==7.1.1
+      - run: flake8 src evaluation scripts tests --max-line-length=100 --extend-ignore=E203,W503,E731

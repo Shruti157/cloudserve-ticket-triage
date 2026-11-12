@@ -1,0 +1,253 @@
+{
+  "ticket_count": 500,
+  "article_count": 29,
+  "EV-01_answerable_from_existing_docs": {
+    "count": 357,
+    "pct": 71.4,
+    "reading": "The answer usually already exists. The failure is in delivering it, not in having it."
+  },
+  "EV-02_historical_baseline": {
+    "first_contact_resolution_pct": 43.8,
+    "escalation_rate_pct": 56.2,
+    "repeat_contact_pct": 21.6,
+    "mean_resolution_minutes": 421.7,
+    "median_resolution_minutes": 214.0,
+    "mean_csat": 2.97
+  },
+  "EV-03_channels": {
+    "chat": {
+      "tickets": 155,
+      "share_pct": 31.0,
+      "answerable_from_docs_pct": 76.8,
+      "historical_fcr_pct": 44.5
+    },
+    "docs_comment": {
+      "tickets": 78,
+      "share_pct": 15.6,
+      "answerable_from_docs_pct": 61.5,
+      "historical_fcr_pct": 34.6
+    },
+    "email": {
+      "tickets": 212,
+      "share_pct": 42.4,
+      "answerable_from_docs_pct": 72.2,
+      "historical_fcr_pct": 44.8
+    },
+    "forum": {
+      "tickets": 55,
+      "share_pct": 11.0,
+      "answerable_from_docs_pct": 67.3,
+      "historical_fcr_pct": 50.9
+    }
+  },
+  "EV-04_intents": {
+    "classes": 22,
+    "distribution": {
+      "data_export": 29,
+      "data_residency": 29,
+      "rollback_request": 28,
+      "deployment_failure": 27,
+      "compliance_request": 26,
+      "sso_configuration": 26,
+      "security_incident": 26,
+      "database_issue": 26,
+      "api_usage_question": 24,
+      "billing_query": 24,
+      "performance_degradation": 23,
+      "quota_or_overage": 23,
+      "account_access": 22,
+      "onboarding": 22,
+      "integration_help": 21,
+      "webhook_issue": 21,
+      "feature_request": 20,
+      "authentication_failure": 20,
+      "api_key_issue": 18,
+      "configuration_help": 17,
+      "unclear_request": 15,
+      "rate_limit": 13
+    },
+    "must_not_auto_respond_classes": [
+      "compliance_request",
+      "feature_request",
+      "security_incident",
+      "unclear_request"
+    ],
+    "must_not_auto_respond_is_always_true_for_those_classes": true,
+    "must_not_auto_respond_tickets": 87,
+    "reading": "These four classes are a hard escalation rule rather than a threshold, because the label is a property of the class and not of how sure the classifier happens to be."
+  },
+  "EV-05_segments": {
+    "customer_tier": {
+      "business": {
+        "tickets": 164,
+        "share_pct": 32.8,
+        "historical_fcr_pct": 48.2,
+        "mean_csat": 2.91,
+        "answerable_from_docs_pct": 75.0,
+        "mean_ticket_chars": 157
+      },
+      "enterprise": {
+        "tickets": 83,
+        "share_pct": 16.6,
+        "historical_fcr_pct": 37.3,
+        "mean_csat": 3.05,
+        "answerable_from_docs_pct": 71.1,
+        "mean_ticket_chars": 161
+      },
+      "standard": {
+        "tickets": 253,
+        "share_pct": 50.6,
+        "historical_fcr_pct": 43.1,
+        "mean_csat": 2.98,
+        "answerable_from_docs_pct": 69.2,
+        "mean_ticket_chars": 158
+      }
+    },
+    "customer_region": {
+      "asia_pacific": {
+        "tickets": 119,
+        "share_pct": 23.8,
+        "historical_fcr_pct": 39.5,
+        "mean_csat": 2.94,
+        "answerable_from_docs_pct": 63.9,
+        "mean_ticket_chars": 154
+      },
+      "europe": {
+        "tickets": 151,
+        "share_pct": 30.2,
+        "historical_fcr_pct": 43.7,
+        "mean_csat": 3.01,
+        "answerable_from_docs_pct": 76.2,
+        "mean_ticket_chars": 162
+      },
+      "latin_america": {
+        "tickets": 60,
+        "share_pct": 12.0,
+        "historical_fcr_pct": 38.3,
+        "mean_csat": 2.73,
+        "answerable_from_docs_pct": 71.7,
+        "mean_ticket_chars": 155
+      },
+      "north_america": {
+        "tickets": 170,
+        "share_pct": 34.0,
+        "historical_fcr_pct": 48.8,
+        "mean_csat": 3.05,
+        "answerable_from_docs_pct": 72.4,
+        "mean_ticket_chars": 160
+      }
+    },
+    "language_fluency": {
+      "fluent": {
+        "tickets": 380,
+        "share_pct": 76.0,
+        "historical_fcr_pct": 43.2,
+        "mean_csat": 2.95,
+        "answerable_from_docs_pct": 71.1,
+        "mean_ticket_chars": 163
+      },
+      "non_fluent": {
+        "tickets": 120,
+        "share_pct": 24.0,
+        "historical_fcr_pct": 45.8,
+        "mean_csat": 3.04,
+        "answerable_from_docs_pct": 72.5,
+        "mean_ticket_chars": 145
+      }
+    }
+  },
+  "EV-06_expected_routing": {
+    "distribution": {
+      "auto_respond": 311,
+      "escalate": 189
+    },
+    "auto_respond_pct": 62.2,
+    "ceiling_note": "62.2% is the labelled ceiling on first contact resolution. A system answering more than that is answering things it should not."
+  },
+  "EV-07_corpus": {
+    "articles": 29,
+    "by_category": {
+      "authentication": 4,
+      "deployment": 4,
+      "api": 3,
+      "performance": 3,
+      "billing": 3,
+      "data": 3,
+      "security": 3,
+      "account": 2,
+      "integration": 2,
+      "onboarding": 2
+    },
+    "mean_chars": 1094,
+    "articles_not_reviewed_in_180_days": [],
+    "intents_with_at_least_one_unanswerable_ticket": [
+      "account_access",
+      "api_key_issue",
+      "api_usage_question",
+      "authentication_failure",
+      "billing_query",
+      "compliance_request",
+      "configuration_help",
+      "data_export",
+      "data_residency",
+      "database_issue",
+      "deployment_failure",
+      "feature_request",
+      "integration_help",
+      "onboarding",
+      "performance_degradation",
+      "quota_or_overage",
+      "rate_limit",
+      "rollback_request",
+      "security_incident",
+      "sso_configuration",
+      "unclear_request",
+      "webhook_issue"
+    ]
+  },
+  "EV-08_ticket_length": {
+    "min": 28,
+    "q1": 140,
+    "median": 161,
+    "q3": 181,
+    "max": 276,
+    "reading": "Every ticket is short. The longest is 276 characters, so any analysis that buckets at 500 characters finds an empty bucket and reports no variation."
+  },
+  "interview_claims_tested": [
+    {
+      "id": "CL-01",
+      "source": "Marcus Adeyemi, Head of Support",
+      "claim": "Enterprise customers are resolved on first contact more often than standard ones.",
+      "figure": "enterprise 37.3% (n=83) vs standard 43.1% (n=253)",
+      "verdict": "contradicted: the gap is 5.8 points in the opposite direction to the claim"
+    },
+    {
+      "id": "CL-02",
+      "source": "Governance Framework, section 3",
+      "claim": "Tickets written in non-fluent English are resolved less often today.",
+      "figure": "fluent 43.2% (n=380) vs non-fluent 45.8% (n=120); mean length 163 vs 145 chars",
+      "verdict": "not supported: the gap is 2.6 points, under 5.0"
+    },
+    {
+      "id": "CL-03",
+      "source": "Sofia Restrepo, tier one agent",
+      "claim": "Longer, more complex tickets are harder to resolve on first contact.",
+      "figure": "longest quartile (>181 chars, n=115) 47.8% vs shortest quartile (<140, n=115) 35.7%",
+      "verdict": "contradicted: the gap is 12.1 points in the opposite direction to the claim"
+    },
+    {
+      "id": "CL-04",
+      "source": "the reframe",
+      "claim": "The client needs a chatbot because answers are missing.",
+      "figure": "71.4% of tickets are answerable from the existing 29 articles, yet only 61.3% of those are resolved first time (against 0.0% of the rest)",
+      "verdict": "contradicted, and this is the central finding. Where the answer already exists, it still fails to reach the customer four times in ten. The constraint is delivery, not availability, so a chatbot that generates more answers addresses the wrong half."
+    },
+    {
+      "id": "CL-05",
+      "source": "Ravi Menon, customer",
+      "claim": "Tickets that are not resolved first time come back.",
+      "figure": "not: 38.4% repeat (n=281); resolved first time: 0.0% repeat (n=219)",
+      "verdict": "supported, and it compounds the cost: every unresolved ticket is close to a second ticket as well as an escalation."
+    }
+  ]
+}

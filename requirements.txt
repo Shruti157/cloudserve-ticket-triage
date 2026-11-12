@@ -1,0 +1,22 @@
+# Re-pinned from a verified install on Python 3.11 in November 2026.
+# The pack's 06_Configuration/requirements.txt does not resolve: it pins
+# openai==1.0.0 while langchain-openai==0.0.7 requires openai>=1.10.0, and pip
+# reports ResolutionImpossible. The reasons for each departure are in
+# docs/architecture.md (ADR-001 and ADR-003).
+
+# HTTP, configuration
+requests==2.32.3
+python-dotenv==1.0.1
+
+# API surface
+fastapi==0.115.6
+uvicorn==0.34.0
+pydantic==2.10.4
+
+# Monitoring
+prometheus-client==0.21.1
+
+# Tests
+pytest==8.3.4
+pytest-cov==6.0.0
+httpx==0.28.1
