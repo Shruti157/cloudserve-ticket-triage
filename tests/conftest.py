@@ -45,6 +45,7 @@ class FakeClient:
         self.cache_hits = 0
         self.tokens_used = 0
         self.failures = 0
+        self.throttle_seconds = 0.0
         self.seen: list[list[dict[str, str]]] = []
 
     def complete(self, messages, **kwargs) -> Completion:
@@ -68,6 +69,7 @@ class FakeClient:
             "cache_hits": self.cache_hits,
             "tokens_used": self.tokens_used,
             "failures": self.failures,
+            "throttle_seconds": self.throttle_seconds,
         }
 
 

@@ -97,6 +97,23 @@ def test_a_quote_too_short_to_verify_is_blocked():
     assert check_grounding(response, claims, [PASSAGE]).status == "block"
 
 
+def test_a_short_but_exactly_copied_clause_is_accepted():
+    """The verbatim match is the test; the word count only rejects fragments.
+
+    A six-word floor blocked 21 of 80 tickets on the first full run and every
+    one of them quoted the passage correctly.
+    """
+    response = GeneratedResponse(body="The account unlocks itself.", answered=True)
+    claims = [{"doc_id": "DOC-AUTH-001", "quote": "displays a red banner"}]
+    assert check_grounding(response, claims, [PASSAGE]).status == "pass"
+
+
+def test_a_short_quote_that_is_not_in_the_passage_is_still_blocked():
+    response = GeneratedResponse(body="x", answered=True)
+    claims = [{"doc_id": "DOC-AUTH-001", "quote": "displays a green banner"}]
+    assert check_grounding(response, claims, [PASSAGE]).status == "block"
+
+
 def test_punctuation_and_case_differences_do_not_break_a_genuine_quote():
     response = GeneratedResponse(body="x", answered=True)
     claims = [{"doc_id": "DOC-AUTH-001", "quote": "Banner AND unlocks, automatically; after THIRTY minutes!"}]

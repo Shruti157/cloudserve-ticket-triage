@@ -25,7 +25,7 @@ from . import classify as classify_mod
 from . import killswitch, route
 from .config import Config
 from .decision_log import DecisionLog
-from .generate import ESCALATION_TEXT, generate
+from .generate import ESCALATION_TEXT, GENERATION_MAX_PASSAGES, generate
 from .llm import LLMClient
 from .models import (
     Classification,
@@ -35,8 +35,16 @@ from .models import (
     Ticket,
     TicketOutcome,
 )
+from .prompts import load_prompt
 from .retrieval import LexicalIndex
 from .validate import blocked_by, run_guardrails
+
+# Read from the prompt files rather than written here. A literal drifts the
+# moment a prompt is edited, and a decision log that names the wrong version
+# is worse than one that names none: it invites reproduction against text that
+# never produced the decision.
+CLASSIFY_VERSION = load_prompt("PR-01").label
+GENERATE_VERSION = load_prompt("PR-02").label
 
 log = logging.getLogger(__name__)
 
@@ -59,7 +67,9 @@ class Pipeline:
     def process(self, ticket: Ticket) -> TicketOutcome:
         started = time.perf_counter()
         calls_before = self.client.calls_made + self.client.cache_hits
+        cache_before = self.client.cache_hits
         tokens_before = self.client.tokens_used
+        throttle_before = self.client.throttle_seconds
         outcome = TicketOutcome(
             ticket_id=ticket.ticket_id,
             channel=ticket.channel,
@@ -100,7 +110,9 @@ class Pipeline:
             log.debug(traceback.format_exc())
 
         outcome.latency_s = round(time.perf_counter() - started, 3)
+        outcome.throttle_s = round(self.client.throttle_seconds - throttle_before, 3)
         outcome.llm_calls = (self.client.calls_made + self.client.cache_hits) - calls_before
+        outcome.cache_hits = self.client.cache_hits - cache_before
         outcome.tokens_used = self.client.tokens_used - tokens_before
         return outcome
 
@@ -126,7 +138,7 @@ class Pipeline:
             alternatives=classification.alternatives,
             action_taken="classified",
             reason=classification.note or f"Urgency assessed as {classification.urgency}.",
-            prompt_version="PR-01 v1.3" if classification.source == "model" else "rule",
+            prompt_version=CLASSIFY_VERSION if classification.source == "model" else "rule",
             requirement_ids=REQUIREMENTS["classification"],
         )
 
@@ -159,7 +171,11 @@ class Pipeline:
             outcome.response_text = ESCALATION_TEXT
             return
 
-        response, claims = generate(ticket, classification, passages, self.client)
+        # Generation and the grounding check see exactly the same passages, so
+        # the model can never be blocked for failing to quote something it was
+        # not shown. Retrieval still records all of them.
+        grounding_passages = passages[:GENERATION_MAX_PASSAGES]
+        response, claims = generate(ticket, classification, grounding_passages, self.client)
         if not response.answered:
             outcome.degraded = outcome.degraded or bool(response.note)
             outcome.action = "escalate"
@@ -177,7 +193,7 @@ class Pipeline:
                 sources_used=[{"doc_id": p.doc_id, "score": p.score} for p in passages],
                 action_taken="escalate",
                 reason=outcome.reason,
-                prompt_version="PR-02 v1.4",
+                prompt_version=GENERATE_VERSION,
                 requirement_ids=REQUIREMENTS["generation"],
             )
             return
@@ -190,11 +206,11 @@ class Pipeline:
             sources_used=[{"doc_id": c["doc_id"], "score": 0.0} for c in claims],
             action_taken="drafted",
             reason=f"Drafted a reply citing {len(claims)} passage(s).",
-            prompt_version="PR-02 v1.4",
+            prompt_version=GENERATE_VERSION,
             requirement_ids=REQUIREMENTS["generation"],
         )
 
-        self._validate(ticket, classification, response, claims, passages, outcome)
+        self._validate(ticket, classification, response, claims, grounding_passages, outcome)
 
     def _retrieve(self, ticket: Ticket, outcome: TicketOutcome) -> list[Passage]:
         try:
@@ -276,7 +292,7 @@ class Pipeline:
             action_taken="block" if blocks else "auto_respond",
             reason=outcome.reason if blocks else "All guardrails passed; the reply was sent.",
             guardrail_results={f.name: f.status for f in findings},
-            prompt_version="PR-02 v1.4",
+            prompt_version=GENERATE_VERSION,
             requirement_ids=REQUIREMENTS["validation"],
         )
 

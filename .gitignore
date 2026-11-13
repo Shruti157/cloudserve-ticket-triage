@@ -1,6 +1,11 @@
 # Secrets. Never commit a real key.
 .env
 
+# Course materials. Supplied reading and templates, not part of the system.
+# The two datasets it carries are byte-identical to the copies in data/, which
+# are committed, so nothing here is needed to build or run anything.
+Capstone_Pack/
+
 # Python
 .venv/
 __pycache__/

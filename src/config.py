@@ -62,7 +62,7 @@ def _as_path(value: str) -> Path:
 class Config:
     provider: str = "groq"
     api_key: str = ""
-    model_name: str = "openai/gpt-oss-20b"
+    model_name: str = "qwen/qwen3.8-27b"
 
     retrieval_backend: str = "lexical"
     embedding_model: str = "all-MiniLM-L6-v2"
@@ -79,6 +79,11 @@ class Config:
     tokens_per_minute: int = 8000
     request_timeout_s: float = 60.0
     max_attempts: int = 4
+    # The longest this will wait out a provider throttle before giving up on a
+    # ticket and escalating it. A support system does not hold a customer for
+    # eight minutes because a free tier said so; it hands the ticket to a
+    # person. This also bounds the run, which the gate depends on.
+    max_throttle_wait_s: float = 90.0
 
     kill_switch_path: Path = field(default_factory=lambda: ROOT / "storage" / "KILL_SWITCH")
 
@@ -97,7 +102,7 @@ def load_config(env_file: str | os.PathLike[str] | None = None) -> Config:
     return Config(
         provider=provider,
         api_key=os.getenv(key_var, "").strip(),
-        model_name=os.getenv("MODEL_NAME", "openai/gpt-oss-20b").strip(),
+        model_name=os.getenv("MODEL_NAME", "qwen/qwen3.8-27b").strip(),
         retrieval_backend=os.getenv("RETRIEVAL_BACKEND", "lexical").strip().lower(),
         embedding_model=os.getenv("EMBEDDING_MODEL", "all-MiniLM-L6-v2").strip(),
         chroma_path=_as_path(os.getenv("CHROMA_PATH", "./storage/chroma")),
@@ -110,5 +115,6 @@ def load_config(env_file: str | os.PathLike[str] | None = None) -> Config:
         tokens_per_minute=int(os.getenv("TOKENS_PER_MINUTE", "8000")),
         request_timeout_s=float(os.getenv("REQUEST_TIMEOUT_S", "60")),
         max_attempts=int(os.getenv("MAX_ATTEMPTS", "4")),
+        max_throttle_wait_s=float(os.getenv("MAX_THROTTLE_WAIT_S", "90")),
         kill_switch_path=_as_path(os.getenv("KILL_SWITCH_PATH", "./storage/KILL_SWITCH")),
     )

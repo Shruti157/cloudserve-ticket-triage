@@ -15,6 +15,7 @@ to the model as data rather than as a continuation of its own system prompt.
 from __future__ import annotations
 
 import logging
+import re
 
 from .llm import LLMClient, ModelUnavailable, extract_json
 from .models import Classification, GeneratedResponse, Passage, Ticket
@@ -22,10 +23,23 @@ from .prompts import load_prompt
 
 log = logging.getLogger(__name__)
 
-# Trimmed because the per-minute token bucket is what sets the wall-clock floor
-# on a full run. Passages are already one per distinct document, so this cuts
-# the tail of a long article rather than a second source.
+# Token budget. The per-minute bucket is what sets the wall-clock floor on a
+# full run, so what generation is shown is a cost decision as well as a
+# quality one. Two choices, both measured in docs/architecture.md (ADR-006):
+#
+# Two articles, not three. Retrieval still returns and records three, because
+# hit rate is a measure of retrieval; the third is almost never the one cited
+# and costs roughly 430 tokens a ticket to carry.
+#
+# The Symptoms section is removed before sending. It is what made the article
+# match — a customer describes their symptom in the words that section uses —
+# but it tells the customer nothing they did not already know. The fix is in
+# Resolution. Dropping it is the rare cut that lowers cost and raises the
+# share of the payload that can actually answer the question.
+GENERATION_MAX_PASSAGES = 2
 MAX_PASSAGE_CHARS = 1600
+
+_SYMPTOMS_SECTION = re.compile(r"\n##\s+Symptoms\b.*?(?=\n##\s|\Z)", re.DOTALL | re.IGNORECASE)
 
 ESCALATION_TEXT = (
     "Thanks for getting in touch. Your ticket has been passed to a support "
@@ -37,7 +51,7 @@ ESCALATION_TEXT = (
 def format_passages(passages: list[Passage]) -> str:
     blocks = []
     for i, passage in enumerate(passages, start=1):
-        body = passage.text[:MAX_PASSAGE_CHARS]
+        body = _SYMPTOMS_SECTION.sub("", passage.text)[:MAX_PASSAGE_CHARS]
         blocks.append(
             f"--- PASSAGE {i} | doc_id={passage.doc_id} | relevance={passage.score:.2f} ---\n"
             f"{body}"
@@ -83,6 +97,7 @@ def generate(
             # guardrail checks the output whatever process produced it, and on
             # gpt-oss that reasoning was the larger half of the token bill.
             reasoning_effort="low",
+            stage="generate",
         )
         data = extract_json(completion.text)
     except (ModelUnavailable, ValueError) as exc:

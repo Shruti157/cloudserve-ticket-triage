@@ -108,8 +108,12 @@ class TicketOutcome:
     response_sent: bool = False
     response_text: str = ""
     latency_s: float = 0.0
+    # Of that latency, the part spent waiting on the free-tier token allowance.
+    # Reported separately so the system's own cost can be read off.
+    throttle_s: float = 0.0
     tokens_used: int = 0
     llm_calls: int = 0
+    cache_hits: int = 0
     degraded: bool = False
     errors: list[str] = field(default_factory=list)
     ticket_length: int = 0

@@ -119,7 +119,10 @@ def classify(ticket: Ticket, client: LLMClient) -> Classification:
             messages,
             prompt_version=prompt.label,
             max_tokens=500,
-            reasoning_effort="low",
+            # Classification decides every downstream step, so it is the one
+            # call worth paying reasoning tokens for.
+            reasoning_effort="medium",
+            stage="classify",
         )
         data = extract_json(completion.text)
     except (ModelUnavailable, ValueError) as exc:

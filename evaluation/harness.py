@@ -156,6 +156,13 @@ def run(input_path: Path, output_dir: Path, limit: int | None = None) -> dict[st
             "unattended": True,
             "model_calls": client.stats(),
             "tokens_per_ticket": round(client.tokens_used / max(1, len(outcomes)), 1),
+            "by_stage": client.by_stage,
+            "throttle_seconds": round(client.throttle_seconds, 1),
+            # The per-minute token allowance puts a floor under wall clock that
+            # no amount of code gets under. Reporting it next to the elapsed
+            # time separates "this run was badly paced" from "this run was as
+            # fast as the tier permits".
+            "tpm_floor_seconds": round(client.tokens_used / max(1, config.tokens_per_minute) * 60, 1),
         },
         "volume": metrics.volume(outcomes),
         "business": metrics.business(outcomes),
@@ -213,6 +220,22 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"| Blocked by a guardrail | {volume['blocked_by_guardrails']} |",
         f"| Processed in a degraded mode | {volume['degraded']} |",
         "",
+        "## Cost of the run",
+        "",
+        f"Elapsed {run['wall_clock_seconds'] / 60:.1f} min, of which "
+        f"{run.get('throttle_seconds', 0) / 60:.1f} min was spent waiting on the per-minute token "
+        f"allowance. The allowance implies a floor of about "
+        f"{run.get('tpm_floor_seconds', 0) / 60:.1f} min for this many tokens, so the time above "
+        f"that floor is the only part code can recover. A short run can finish under the floor by "
+        f"spending allowance that had already accumulated before it started.",
+        "",
+        "| Stage | Billed calls | Served from cache | Tokens |",
+        "|---|---|---|---|",
+        *[
+            f"| {stage} | {s['calls']} | {s['cached']} | {s['tokens']:,} |"
+            for stage, s in sorted(run.get("by_stage", {}).items())
+        ],
+        "",
         "## Business outcomes",
         "",
         "| Measure | Baseline | Target | This run |",
@@ -245,8 +268,13 @@ def render_markdown(report: dict[str, Any]) -> str:
     lines += [
         f"| Citation accuracy | 95% | {technical['citation_accuracy_pct']}% "
         f"({technical['citations_checked']} checked) |",
-        f"| Latency p95 | <3 s | {technical['latency_seconds']['p95']} s |",
-        f"| Latency median | — | {technical['latency_seconds']['median']} s |",
+        f"| Latency p95, as experienced on this free tier | <3 s "
+        f"| {technical['latency_seconds']['p95']} s |",
+        f"| Latency p95, excluding the token-allowance wait | <3 s "
+        f"| {technical['latency_seconds']['excluding_free_tier_wait']['p95']} s |",
+        f"| Latency p95, live calls only, excluding the wait | <3 s "
+        f"| {technical['latency_seconds']['live_calls_only_excluding_wait']['p95']} s "
+        f"({technical['latency_seconds']['live_calls_only_excluding_wait']['tickets']} tickets) |",
         "",
         "## Governance",
         "",

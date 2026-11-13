@@ -3,11 +3,25 @@
 Three things here exist because of how the free tier actually behaves rather
 than how it is documented.
 
-First, the binding limit on Groq is tokens per minute, not requests per day.
-The headers on a live account report 1,000 requests a day and 8,000 tokens a
-minute, continuously refilling. That makes the per-minute bucket a floor on
-wall-clock time rather than a ceiling on volume, so the pacer below spends
-time deliberately instead of discovering a 429.
+First, the binding limit is tokens per minute, and there is a second limit the
+headers do not mention at all. `scripts/probe_limits.py` asks this account
+directly: 1,000 requests a day and 8,000 tokens a minute, both continuously
+refilling, and no daily token figure anywhere in the headers. A 429 body then
+reports one: `TPD): Limit 200000, Used 199638`. So the published table, the
+headers and the enforcement all disagree, and only the last one stops a run.
+
+Each binds differently. The per-minute bucket is a floor on wall-clock time
+rather than a ceiling on volume -- at 1,416 tokens a ticket, 120 tickets
+cannot take less than 21 minutes on any machine -- so the pacer below spends
+that time deliberately instead of discovering a 429. The invisible daily limit
+is a ceiling on volume, reached at ticket 61 of the first full run, and the
+only defence against it is spending fewer tokens per ticket.
+
+Because the throughput cap binds and not per-request latency, concurrency
+would not help: parallel workers would reach the same 429s together and spend
+the same tokens more noisily. Each ticket is nonetheless isolated from its
+neighbours' failures, so a paid tier or a local model could be worked through
+a thread pool without reorganising the pipeline.
 
 Second, gpt-oss models bill hidden reasoning as output tokens and return it in
 a separate `reasoning` field. Reasoning effort is therefore set per task:
@@ -64,12 +78,46 @@ class _TokenPacer:
 
     def __init__(self, tokens_per_minute: int) -> None:
         self.capacity = max(1, tokens_per_minute)
-        self._tokens = float(self.capacity)
+        # Starts empty rather than full. A fresh process has no idea how much
+        # of the server's window the previous run already consumed, and a
+        # bucket that starts full bursts straight past the real allowance on
+        # the first few tickets. Groq answers that burst with a 429 carrying a
+        # five minute retry-after, so the optimistic start costs far more time
+        # than the one minute it saves.
+        self._tokens = 0.0
         self._last = time.monotonic()
         self._lock = threading.Lock()
 
-    def acquire(self, estimated: int) -> None:
+    def observe(self, remaining_tokens: float) -> None:
+        """Adopt the server's own count of what is left, up or down.
+
+        This assigns rather than taking a minimum, and the difference was
+        worth about seven minutes on an eighty ticket run. Taking a minimum
+        makes the estimate monotonically pessimistic: it can be revised down
+        by a server that reports a drained bucket but never revised back up by
+        one that reports a full one, so after the first busy moment the pacer
+        sat near zero and metered out every later call at the refill rate even
+        though the real allowance was untouched. Measured against a floor of
+        9.7 minutes of unavoidable waiting, it spent 17.3.
+
+        The server's figure is the authority on how much burst headroom exists,
+        so spending it is correct rather than reckless. Overspending is not
+        possible from here: the next response carries the new remaining count
+        and pacing tightens on its own.
+        """
+        with self._lock:
+            self._tokens = max(0.0, remaining_tokens)
+            self._last = time.monotonic()
+
+    def acquire(self, estimated: int) -> float:
+        """Blocks until the allowance permits the call. Returns seconds waited.
+
+        The caller reports that figure separately, because time spent waiting
+        for a free tier is not the system being slow and a latency number that
+        conflates the two cannot be acted on by the client.
+        """
         want = min(float(estimated), float(self.capacity))
+        waited = 0.0
         while True:
             with self._lock:
                 now = time.monotonic()
@@ -80,9 +128,11 @@ class _TokenPacer:
                 self._last = now
                 if self._tokens >= want:
                     self._tokens -= want
-                    return
+                    return waited
                 wait = (want - self._tokens) * 60.0 / self.capacity
-            time.sleep(min(wait, 20.0))
+            slept = min(wait, 20.0)
+            time.sleep(slept)
+            waited += slept
 
     def refund(self, tokens: int) -> None:
         with self._lock:
@@ -138,6 +188,17 @@ class LLMClient:
         self.cache_hits = 0
         self.tokens_used = 0
         self.failures = 0
+        # Seconds spent waiting on the free-tier allowance rather than on work.
+        self.throttle_seconds = 0.0
+        # Tokens and billed calls per task. An aggregate figure says the run is
+        # expensive; the split says which of the two calls to shorten, and
+        # stops the effort going into the cheaper one.
+        self.by_stage: dict[str, dict[str, int]] = {}
+
+    def _record(self, stage: str, tokens: int, billed: bool) -> None:
+        bucket = self.by_stage.setdefault(stage, {"tokens": 0, "calls": 0, "cached": 0})
+        bucket["tokens"] += tokens
+        bucket["calls" if billed else "cached"] += 1
 
     @staticmethod
     def estimate_tokens(messages: list[dict[str, str]], max_tokens: int) -> int:
@@ -153,15 +214,19 @@ class LLMClient:
         temperature: float = 0.0,
         reasoning_effort: str = "low",
         use_cache: bool = True,
+        stage: str = "other",
     ) -> Completion:
         """One completion, or ModelUnavailable. Never returns partial nonsense."""
         model = self.config.model_name
+        # Reasoning effort belongs in the key. Without it a run at a changed
+        # effort is served answers produced at the old one.
         key = self._cache.key(model, prompt_version, messages, f"{temperature}:{reasoning_effort}")
 
         if use_cache:
             hit = self._cache.get(key)
             if hit is not None:
                 self.cache_hits += 1
+                self._record(stage, hit[1], billed=False)
                 return Completion(text=hit[0], tokens=hit[1], cached=True, model=hit[2])
 
         if not self.config.has_credentials:
@@ -182,7 +247,7 @@ class LLMClient:
         last_error = "unknown"
 
         for attempt in range(1, self.config.max_attempts + 1):
-            self._pacer.acquire(estimate)
+            self.throttle_seconds += self._pacer.acquire(estimate)
             try:
                 response = self._session.post(
                     self.endpoint,
@@ -199,11 +264,29 @@ class LLMClient:
                 self._backoff(attempt)
                 continue
 
+            self._observe_headers(response.headers)
+
             if response.status_code == 429:
                 retry_after = float(response.headers.get("retry-after", 0) or 0)
-                log.warning("Rate limited; waiting %.1fs", max(retry_after, 2.0))
-                time.sleep(max(retry_after, 2.0) + attempt)
-                last_error = "rate limited (429)"
+                detail = response.text[:300].replace("\n", " ")
+                if retry_after > self.config.max_throttle_wait_s:
+                    # Longer than a customer should wait behind a free tier.
+                    # Escalating this ticket to a person is the right answer
+                    # and keeps the run bounded, which the gate depends on.
+                    self.failures += 1
+                    raise ModelUnavailable(
+                        f"Provider throttled for {retry_after:.0f}s, beyond the "
+                        f"{self.config.max_throttle_wait_s:.0f}s this will wait. "
+                        f"Ticket escalated. Provider said: {detail}"
+                    )
+                wait = max(retry_after, 2.0) + attempt
+                log.warning(
+                    "Rate limited; waiting %.0fs (attempt %d/%d). Provider said: %s",
+                    wait, attempt, self.config.max_attempts, detail,
+                )
+                self.throttle_seconds += wait
+                time.sleep(wait)
+                last_error = f"rate limited (429): {detail}"
                 continue
 
             if response.status_code >= 500:
@@ -235,10 +318,12 @@ class LLMClient:
                 payload["max_tokens"] = min(int(payload["max_tokens"] * 2), 2048)
                 payload["reasoning_effort"] = "low"
                 self.tokens_used += tokens
+                self._record(stage, tokens, billed=True)
                 continue
 
             self.calls_made += 1
             self.tokens_used += tokens
+            self._record(stage, tokens, billed=True)
             if use_cache:
                 self._cache.put(key, text, tokens, model)
             return Completion(text=text, tokens=tokens, cached=False, model=model)
@@ -246,16 +331,32 @@ class LLMClient:
         self.failures += 1
         raise ModelUnavailable(f"Gave up after {self.config.max_attempts} attempts: {last_error}")
 
+    def _observe_headers(self, headers) -> None:
+        """Re-seed the local bucket from the provider's own accounting.
+
+        The published table and the account's actual limits disagree often
+        enough that the headers are the only trustworthy source, and they also
+        reflect usage by anything else sharing the key.
+        """
+        remaining = headers.get("x-ratelimit-remaining-tokens")
+        if remaining is None:
+            return
+        try:
+            self._pacer.observe(float(remaining))
+        except (TypeError, ValueError):
+            pass
+
     @staticmethod
     def _backoff(attempt: int) -> None:
         time.sleep(min(2.0 ** attempt, 16.0))
 
-    def stats(self) -> dict[str, int]:
+    def stats(self) -> dict[str, float]:
         return {
             "llm_calls": self.calls_made,
             "cache_hits": self.cache_hits,
             "tokens_used": self.tokens_used,
             "failures": self.failures,
+            "throttle_seconds": round(self.throttle_seconds, 1),
         }
 
 

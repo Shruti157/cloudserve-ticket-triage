@@ -195,6 +195,14 @@ def technical(
     outcomes: list[TicketOutcome], truth: dict[str, dict[str, Any]], citation_checks: dict[str, Any]
 ) -> dict[str, Any]:
     latencies = [o.latency_s for o in outcomes]
+    # Latency with the free-tier wait removed. The target of three seconds is
+    # a statement about the system; time spent queueing behind a token
+    # allowance is a statement about the tier it was run on, and a single
+    # number that mixes them cannot be acted on by either audience.
+    working = [max(0.0, o.latency_s - o.throttle_s) for o in outcomes]
+    live = [
+        max(0.0, o.latency_s - o.throttle_s) for o in outcomes if o.llm_calls and not o.cache_hits
+    ]
     report: dict[str, Any] = {
         "classification": classification_report(outcomes, truth),
         "latency_seconds": {
@@ -203,6 +211,22 @@ def technical(
             "p95": _percentile(latencies, 0.95),
             "max": round(max(latencies), 3) if latencies else 0.0,
             "target_p95": TARGET["latency_p95_s"],
+            "excluding_free_tier_wait": {
+                "median": round(statistics.median(working), 3) if working else 0.0,
+                "p95": _percentile(working, 0.95),
+            },
+            "live_calls_only_excluding_wait": {
+                "tickets": len(live),
+                "median": round(statistics.median(live), 3) if live else None,
+                "p95": _percentile(live, 0.95) if live else None,
+            },
+            "note": (
+                "Three figures, because they answer different questions. The "
+                "first is what a customer on this free tier would experience. "
+                "The second removes the token-allowance wait. The third counts "
+                "only tickets answered by a live call, excluding cache hits, "
+                "and is the one to compare against the three second target."
+            ),
         },
         "citation_accuracy_pct": citation_checks.get("accuracy_pct"),
         "citation_target_pct": TARGET["citation_accuracy_pct"],

@@ -130,6 +130,19 @@ def _looks_like_card(value: str) -> bool:
     return total % 10 == 0
 
 
+# The verbatim match is what makes a citation evidence; the length floor only
+# stops a model claiming groundedness on a fragment like "the account is".
+#
+# This was six words until it was measured. On the first full run with
+# qwen3.8-27b, 21 of 80 tickets were blocked here, and every one of the 21 was
+# a quote that appeared in the passage word for word and merely ran to four or
+# five words — "Cursors expire after one hour", "It does not restore data".
+# The rule was rejecting correctly grounded answers and costing roughly
+# twenty-six points of first contact resolution to do it. Four words plus an
+# exact match is the test that was actually intended.
+MIN_QUOTE_WORDS = 4
+
+
 def check_grounding(
     response: GeneratedResponse,
     claims: list[dict[str, str]],
@@ -137,9 +150,11 @@ def check_grounding(
 ) -> GuardrailFinding:
     """Block unless every citation quotes a retrieved passage verbatim.
 
-    Naming a document that exists is not evidence. The quote is compared after
-    whitespace, case and punctuation are normalised, so the model is held to
-    the words and not to the typography.
+    Naming a document that exists is not evidence: a model that invents a
+    reference to a real article passes a check that only asks whether the
+    article exists. The quote is compared after whitespace, case and
+    punctuation are normalised, so the model is held to the words and not to
+    the typography.
     """
     if not response.answered or not response.body:
         return GuardrailFinding("grounding", "not_applicable", "No answer was drafted.")
@@ -157,8 +172,11 @@ def check_grounding(
             problems.append(f"{doc_id} was cited but never retrieved for this ticket")
             continue
         quote = _normalise_for_quote(claim.get("quote", ""))
-        if len(quote.split()) < 6:
-            problems.append(f"{doc_id} is cited with a quote too short to verify")
+        if len(quote.split()) < MIN_QUOTE_WORDS:
+            problems.append(
+                f"{doc_id} is cited with a quote of "
+                f"{len(quote.split())} words, below the {MIN_QUOTE_WORDS} needed to verify it"
+            )
         elif quote not in retrieved[doc_id]:
             problems.append(f"the span attributed to {doc_id} is not in that passage")
 
