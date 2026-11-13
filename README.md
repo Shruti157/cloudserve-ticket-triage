@@ -45,7 +45,7 @@ Open `.env` and put a key in `GROQ_API_KEY`. A free key, no card required, is
 at <https://console.groq.com/keys>. `.env` is already in `.gitignore`.
 
 Groq is the default because its free tier allows 1,000 requests a day against
-OpenRouter's 50, and a full run over 120 tickets needs roughly 170. To use
+OpenRouter's 50, and a full run over 120 tickets needs roughly 210. To use
 OpenRouter instead, set `LLM_PROVIDER=openrouter` and `OPENROUTER_API_KEY`.
 
 ### Check the installation
@@ -77,12 +77,25 @@ python -m src.api
 default. The harness processes whatever is in the file it is given, however
 many tickets that is.
 
-**Expected runtime.** About **4 to 7 minutes for 80 tickets** on a first run,
-and a few seconds on a repeat run because every model response is cached. The
-pace is set by Groq's free tier, which allows 8,000 tokens per *minute*; at
-roughly 1,100 tokens per ticket that is a floor of about 11 seconds per ten
-tickets however fast the machine is. A run that appears to pause is being
-throttled, not hung — progress is printed to stderr every ten tickets.
+**Expected runtime.** About **15 to 25 minutes for 80 tickets** on a first
+run, and a few seconds on a repeat run because every model response is
+cached. A run that appears to pause is being throttled, not hung — progress
+is printed to stderr every ten tickets.
+
+The pace is set by the free tier rather than by the machine. Groq allows
+8,000 tokens per *minute*, and this system spends about 1,400 tokens per
+ticket, so 80 tickets cannot finish in under about 14 minutes on any
+hardware, and 120 cannot finish in under about 21. Each report states its own
+floor next to its elapsed time so the two can be told apart.
+
+> **Before a long run, check the daily allowance.** There is also a cap of
+> 200,000 tokens per day, enforced per account, and it appears in no response
+> header — only in the body of a 429. A 120-ticket run needs roughly 170,000
+> of it, so it fits a fresh day's budget and will not fit a partly spent one.
+> Exhausting it mid-run is not a crash: the remaining tickets escalate, are
+> counted as `degraded`, and the report still completes. But the quality
+> figures from such a run describe the allowance, not the system. Run
+> `python -m scripts.probe_limits` first to see what your key actually has.
 
 ### Seeing a guardrail block
 
@@ -102,6 +115,7 @@ that blocks everything is not a guardrail suite.
 python -m scripts.discovery         # Stage 1 evidence from the ticket data
 python -m scripts.tune_retrieval    # chunking and threshold comparison
 python -m scripts.induce_failures   # every A11 failure condition, induced
+python -m scripts.probe_limits       # the rate limits this key actually has
 python scripts/scan_for_secrets.py --history
 ```
 
@@ -162,7 +176,7 @@ the reported figures were produced with.
 | Variable | Default | What it does |
 |---|---|---|
 | `LLM_PROVIDER` | `groq` | `groq` or `openrouter` |
-| `MODEL_NAME` | `openai/gpt-oss-20b` | Any chat model the provider offers |
+| `MODEL_NAME` | `qwen/qwen3.8-27b` | Any chat model the provider offers |
 | `CONFIDENCE_THRESHOLD` | `0.75` | Below this, a ticket goes to a person |
 | `RETRIEVAL_MIN_SCORE` | `0.45` | Below this, retrieval returns nothing |
 | `RETRIEVAL_TOP_K` | `3` | Maximum articles per ticket |
@@ -199,7 +213,7 @@ src/            the system.      ingest → classify → retrieve → route → 
 prompts/        versioned prompt files, each naming the requirements it serves
 evaluation/     the harness, the metrics, the fairness audit, and the results
 scripts/        preflight, discovery, retrieval tuning, induced failures, secret scan
-tests/          106 tests; no API key and no network required
+tests/          112 tests; no API key and no network required
 data/           the ticket sets, the 29-article corpus, the guardrail triggers
 docs/           problem statement, architecture decisions, governance, build notes
 storage/        gitignored: the decision log, the response cache, the kill switch
