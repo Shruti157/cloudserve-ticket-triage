@@ -29,7 +29,8 @@ def main() -> int:
     results = []
 
     version = sys.version_info
-    if version < (3, 10):
+    too_old = version < (3, 10)
+    if too_old:
         results.append(
             fail(
                 f"Python {version.major}.{version.minor}",
@@ -54,6 +55,14 @@ def main() -> int:
             fail("Dependencies", f"{exc}. Run: pip install -r requirements.txt")
         )
         print("\nStopping: nothing further can be checked without the dependencies.")
+        return 1
+
+    if too_old:
+        # Importing anything under src/ on an unsupported interpreter raises,
+        # and an uncaught traceback printed underneath a readable failure
+        # report is worse than no report: it reads as a crash in the checker
+        # rather than as the answer the checker was asked for.
+        print("\nStopping: the interpreter is too old for the rest of the checks.")
         return 1
 
     from src.config import load_config

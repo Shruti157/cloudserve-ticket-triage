@@ -1,55 +1,43 @@
-"""The pacer decides how long a run takes, so its arithmetic is tested.
+"""How the client reacts to a rate limit, which decides how long a run takes.
 
-Nothing here touches the network. The pacer is driven directly with the
-numbers a provider would have returned in its headers.
+There was a token pacer here that tried to predict the provider's remaining
+allowance from a local bucket and wait before each call. It was removed. A
+local model cannot know what the server's window actually holds, so it waited
+when there was headroom and still earned a 429 when it guessed high -- having
+already paid for the wait. Reading the provider's own reset hint off the 429
+is better information and usually asks for milliseconds.
+
+Nothing here touches the network.
 """
 
 from __future__ import annotations
 
-import time
-
-from src.llm import _TokenPacer
+from src.llm import _reset_hint_seconds
 
 
-def test_it_waits_before_the_first_call_because_it_cannot_know_the_window():
-    """A fresh process has no idea what the last one already spent.
-
-    Starting full would burst past the real allowance and earn a 429 carrying
-    a multi-minute retry-after, which costs more than the wait it saved.
-    """
-    pacer = _TokenPacer(tokens_per_minute=8000)
-    waited = pacer.acquire(estimated=800)
-    assert waited > 0
+def test_it_reads_a_plain_seconds_value():
+    assert _reset_hint_seconds({"retry-after": "2"}) == 2.0
 
 
-def test_a_reported_allowance_is_adopted_rather_than_only_lowered():
-    """The regression that cost seven minutes on an eighty ticket run.
-
-    Taking a minimum here made the estimate monotonically pessimistic: once
-    the bucket read low it could never be told it had refilled, so every later
-    call was metered out at the refill rate against an allowance that was
-    actually untouched.
-    """
-    pacer = _TokenPacer(tokens_per_minute=8000)
-    pacer.acquire(estimated=800)        # drains the local bucket
-    pacer.observe(remaining_tokens=7900)  # the server says there is room
-
-    started = time.monotonic()
-    waited = pacer.acquire(estimated=800)
-    assert waited == 0
-    assert time.monotonic() - started < 0.1
+def test_it_reads_the_millisecond_form_groq_sends():
+    """The common case, and the reason reacting beats predicting."""
+    assert _reset_hint_seconds({"x-ratelimit-reset-tokens": "547ms"}) == 0.547
 
 
-def test_a_drained_allowance_is_still_respected():
-    """Trusting the server has to cut both ways or it is just optimism."""
-    pacer = _TokenPacer(tokens_per_minute=8000)
-    pacer.observe(remaining_tokens=7900)
-    pacer.observe(remaining_tokens=10)
-    assert pacer.acquire(estimated=800) > 0
+def test_it_reads_the_minutes_and_seconds_form():
+    assert _reset_hint_seconds({"x-ratelimit-reset-requests": "1m26.4s"}) == 86.4
 
 
-def test_it_never_demands_more_than_one_window_holds():
-    """An estimate above capacity must not wedge the run forever."""
-    pacer = _TokenPacer(tokens_per_minute=100)
-    pacer.observe(remaining_tokens=100)
-    assert pacer.acquire(estimated=10_000) == 0
+def test_retry_after_is_preferred_over_the_reset_hints():
+    headers = {"retry-after": "30", "x-ratelimit-reset-tokens": "105ms"}
+    assert _reset_hint_seconds(headers) == 30.0
+
+
+def test_no_hint_returns_zero_so_the_caller_uses_its_own_backoff():
+    assert _reset_hint_seconds({}) == 0.0
+    assert _reset_hint_seconds(None) == 0.0
+
+
+def test_an_unreadable_value_does_not_become_a_zero_wait_by_accident():
+    """Falling through to the caller's backoff is right; returning 0 silently is not."""
+    assert _reset_hint_seconds({"retry-after": "soon"}) == 0.0

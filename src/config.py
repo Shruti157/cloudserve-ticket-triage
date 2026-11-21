@@ -89,7 +89,11 @@ class Config:
 
     @property
     def has_credentials(self) -> bool:
-        return bool(self.api_key)
+        # The placeholder shipped in .env.example counts as absent. Someone who
+        # copies the file and forgets the key otherwise gets a 401 on every
+        # ticket of an 80 ticket run, which reads as a broken key rather than
+        # as a missing one and costs a run to work out.
+        return bool(self.api_key) and self.api_key.strip() != "your_key_here"
 
 
 def load_config(env_file: str | os.PathLike[str] | None = None) -> Config:
