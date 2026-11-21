@@ -80,7 +80,8 @@ it rejects a short true quote.
 
 | ID | Risk | Likelihood | Impact | Control | Residual |
 |---|---|---|---|---|---|
-| R-01 | A confident, fluent, wrong answer reaches a customer | Medium | High | Verbatim-span grounding check; retrieval returns nothing below the floor; generation sees only retrieved text | Low |
+| R-01 | A confident, fluent, wrong answer reaches a customer because it was **fabricated** | Medium | High | Verbatim-span grounding check; retrieval returns nothing below the floor; generation sees only retrieved text | Low |
+| R-09 | A confident, fluent, wrong answer reaches a customer because the passage it quotes is **genuine but irrelevant** | **Measured at 13 in 80** | High | Prompt instruction only (PR-02 v1.6). No mechanical check exists | **High** |
 | R-02 | A security or compliance ticket is answered automatically | Low | Severe | Hard class rule in `src/route.py`, ahead of any model call | Very low |
 | R-03 | Customer attributes influence routing | Low | Severe | `src/route.py` is a pure function that reads no tier, region or fluency field; fairness audit segments every run | Very low |
 | R-04 | The provider fails mid-run and the run reports success | Medium | High | Typed `ModelUnavailable`; every caller degrades to escalation and flags `degraded`; six induced failure cases in `scripts/induce_failures.py` | Low |
@@ -88,6 +89,25 @@ it rejects a short true quote.
 | R-06 | The decision log republishes customer ticket text | Medium | Medium | `storage/` gitignored; `per_ticket_outcomes.json` carries the same decisions with no ticket text and is committed instead | Low |
 | R-07 | The documentation corpus goes stale and answers become wrong | Medium | High | Not controlled in code. See the declaration below | **Accepted** |
 | R-08 | The token budget is exhausted mid-run and the report reads as quality | Medium | Medium | Per-stage token accounting; `degraded` counted and reported; throttled model comparisons carry a `comparable` flag so they are excluded rather than read as scores | Low |
+
+**R-09 was split out of R-01 on 21 November and it is the most serious open
+item in this register.** R-01 as originally written assumed one mechanism —
+the model inventing a fact — and the grounding guardrail defeats that
+completely: citation accuracy was 100% across 51 checked citations, and not
+one claim in any sent reply was fabricated. What the run exposed is a second
+mechanism with the same consequence and no control in front of it. Of 50
+automatic answers, **14 went to tickets labelled escalate and 13 of those are
+labelled not answerable from the documentation at all.** Every citation in
+them was verbatim correct. The model found a real sentence in a real passage
+that did not address the question.
+
+Grounding verifies that a quote is *real*. Nothing here verifies that the
+passage is *relevant*, and those are different properties. The residual is
+recorded as High because the only control is a prompt instruction, prompt
+instructions are not guarantees, and the current wording is not yet measured.
+Raising the confidence threshold would not help — 13 of the 14 scored between
+0.85 and 0.95 — and neither would raising the retrieval floor, since top
+scores on correct and incorrect answers have medians of 0.669 and 0.652.
 
 R-07 is listed as accepted rather than solved on purpose. Nothing in this
 system detects that an article has become untrue. `scripts/discovery.py`
@@ -141,14 +161,33 @@ found a disparity by choosing its buckets badly. It is reported as measured.
 
 ### The disparity that is real
 
-The last run showed a 45.7-point spread in automatic answering between
-channels: email 64.5%, docs_comment 18.8%, beyond the confidence interval.
-This traces to the input rather than the rule — docs comments are the least
-answerable channel in the history (61.5% answerable against email's 72.2%)
-and have the lowest historical first-contact resolution (34.6%). The system
-is declining to answer tickets its documentation cannot answer. That is the
-correct behaviour and it is still a disparity in service by channel, so it is
-reported rather than explained away.
+The last run (`run-20261121T084235Z`) showed a 46.2-point spread in automatic
+answering between channels: email 77.4%, docs_comment 31.2%, the only gap in
+the table whose confidence intervals do not overlap.
+
+**Part of that gap is an artefact of the run and must be separated out before
+anything is concluded from it.** The daily token cap was exhausted part-way
+through, and because the validation file is not ordered by channel it did not
+bite evenly: 7 of 16 docs_comment tickets were degraded (44%) against 4 of 31
+email tickets (13%). A degraded ticket is forced to escalate, so a channel
+over-represented in the tail of the run is penalised twice — once for the
+tickets it lost, and once in this table. Excluding degraded tickets the
+spread is **33.3 points** (email 88.9%, docs_comment 55.6%).
+
+The residual gap still traces to the input rather than the rule. Docs
+comments are the least answerable channel in the history (61.5% answerable
+against email's 72.2%) and have the lowest historical first-contact
+resolution (34.6%), so the system is in part declining to answer tickets its
+documentation cannot answer. That is correct behaviour and it is still a
+disparity in service by channel, so it is reported rather than explained
+away. It is not fully explained: ticket length does not account for it, since
+chat has the shortest tickets and the second-highest answer rate.
+
+This is why the harness is required to report every accuracy and fairness
+metric twice, over all tickets and over the non-degraded subset. A metric
+that silently mixes system behaviour with provider failure produced a
+governance conclusion that was wrong by thirteen points in a direction nobody
+would have thought to check.
 
 ---
 
@@ -187,8 +226,9 @@ to no service.
    past decision can be replayed exactly.
 4. **Fix and prove.** Add the failing case to `tests/` first. The grounding
    defect in section 2 is in `tests/test_guardrails.py` as
-   `test_a_short_but_exactly_copied_clause_is_accepted`, and the pacer defect
-   in `tests/test_token_pacer.py`; both fail against the old code.
+   `test_a_short_but_exactly_copied_clause_is_accepted`, and the rate-limit
+   defect in `tests/test_rate_limit_backoff.py`; both fail against the old
+   code.
 5. **Re-run the evaluation** before lifting the switch, and compare against
    the previous `metrics_report.json` rather than against the targets alone.
 6. **Record it.** Bump the prompt version with a changelog line if a prompt

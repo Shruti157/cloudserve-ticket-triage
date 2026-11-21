@@ -138,7 +138,7 @@ one is "treated as incomplete rather than as a submission with a deduction".
 | Folder | Contents | Status |
 |---|---|---|
 | `01_Video` | ~20 min, you on camera, ≥7 min live demo | [ ] Deferred to last, by your decision |
-| `02_Report` | One PDF, 20–30 pages, 10 prescribed sections | [ ] Not started |
+| `02_Report` | One PDF, 20–30 pages, 10 prescribed sections | [x] `ShrutiMittal_Capstone_Report.pdf`, **21 pages**, all 10 sections in order |
 | `03_Workbooks` | Five stage workbooks + effort log | [x] All six written |
 | `04_Source_Code` | The whole repository | [x] Pending C3 and E |
 
@@ -153,19 +153,17 @@ one is "treated as incomplete rather than as a submission with a deduction".
 
 ### Report sections
 
-- [ ] 1 Executive summary (1 p) · 2 The problem (2–3) · 3 Discovery findings (3–4)
-- [ ] 4 Requirements (2–3) · 5 Architecture and design (3–4) · 6 Implementation (2–3)
-- [ ] 7 Evaluation (3–4) · 8 Governance and risk (2–3) · 9 The requirements revision (1–2)
-- [ ] 10 Conclusions (1–2) · Appendices (unlimited)
-- [ ] Every figure and table numbered, captioned, and referred to in the text
-- [ ] **Declaration of AI tool use** — explicitly on the final checklist
-- [ ] A statement of when the evaluation set was used
+- [x] All 10 sections present and in the prescribed order, 21 pages
+- [x] Every figure and table numbered, captioned, and referred to in the text — 1 figure, 10 tables, each cited in prose
+- [x] **Declaration of AI tool use** — states what the tools drafted and what judgement was mine
+- [x] A statement of when the evaluation set was used — names all three runs and which one every figure comes from
+- [x] The two post-hoc changes declared rather than folded in: the quote-floor fix after run 1, and PR-02 v1.6 after run 3 (explicitly not reflected in any reported number)
 
 ### Packaging
 
 - [ ] Archive named `ShrutiMittal_Capstone_Submission.zip`, no spaces, no dates
 - [ ] Exactly four top-level folders, nothing nested inside another folder
-- [ ] Report as `ShrutiMittal_Capstone_Report.pdf`, effort log as `ShrutiMittal_Effort_Log.pdf`
+- [x] Report as `ShrutiMittal_Capstone_Report.pdf`, effort log as `ShrutiMittal_Effort_Log.pdf` — both built
 
 ---
 
