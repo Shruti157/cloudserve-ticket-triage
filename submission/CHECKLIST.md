@@ -161,8 +161,9 @@ one is "treated as incomplete rather than as a submission with a deduction".
 
 ### Packaging
 
-- [ ] Archive named `ShrutiMittal_Capstone_Submission.zip`, no spaces, no dates
-- [ ] Exactly four top-level folders, nothing nested inside another folder
+- [x] Archive named `ShrutiMittal_Capstone_Submission.zip`, no spaces, no dates
+- [x] Exactly four top-level folders, nothing nested inside another folder — verified: 76 entries, no `Capstone_Pack/`, no `.env`
+- [x] Reproducible: `python -m scripts.build_submission --archive` rebuilds every PDF and the zip, and warns if the report leaves the 20–30 page range or `01_Video` is empty
 - [x] Report as `ShrutiMittal_Capstone_Report.pdf`, effort log as `ShrutiMittal_Effort_Log.pdf` — both built
 
 ---
