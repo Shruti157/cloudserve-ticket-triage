@@ -145,13 +145,34 @@ class DecisionLog:
             "coverage_complete": distinct == tickets_processed and routed == tickets_processed,
         }
 
+    # Stored as TEXT because SQLite has no list or dict type. They have to be
+    # decoded on the way out or every consumer parses JSON twice, and the
+    # audit endpoint hands a compliance reviewer a string where it promised a
+    # list of the requirements a decision served.
+    _JSON_COLUMNS = ("alternatives", "sources_used", "guardrail_results", "requirement_ids")
+
     def fetch(self, ticket_id: str) -> list[dict[str, Any]]:
         with self._lock:
             self._conn.row_factory = sqlite3.Row
             rows = self._conn.execute(
                 "SELECT * FROM decisions WHERE ticket_id = ? ORDER BY timestamp", (ticket_id,)
             ).fetchall()
-        return [dict(r) for r in rows]
+
+        decoded = []
+        for row in rows:
+            record = dict(row)
+            for column in self._JSON_COLUMNS:
+                raw = record.get(column)
+                if isinstance(raw, str):
+                    try:
+                        record[column] = json.loads(raw)
+                    except json.JSONDecodeError:
+                        # Keep the unparseable text rather than dropping it. A
+                        # reviewer reading a malformed row is better served by
+                        # seeing it than by seeing nothing.
+                        pass
+            decoded.append(record)
+        return decoded
 
     def guardrail_activation_counts(self) -> dict[str, int]:
         counts: dict[str, int] = {}

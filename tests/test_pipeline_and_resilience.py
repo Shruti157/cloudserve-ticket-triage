@@ -12,6 +12,7 @@ from __future__ import annotations
 import json
 
 from src import killswitch
+from src.decision_log import DecisionLog
 from src.ingest import normalise_ticket
 from src.llm import ModelUnavailable, extract_json
 from tests.conftest import CLASSIFY_OK, FakeClient
@@ -91,14 +92,14 @@ def test_each_logged_decision_carries_a_reason_a_prompt_version_and_requirements
     assert {r["stage"] for r in rows} >= {"classification", "retrieval", "routing"}
     for row in rows:
         assert row["reason"]
-        assert json.loads(row["requirement_ids"])
+        assert row["requirement_ids"]
 
 
 def test_the_log_records_what_the_guardrails_checked_not_only_what_blocked(make_pipeline):
     pipeline = make_pipeline(FakeClient(classify=CLASSIFY_OK, generate=GENERATE_OK))
     pipeline.process(_ticket())
     validation = [r for r in pipeline.decisions.fetch("T-1") if r["stage"] == "validation"][0]
-    results = json.loads(validation["guardrail_results"])
+    results = validation["guardrail_results"]
     assert len(results) == 5
     assert all(v in ("pass", "block", "not_applicable") for v in results.values())
 
@@ -179,3 +180,30 @@ def test_the_kill_switch_reason_reaches_the_decision_log(make_pipeline, config):
     pipeline.process(_ticket(ticket_id="T-9"))
     routing = [r for r in pipeline.decisions.fetch("T-9") if r["stage"] == "routing"][0]
     assert "duty engineer" in routing["reason"]
+
+
+def test_the_audit_endpoint_returns_lists_not_json_strings(tmp_path):
+    """A compliance reviewer reading a decision should not have to parse twice.
+
+    The columns are TEXT because SQLite has no list type, which is a storage
+    detail and must not reach the reader.
+    """
+    log = DecisionLog(tmp_path / "decisions.db", run_id="run-test")
+    log.record(
+        ticket_id="T-1",
+        stage="classification",
+        input_summary="something broke",
+        alternatives=[{"intent": "database_issue", "confidence": 0.2}],
+        sources_used=[{"doc_id": "DOC-AUTH-001", "score": 0.61}],
+        action_taken="classified",
+        reason="because",
+        guardrail_results={"grounding": "pass"},
+        requirement_ids=["FR-02", "FR-03"],
+    )
+
+    record = log.fetch("T-1")[0]
+
+    assert record["requirement_ids"] == ["FR-02", "FR-03"]
+    assert record["alternatives"][0]["intent"] == "database_issue"
+    assert record["sources_used"][0]["doc_id"] == "DOC-AUTH-001"
+    assert record["guardrail_results"] == {"grounding": "pass"}
