@@ -213,7 +213,7 @@ src/            the system.      ingest → classify → retrieve → route → 
 prompts/        versioned prompt files, each naming the requirements it serves
 evaluation/     the harness, the metrics, the fairness audit, and the results
 scripts/        preflight, discovery, retrieval tuning, induced failures, secret scan
-tests/          112 tests; no API key and no network required
+tests/          114 tests; no API key and no network required
 data/           the ticket sets, the 29-article corpus, the guardrail triggers
 docs/           problem statement, architecture decisions, governance, build notes
 storage/        gitignored: the decision log, the response cache, the kill switch

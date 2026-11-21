@@ -17,7 +17,7 @@ unattended. Three outcomes: runs cleanly (no cap), runs but needs help
 
 - [x] **Runs unattended end to end.** `evaluation/harness.py`, one command, exits 0.
 - [x] **Degrades rather than stops** when the provider fails mid-run — verified by the run that lost its token budget at ticket 61: remaining tickets escalated, report still produced, exit 0.
-- [ ] **Clean-checkout rehearsal not yet done.** This is the single highest-risk outstanding item. See section E.
+- [!] **Clean-checkout rehearsal: steps 1–5, 10 and 11 done on 21 November, three defects found and fixed.** Steps 6–9 need tokens. See section E.
 
 ---
 
@@ -25,7 +25,7 @@ unattended. Three outcomes: runs cleanly (no cap), runs but needs help
 
 | # | Criterion | Status | How to re-verify |
 |---|---|---|---|
-| A1 | Runs from a clean checkout using documented commands | [ ] | Section E rehearsal. Everything else is in place |
+| A1 | Runs from a clean checkout using documented commands | [x] | Rehearsed 21 Nov from a fresh clone: installs, preflights, 114 tests pass, no secrets. Three defects found and fixed |
 | A2 | Four channels ingested into one representation | [x] | `pytest tests/test_ingest.py -v` |
 | A3 | Intent + urgency + numeric confidence on every ticket | [x] | `pytest tests/test_classify_route.py` |
 | A4 | Retrieval returns passages that resolve to the corpus | [x] | `pytest tests/test_retrieval.py`; `scripts/tune_retrieval.py` |
@@ -93,7 +93,7 @@ and each was found".
 - [x] **Citations resolved, not plausible-looking.** The quote must appear in the retrieved passage verbatim; naming a real article is not enough.
 - [x] **Retrieval returns nothing when nothing clears the floor.** Noise rate 92.3%, not 100%, and the floor is applied to the lexical component because trigram overlap inflated everything.
 - [x] **Decision log covers every ticket**, not only successes — 344 decisions, coverage complete.
-- [ ] **README tested against a clean checkout** — section E, the one still open.
+- [x] **README tested against a clean checkout** — 21 Nov. It assumed three things that were true only on this machine; all three are fixed.
 - [x] **No tuning against the hidden set.** Thresholds were set on the 500 development tickets; the validation set was not used to choose them.
 
 ---
@@ -105,17 +105,28 @@ because the README assumes something that exists only on the author's
 machine." Work through these literally, in a fresh directory, improvising
 nothing.
 
-- [ ] 1. Clone into an empty directory on a path with no relation to this one
-- [ ] 2. Open the README and follow it from the first line, in order
-- [ ] 3. Create the environment and install dependencies exactly as written
-- [ ] 4. Configure from `.env.example`, substituting a working key
-- [ ] 5. Start the system with the documented command
-- [ ] 6. Submit one ticket from each of the four channels, inspect the replies
-- [ ] 7. Submit a guardrail-trigger ticket, confirm the block
-- [ ] 8. Start the full validation run and leave it alone until it finishes
-- [ ] 9. Open the metrics report and the decision log, reconcile them against each other
-- [ ] 10. Run the test suite with the documented command
-- [ ] 11. Search the repository for credentials and for unattributed code
+**Steps 1–5, 10 and 11 were carried out on 21 November** in `/tmp`, from a
+fresh clone with a fresh virtualenv. They found three real defects, all now
+fixed in commit `13a6c7f`.
+
+- [x] 1. Clone into an empty directory on an unrelated path — 72 tracked files, no `Capstone_Pack/`, no `.env`
+- [x] 2. README followed literally from the first line
+- [x] 3. Environment and dependencies — installs in ~10 s on 3.11
+- [x] 4. Configure from `.env.example` — **defect found and fixed**: the literal `your_key_here` placeholder counted as a real key, so forgetting to edit it produced a 401 on every ticket of an 80-ticket run instead of "no API key"
+- [x] 5. Preflight runs and reports 3/4 with an accurate reason for the fourth
+- [ ] 6. Submit one ticket from each of the four channels, inspect the replies — **needs ~6k tokens**
+- [ ] 7. Submit a guardrail-trigger ticket, confirm the block — **needs ~7k tokens**
+- [ ] 8. Start the full validation run and leave it alone — **needs ~115k tokens**
+- [ ] 9. Reconcile the metrics report against the decision log
+- [x] 10. Test suite from the documented command — **defect found and fixed**: the committed repository did not pass its own tests. `src/llm.py` was committed without the matching test file, so a fresh clone failed at collection on `ImportError: cannot import name '_TokenPacer'`. This is A12 and it would have failed at the gate
+- [x] 11. Secret scan over working tree and history — clean
+
+The third defect was in `scripts/preflight.py`: on an unsupported interpreter
+it printed its readable failure report and then crashed with a traceback
+underneath it, because every check after the version check imports `src/`.
+This machine's `python3` is 3.9.6, so anyone typing the obvious command
+rather than the one the README asks for hit it immediately. It now stops
+cleanly with exit 1, as the dependency check already did.
 
 ---
 
