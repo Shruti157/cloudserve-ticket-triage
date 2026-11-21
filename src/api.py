@@ -17,7 +17,7 @@ from contextlib import asynccontextmanager
 from typing import Any
 
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import PlainTextResponse
+from fastapi.responses import PlainTextResponse, RedirectResponse
 from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
 from pydantic import BaseModel, Field
 
@@ -120,6 +120,17 @@ def process_ticket(request: TicketRequest) -> dict[str, Any]:
         "latency_seconds": outcome.latency_s,
         "degraded": outcome.degraded,
     }
+
+
+@app.get("/", include_in_schema=False)
+def index() -> RedirectResponse:
+    """Send the root to the docs.
+
+    There is no UI of its own here; the interactive schema is the interface.
+    Anyone who starts the server and opens the address it printed should land
+    somewhere useful rather than on a 404 that reads as a broken server.
+    """
+    return RedirectResponse("/docs")
 
 
 @app.get("/ticket/{ticket_id}/decisions")

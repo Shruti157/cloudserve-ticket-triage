@@ -245,3 +245,10 @@ def test_the_ticket_endpoint_accepts_a_minimal_body(api_client, monkeypatch):
     assert payload["action"] in ("auto_respond", "escalate", "blocked")
     assert "guardrails" in payload
     assert payload["reason"]
+
+
+def test_the_root_sends_you_to_the_docs(api_client):
+    """There is no UI of its own; a bare root 404 reads as a broken server."""
+    response = api_client.get("/", follow_redirects=False)
+    assert response.status_code in (307, 308)
+    assert response.headers["location"] == "/docs"
