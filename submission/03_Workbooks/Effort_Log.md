@@ -64,12 +64,12 @@ written down the first time.
 | 2. Requirements | 1.0 | **0.8** | −0.2 | The requirement identifiers were fixed early and carried in the code; writing them out in full came later and quickly |
 | 3. Prompt library | 0.5 | **0.7** | +0.2 | Six prompt versions across two prompts, each with a recorded reason. The versions were cheap; the reasons took the time |
 | 4. Sprint plan | 0.5 | **0.3** | −0.2 | Written against evidence rather than invented |
-| 5. Build and revision | 6.0 | **4.9** | −1.1 | Under the estimate on code and well over it on everything surrounding the evaluation run. See §6 |
-| 6. Report, video, packaging | 2.5 | **0.8** so far | — | **Incomplete.** The report and the video are outstanding |
-| **Total** | **12.0** | **8.0 recorded** | | |
+| 5. Build and revision | 6.0 | **5.4** | −0.6 | Under the estimate on code and well over it on everything surrounding the evaluation run. See §6 |
+| 6. Report, video, packaging | 2.5 | **1.4** so far | — | **Incomplete.** The report is written; the video is outstanding |
+| **Total** | **12.0** | **8.8 recorded** | | |
 
-The totals reconcile against the session boundaries in §3 to §5: 2.6 + 1.9 +
-3.5 = 8.0 hours.
+The totals reconcile against the session boundaries in §3 to §5a: 2.6 + 1.9 +
+3.5 + 0.8 = 8.8 hours.
 
 **What is not counted.** Reading the project brief, the build specification,
 the evaluation framework, the governance framework and the five stakeholder
@@ -116,9 +116,28 @@ hours after the retriever it should have informed.
 | 12:54 | Completion checklist against the twelve acceptance criteria | 6 | 0.3 | `submission/CHECKLIST.md` | No |
 | 12:54–13:51 | **Token pacer built, debugged, then deleted.** Replaced with reading the provider's `retry-after` hint | 5 | **1.0** | `src/llm.py` net −3,842 chars; `tests/test_rate_limit_backoff.py`. Test suite 60s → 0.9s | **Yes, and self-inflicted.** The pacer modelled limits the provider publishes; the cap that truncated the 13 Nov run is published in no header |
 | 13:51–14:29 | **The clean gate run.** 80 tickets, exit 0, 998 s | 5 | 0.6 | `metrics_report.{json,md}`, `per_ticket_outcomes.json` | No. It completed |
-| 14:29–14:49 | Failure analysis; comparison against a reference implementation; PR-02 → v1.6 | 5, 3 | 0.4 | The relevance finding. `prompts/PR-02_generation.txt` v1.6 | **Yes — token budget exhausted by the run itself. The fix cannot be measured** |
+| 14:29–14:49 | Failure analysis; comparison against a second implementation of the same brief, believed at the time to be free of the failure; PR-02 → v1.6 | 5, 3 | 0.4 | The relevance finding. `prompts/PR-02_generation.txt` v1.6 | **Yes — token budget exhausted by the run itself. The fix could not be measured until 22 Nov** |
 | 14:49–14:55 | Two traceability defects fixed: an unhandled-error path tagged NFR-06 (Fairness) that belongs to NFR-02 (Availability); FR-11 had no code reference | 2 | 0.1 | `src/pipeline.py` | No |
-| 14:55–16:25 | Stage 2 PRD, Stage 3 Prompt Library, Stage 4 Sprint Plan, Stage 5 Revision Log, this log | 2, 3, 4, 6 | 1.1 | Five workbooks | No |
+| 14:55–15:03 | Stage 2 PRD, Stage 3 Prompt Library, Stage 4 Sprint Plan, Stage 5 Revision Log, this log | 2, 3, 4, 6 | 0.1 | Five workbooks | No |
+| 15:03–15:47 | **Clean-checkout rehearsal.** Three defects found and fixed: the committed repository failed its own tests on an `ImportError`, `preflight.py` printed a traceback under its own report on Python 3.9, and the `.env.example` placeholder counted as a real key | 5, 6 | 0.7 | `13a6c7f`, `8466815`, `submission/CHECKLIST.md` | No. This is the rehearsal finding defects it was run to find |
+| 15:47–16:07 | **The report**, ten sections, plus two stale claims corrected in `docs/governance.md` | 6 | 0.3 | `ShrutiMittal_Capstone_Report.md` | No |
+| 16:07–16:11 | Submission build made reproducible | 6 | 0.1 | `scripts/build_submission.py` | No |
+| 16:11–16:25 | Two defects found by manual use that the test suite could not catch: the audit endpoint returned JSON strings where it promised lists, and `/` returned 404. **Demo page** built | 5 | 0.2 | `src/static/demo.html`, `4c97db5`, `692a8ea` | No |
+
+---
+
+## 5a Session four: Sat 21 Nov 23:45 – Sun 22 Nov 00:35 (0.8 h)
+
+The session the token budget made possible. Everything in it is measurement
+of a defect already found, and none of it changed the shipped behaviour.
+
+| Time | Task | Stage | Hours | What it produced | Blocked by anything? |
+|---|---|---|---|---|---|
+| 23:45–23:50 | Confirmed the daily token allowance had reset; rebuilt the 24-ticket subset from the baseline run | 5 | 0.1 | `evaluation/results/r09_subset_ids.json` | No |
+| 23:50–00:03 | **Measured PR-02 v1.6 alone.** 0 of 14 escalated, 1 of 10 controls lost | 3, 5 | 0.2 | `evaluation/results/r09_prompt_only/` | No |
+| 00:03–00:12 | **Measured section-level passages.** 8 of 14 escalated, 4 of 10 controls lost. Not adopted; projects to 34.5% FCR | 5 | 0.2 | `evaluation/results/r09_section_passages/`, `RETRIEVAL_WHOLE_DOCUMENT` | No |
+| 00:12–00:18 | Report §7.5, §10.2, §10.3 and governance R-09 rewritten to the measured result | 6 | 0.1 | `988a8f5` | No |
+| 00:18–00:35 | **The comparison implementation re-examined** and found to share the failure at a higher rate while not measuring it. Four documents corrected where they had described it as a working example | 5, 6 | 0.2 | This log, Stage 5, the report | No |
 
 ---
 
@@ -191,8 +210,8 @@ error body the whole time.
 |---|---|
 | Full name | Shruti Mittal |
 | Signature | S. Mittal |
-| Date | 21 November 2026 |
-| Total hours recorded | **8.0**, reconstructed from file timestamps, git history and run artefacts, as described at the head of this document. A further two to three hours of reading the brief and the stakeholder transcripts is not included because no evidence of it survives |
+| Date | 22 November 2026 |
+| Total hours recorded | **8.8**, reconstructed from file timestamps, git history and run artefacts, as described at the head of this document. A further two to three hours of reading the brief and the stakeholder transcripts is not included because no evidence of it survives |
 
 I confirm this is an accurate account of my own work on this project, and
 that it is a reconstruction from automatically recorded evidence rather than

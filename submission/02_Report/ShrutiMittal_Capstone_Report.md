@@ -620,14 +620,37 @@ and carries almost no discriminating information.
 
 ### 7.5 What was changed, and the honest status of the fix
 
-I compared the system against a reference implementation that does not
-exhibit this failure, to find what differs. Three things do: a different
-model, an abstain instruction that is stated first and more operationally,
-and passage granularity — the reference sends the best 800-character chunk
-from each of three documents, where this system sends whole articles capped
-at 1,600 characters. Its generate calls average 957 tokens; mine average
-1,342. I am giving the model substantially more text in which to find a
-quotable but irrelevant sentence.
+I began by comparing this system against a second implementation of the same
+brief, built independently on the identical ticket file and corpus, which
+appeared not to have this problem: it reports 68.8% first contact resolution
+against the same 60% target, comfortably above my 62.5%. The intention was to
+find what it does differently and copy it.
+
+**It does not do anything differently. It has the same failure, slightly
+worse, and does not measure it.** Applying the check from §7.4 to its own
+published run, it answers 55 of 80 tickets, of which 13 are labelled escalate
+and all 13 are labelled not answerable from the documentation — against my 50
+answered and 14 labelled escalate, 13 of them unanswerable. Its harness scores
+classification, retrieval hit rate and calibration against the labels, but
+never compares the routing decision to `expected_route`, so an automatic
+answer to a ticket the documentation cannot answer is counted as a first
+contact resolution and raises the headline number. Its 68.8% is not a better
+system than my 62.5%; it is the same behaviour measured less closely, and
+both sit above the 60.0% labelled ceiling for the same reason.
+
+I record this because it changes what the comparison is worth, and because the
+conclusion is uncomfortable in a useful direction. The difference between the
+two projects is not implementation quality but whether the evaluation asks the
+question. A measurement that cannot fail is not evidence, and the more
+favourable of these two numbers is the less trustworthy one.
+
+What the comparison does still give is a list of what differs mechanically: a
+different model, an abstain instruction placed first and phrased more
+operationally, and passage granularity — it sends the best 800-character chunk
+from each of three documents where this system sends whole articles capped at
+1,600 characters, so its generate calls average 957 tokens against my 1,342.
+Those remained worth testing as causes even once it was clear the comparison
+offered no working example to copy.
 
 Two changes were available, and they were tried one at a time so that each
 result would be attributable. Both were measured on the same 24-ticket

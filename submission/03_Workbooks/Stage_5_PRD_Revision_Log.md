@@ -52,17 +52,31 @@ is "on reflection".
 
 | What looked wrong | Why you left it | What it would have cost to change | Revisit when? |
 |---|---|---|---|
-| `CONFIDENCE_THRESHOLD=0.75`, against the reference implementation's 0.80 | Checked before changing it: 13 of the 14 wrong answers scored 0.85 or above, so 0.80 would have caught none of them while discarding correct answers in the 0.75–0.80 band | Minutes to change, one full run to validate | Only if confidence is recalibrated so that the band carries information |
-| Whole-article passages, where the reference implementation sends the best 800-character chunk per document | **This is the most plausible untested cause of the over-answering.** My generate calls average 1,342 tokens against their 957, so the model is given substantially more text in which to find a quotable but irrelevant sentence. It was left alone *because the prompt change was made in the same window*, and changing both would make the result uninterpretable | A retrieval change plus a full run to validate; it would also cut generation tokens by roughly 40% | Immediately after the v1.6 prompt change is measured on its own |
+| `CONFIDENCE_THRESHOLD=0.75`, against the comparison implementation's 0.80 | Checked before changing it: 13 of the 14 wrong answers scored 0.85 or above, so 0.80 would have caught none of them while discarding correct answers in the 0.75–0.80 band | Minutes to change, one full run to validate | Only if confidence is recalibrated so that the band carries information |
+| Whole-article passages, where the comparison implementation sends the best 800-character chunk per document | Was the most plausible cause of the over-answering, and **has since been measured and rejected** (22 Nov). Sending sections escalated 8 of the 14 wrong answers but lost 4 of 10 correctly answered controls, projecting first contact resolution down to roughly 34.5% against a 60% target: the narrowing that removes the quotable irrelevant sentence also removes the Resolution steps that answer a ticket matched on its Symptoms | Already spent: two 24-ticket runs. Retained as `RETRIEVAL_WHOLE_DOCUMENT`, defaulting to the unchanged behaviour | Only alongside a relevance check that recovers the lost controls |
 | Lexical retrieval rather than embeddings | Retrieval hit rate is 98.1%. There is no evidence that retrieval is the bottleneck, and ADR-003 argues a vector store is an operational dependency a 29-article corpus does not need | A day, plus a new runtime dependency | If hit rate falls below roughly 90%, or if the corpus grows past a few hundred articles |
 | The flat 22-class intent taxonomy, where 10 broader classes would score better | The classes come from the data, not from me. Collapsing them to improve a metric would be tuning the measurement rather than the system, and the four classes that must never be auto-answered depend on the distinction being preserved | An hour | Never, on these grounds |
 | The 46.2-point channel disparity | Reported, not fixed, but **most of it is an artefact of the token cap rather than a property of the channel** — see the note below. The residual gap is real and is left for a clean run to re-measure | A re-run on a full budget, which is already planned | As soon as the budget allows. The number as published overstates the disparity and the report must say so |
 
-The second row is the one I would defend hardest and am least comfortable
-with. The chunking change is probably the better fix and it is the one I did
-not make, because making two changes at once would leave me unable to say
-which worked. That is the right methodological call and it is also, in a
-project with an eight-hour budget and a token cap, how a known defect ships.
+The second row has since been resolved, and not in the direction I expected.
+When I wrote it I believed the chunking change was probably the better fix
+and that I had simply run out of budget to make it. It was measured on 22
+November and it is not a fix: it costs more correct answers than it prevents
+wrong ones. The prompt change was measured in the same session and does
+nothing at all. The defect therefore ships, but it ships measured, with both
+plausible remedies tried separately and ruled out on evidence rather than
+left as speculation. That is a better position than the one this row
+originally described, and a worse one than I expected to be in.
+
+The row also assumed the comparison implementation was a working example to
+copy from. It is not: applying this project's own over-answering check to its
+published run shows it answering 55 of 80 tickets with 13 of them labelled
+unanswerable from the documentation, the same failure at a slightly higher
+rate. Its harness never compares routing to `expected_route`, so the failure
+does not appear in its report and its higher headline score is an artefact of
+a less searching evaluation. The comparison was still useful, but as a source
+of mechanical hypotheses, not as an existence proof that the problem is
+solvable this way.
 
 ### A note on the channel disparity, because the headline figure is misleading
 
@@ -145,11 +159,13 @@ going well.
 
 **What is still uncertain, and what would you need to resolve it?**
 
-Whether the v1.6 prompt change fixes anything. It is reasoned from a named
-mechanism and from a working reference implementation, and it is unmeasured,
-because the token budget was exhausted by the run that found the problem. I
-would need roughly 35,000 tokens to test it on the 14 failing tickets plus 10
-controls, and about 115,000 for a full comparable run. Beyond that, OQ-4 is
+How to fix the over-answering at all. Both candidate remedies were measured
+on 22 November on the 14 failing tickets plus 10 controls, and neither is
+usable: the v1.6 prompt change escalated none of the 14, and section-level
+passages escalated 8 but lost 4 controls. The comparison implementation
+turned out to share the failure rather than solve it. What is untried is a
+relevance judgement made outside the generation call, where it can be scored
+against `answerable_from_docs` on its own. Beyond that, OQ-4 is
 the genuinely open question and I do not think it has a clean answer: I can
 make a model more reluctant to answer, and I can measure the result, but I
 have no mechanical check for relevance that is the equal of the verbatim

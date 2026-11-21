@@ -63,9 +63,11 @@ quote is real; nothing proves the passage answers the question.
 - [x] Ruled out the confidence threshold — 13 of 14 scored 0.85–0.95
 - [x] Ruled out the retrieval floor — top-score medians 0.669 correct against 0.652 wrong
 - [x] PR-02 → v1.6: relevance made the first decision in the prompt
-- [ ] **Validate v1.6 on the 14 failing tickets plus 10 controls** (~35k tokens)
-- [ ] Full re-run if the subset holds (~115k tokens)
-- [ ] If it does not hold: send 800-character chunks to generation instead of whole articles, which is what the reference implementation does and would also cut generation tokens by ~40%
+- [x] **Validated v1.6 on the 14 failing tickets plus 10 controls** (22 Nov). **0 of 14 escalated, 1 control lost.** No effect
+- [x] Measured section passages instead of whole articles. **8 of 14 escalated, 4 of 10 controls lost** — projects to 34.5% FCR against a 60% target, so not adopted. Kept as `RETRIEVAL_WHOLE_DOCUMENT`
+- [x] Re-checked the comparison implementation: **it has the same failure at a higher rate** (55 answered, 13 unanswerable) and its harness never compares routing to `expected_route`
+- [x] No full re-run needed — neither change was adopted, so the committed default is identical to the run of record
+- [ ] Not attempted: a relevance judgement made outside the generation call, scored against `answerable_from_docs` on its own
 
 > Budget arithmetic: ~1,416 tokens/ticket. 80 tickets ≈ 113k tokens, 120 ≈ 170k,
 > against a 200,000/day cap. One full run per day fits; two do not.

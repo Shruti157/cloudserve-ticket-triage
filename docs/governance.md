@@ -128,6 +128,18 @@ that a change which buys escalations by refusing everything is visible.
    from 62.5% to about 34.5% against a 60% target. Not adopted; the default
    is unchanged and the setting exists so the experiment can be repeated.
 
+A second implementation of the same brief, built independently on the
+identical ticket file and corpus, was checked on 22 November because it
+appeared not to have this problem. **It has the same failure at a higher
+rate** — 55 of 80 answered, 13 of them labelled not answerable from the
+documentation — and reports 68.8% first contact resolution as a pass. Its
+harness scores classification, retrieval and calibration against the labels
+but never compares the routing decision to `expected_route`, so the failure
+cannot appear in its report. This is recorded here because it is the clearest
+available illustration of why R-09 is a governance risk and not only a
+quality one: the same behaviour produces a better headline number under a
+less searching evaluation, and nothing in that report would tell a reader so.
+
 The outcomes of both runs are in `evaluation/results/r09_prompt_only/` and
 `evaluation/results/r09_section_passages/`, and the subset is defined by
 `evaluation/results/r09_subset_ids.json`, which carries the selection rule

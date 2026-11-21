@@ -35,8 +35,9 @@ back-filled.
 | Session 1 — Wed 12 Nov, 22:53 to Thu 13 Nov, 01:28 | **2.6** | Full working day preceding it; this was evening work | — |
 | Session 2 — Thu 13 Nov, 12:46 to 14:38 | **1.9** | — | — |
 | Gap — Fri 14 Nov to Thu 20 Nov | **0** | Unrelated commitments. Seven calendar days with no work on the project | 14–20 Nov |
-| Session 3 — Fri 21 Nov, 12:54 onward | **3.5** (in progress) | — | — |
-| **Total** | **~8.0 hours of working time** | | |
+| Session 3 — Fri 21 Nov, 12:54 to 16:25 | **3.5** | — | — |
+| Session 4 — Sat 21 Nov, 23:45 to Sun 22 Nov, 00:35 | **0.8** | Late evening, and timed by when the provider's daily token allowance reset rather than by choice | — |
+| **Total** | **~8.8 hours of working time** | | |
 
 These figures are reconstructed from file modification times across the
 repository and from the git history, not from a contemporaneous record. They
@@ -114,7 +115,8 @@ with it, which is luck rather than method.
 | 12:00–13:00 | B-15. Token pacer written, debugged, and then **deleted** in favour of reading the provider's own `retry-after` hint. Test suite went from 60s to 0.9s | 1.0 | Medium. An hour spent building the wrong thing before the simpler thing was obvious |
 | 13:00–14:30 | **The clean gate run.** 80 tickets, exit 0, 998 seconds, 15 degraded | 1.5 | The gate, passed mechanically |
 | 14:30–15:00 | Analysis of the result. Found the relevance failure: 14 tickets answered that were labelled escalate, 13 of them unanswerable from the documentation | 0.5 | **The finding that matters, arrived at with no token budget left to test a fix** |
-| 15:00 onward | Comparison against a reference implementation. PR-02 → v1.6. Workbooks | ongoing | — |
+| 15:00–16:25 | Comparison against a second implementation. PR-02 → v1.6. Workbooks, clean-checkout rehearsal, report, demo page | 1.4 | — |
+| 23:45–00:35 | **Both candidate fixes measured, and both rejected.** The comparison implementation re-examined and found to share the failure while not measuring it | 0.8 | The defect ships, but measured rather than assumed |
 
 ---
 
