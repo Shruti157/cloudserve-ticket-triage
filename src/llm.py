@@ -12,10 +12,19 @@ headers and the enforcement all disagree, and only the last one stops a run.
 
 Each binds differently. The per-minute bucket is a floor on wall-clock time
 rather than a ceiling on volume -- at 1,416 tokens a ticket, 120 tickets
-cannot take less than 21 minutes on any machine -- so the pacer below spends
-that time deliberately instead of discovering a 429. The invisible daily limit
-is a ceiling on volume, reached at ticket 61 of the first full run, and the
-only defence against it is spending fewer tokens per ticket.
+cannot take less than 21 minutes on any machine. The invisible daily limit is
+a ceiling on volume, reached at ticket 61 of the first full run, and the only
+defence against it is spending fewer tokens per ticket.
+
+There is deliberately no pacer. One was built, to spend the per-minute
+allowance evenly and avoid 429s rather than discover them, and it was removed
+because measurement went against it: a local bucket cannot know what the
+server's window holds, so it waited while there was headroom and still earned
+a 429 when it guessed high, having already paid for the wait. Reacting is
+cheaper than predicting here because a Groq 429 carries its own reset hint and
+that hint is usually milliseconds. The client therefore calls, and on a 429
+waits for whichever is longer: the provider's hint, or a jittered exponential
+backoff for the case where no hint arrives.
 
 Because the throughput cap binds and not per-request latency, concurrency
 would not help: parallel workers would reach the same 429s together and spend
@@ -38,6 +47,8 @@ import hashlib
 import json
 import logging
 import sqlite3
+import random
+import re
 import threading
 import time
 from dataclasses import dataclass
@@ -56,6 +67,35 @@ _ENDPOINTS = {
 }
 
 
+_DURATION = re.compile(r"(?:(\d+(?:\.\d+)?)m)?(?:(\d+(?:\.\d+)?)s)?|(\d+(?:\.\d+)?)ms")
+
+
+def _reset_hint_seconds(headers: Any) -> float:
+    """How long the provider says to wait, in seconds. 0.0 if it did not say.
+
+    Groq answers a 429 with a reset hint far more accurate than anything this
+    process can compute, and it is usually tiny -- "547ms", "1m26.4s". Reading
+    it is what makes discovering a limit cheaper than predicting one.
+    """
+    for name in ("retry-after", "x-ratelimit-reset-tokens", "x-ratelimit-reset-requests"):
+        raw = (headers or {}).get(name)
+        if not raw:
+            continue
+        text = str(raw).strip()
+        try:
+            return float(text)
+        except ValueError:
+            pass
+        match = _DURATION.fullmatch(text)
+        if match:
+            minutes, seconds, millis = match.groups()
+            if millis is not None:
+                return float(millis) / 1000.0
+            if minutes or seconds:
+                return float(minutes or 0) * 60 + float(seconds or 0)
+    return 0.0
+
+
 class ModelUnavailable(Exception):
     """The provider could not be reached or would not answer.
 
@@ -71,72 +111,6 @@ class Completion:
     tokens: int
     cached: bool
     model: str
-
-
-class _TokenPacer:
-    """Spends the per-minute token allowance evenly instead of in bursts."""
-
-    def __init__(self, tokens_per_minute: int) -> None:
-        self.capacity = max(1, tokens_per_minute)
-        # Starts empty rather than full. A fresh process has no idea how much
-        # of the server's window the previous run already consumed, and a
-        # bucket that starts full bursts straight past the real allowance on
-        # the first few tickets. Groq answers that burst with a 429 carrying a
-        # five minute retry-after, so the optimistic start costs far more time
-        # than the one minute it saves.
-        self._tokens = 0.0
-        self._last = time.monotonic()
-        self._lock = threading.Lock()
-
-    def observe(self, remaining_tokens: float) -> None:
-        """Adopt the server's own count of what is left, up or down.
-
-        This assigns rather than taking a minimum, and the difference was
-        worth about seven minutes on an eighty ticket run. Taking a minimum
-        makes the estimate monotonically pessimistic: it can be revised down
-        by a server that reports a drained bucket but never revised back up by
-        one that reports a full one, so after the first busy moment the pacer
-        sat near zero and metered out every later call at the refill rate even
-        though the real allowance was untouched. Measured against a floor of
-        9.7 minutes of unavoidable waiting, it spent 17.3.
-
-        The server's figure is the authority on how much burst headroom exists,
-        so spending it is correct rather than reckless. Overspending is not
-        possible from here: the next response carries the new remaining count
-        and pacing tightens on its own.
-        """
-        with self._lock:
-            self._tokens = max(0.0, remaining_tokens)
-            self._last = time.monotonic()
-
-    def acquire(self, estimated: int) -> float:
-        """Blocks until the allowance permits the call. Returns seconds waited.
-
-        The caller reports that figure separately, because time spent waiting
-        for a free tier is not the system being slow and a latency number that
-        conflates the two cannot be acted on by the client.
-        """
-        want = min(float(estimated), float(self.capacity))
-        waited = 0.0
-        while True:
-            with self._lock:
-                now = time.monotonic()
-                self._tokens = min(
-                    float(self.capacity),
-                    self._tokens + (now - self._last) * self.capacity / 60.0,
-                )
-                self._last = now
-                if self._tokens >= want:
-                    self._tokens -= want
-                    return waited
-                wait = (want - self._tokens) * 60.0 / self.capacity
-            slept = min(wait, 20.0)
-            time.sleep(slept)
-            waited += slept
-
-    def refund(self, tokens: int) -> None:
-        with self._lock:
-            self._tokens = min(float(self.capacity), self._tokens + float(tokens))
 
 
 class _ResponseCache:
@@ -182,7 +156,6 @@ class LLMClient:
         self.config = config
         self.endpoint = _ENDPOINTS.get(config.provider, _ENDPOINTS["groq"])
         self._session = session or requests.Session()
-        self._pacer = _TokenPacer(config.tokens_per_minute)
         self._cache = _ResponseCache(config.cache_path)
         self.calls_made = 0
         self.cache_hits = 0
@@ -247,7 +220,6 @@ class LLMClient:
         last_error = "unknown"
 
         for attempt in range(1, self.config.max_attempts + 1):
-            self.throttle_seconds += self._pacer.acquire(estimate)
             try:
                 response = self._session.post(
                     self.endpoint,
@@ -260,14 +232,11 @@ class LLMClient:
                 )
             except requests.RequestException as exc:
                 last_error = f"{type(exc).__name__}: {exc}"
-                self._pacer.refund(estimate)
                 self._backoff(attempt)
                 continue
 
-            self._observe_headers(response.headers)
-
             if response.status_code == 429:
-                retry_after = float(response.headers.get("retry-after", 0) or 0)
+                retry_after = _reset_hint_seconds(response.headers)
                 detail = response.text[:300].replace("\n", " ")
                 if retry_after > self.config.max_throttle_wait_s:
                     # Longer than a customer should wait behind a free tier.
@@ -279,9 +248,12 @@ class LLMClient:
                         f"{self.config.max_throttle_wait_s:.0f}s this will wait. "
                         f"Ticket escalated. Provider said: {detail}"
                     )
-                wait = max(retry_after, 2.0) + attempt
+                # The provider's own hint is better information than anything
+                # computed here, so it wins when it is larger. The jittered
+                # backoff is the floor for the case where no hint was sent.
+                wait = max(retry_after, min(2.0 ** (attempt - 1), 8.0) + random.uniform(0, 0.4))
                 log.warning(
-                    "Rate limited; waiting %.0fs (attempt %d/%d). Provider said: %s",
+                    "Rate limited; waiting %.1fs (attempt %d/%d). Provider said: %s",
                     wait, attempt, self.config.max_attempts, detail,
                 )
                 self.throttle_seconds += wait
@@ -331,22 +303,6 @@ class LLMClient:
         self.failures += 1
         raise ModelUnavailable(f"Gave up after {self.config.max_attempts} attempts: {last_error}")
 
-    def _observe_headers(self, headers) -> None:
-        """Re-seed the local bucket from the provider's own accounting.
-
-        The published table and the account's actual limits disagree often
-        enough that the headers are the only trustworthy source, and they also
-        reflect usage by anything else sharing the key.
-        """
-        remaining = headers.get("x-ratelimit-remaining-tokens")
-        if remaining is None:
-            return
-        try:
-            self._pacer.observe(float(remaining))
-        except (TypeError, ValueError):
-            pass
-
-    @staticmethod
     def _backoff(attempt: int) -> None:
         time.sleep(min(2.0 ** attempt, 16.0))
 

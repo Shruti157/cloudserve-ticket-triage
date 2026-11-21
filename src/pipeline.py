@@ -51,7 +51,7 @@ log = logging.getLogger(__name__)
 REQUIREMENTS = {
     "classification": ["FR-02", "FR-03"],
     "retrieval": ["FR-04"],
-    "routing": ["FR-07", "NFR-05"],
+    "routing": ["FR-07", "FR-11", "NFR-05"],
     "generation": ["FR-05", "FR-06"],
     "validation": ["FR-08", "FR-09", "NFR-02"],
 }
@@ -104,7 +104,7 @@ class Pipeline:
                 action_taken="escalate",
                 reason=outcome.reason + f" Internal error: {type(exc).__name__}.",
                 threshold_applied=self.config.confidence_threshold,
-                requirement_ids=REQUIREMENTS["routing"] + ["NFR-06"],
+                requirement_ids=REQUIREMENTS["routing"] + ["NFR-02"],
                 guardrail_results={"unhandled_error": "block"},
             )
             log.debug(traceback.format_exc())

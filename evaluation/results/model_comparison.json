@@ -1,0 +1,46 @@
+{
+  "sample_size": 22,
+  "sampling": "stratified by intent, seed 20261113",
+  "tokens_per_day_budget": 200000,
+  "hidden_set_size_assumed": 120,
+  "results": [
+    {
+      "model": "qwen/qwen3.8-27b",
+      "tickets_attempted": 22,
+      "returned_a_usable_label": 21,
+      "accuracy_pct": 86.4,
+      "tokens_per_call": 589,
+      "estimated_tokens_per_ticket": 824,
+      "estimated_tickets_per_day_on_free_tier": 242,
+      "can_run_the_hidden_set_in_one_day": true,
+      "seconds": 185.9,
+      "error": ""
+    },
+    {
+      "model": "openai/gpt-oss-20b",
+      "tickets_attempted": 22,
+      "returned_a_usable_label": 9,
+      "accuracy_pct": 36.4,
+      "tokens_per_call": 639,
+      "estimated_tokens_per_ticket": 895,
+      "estimated_tickets_per_day_on_free_tier": 223,
+      "can_run_the_hidden_set_in_one_day": true,
+      "seconds": 221.9,
+      "error": ""
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "tickets_attempted": 22,
+      "returned_a_usable_label": 21,
+      "accuracy_pct": 77.3,
+      "tokens_per_call": 675,
+      "estimated_tokens_per_ticket": 945,
+      "estimated_tickets_per_day_on_free_tier": 211,
+      "can_run_the_hidden_set_in_one_day": true,
+      "seconds": 192.1,
+      "error": ""
+    }
+  ],
+  "chosen": "qwen/qwen3.8-27b",
+  "rationale": "Chosen as the most accurate model that can process the hidden set inside one day's free token budget. Accuracy alone would not be the right criterion: a model that cannot finish the run fails the gate regardless of how well it classifies."
+}

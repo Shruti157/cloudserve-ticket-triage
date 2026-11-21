@@ -1,0 +1,4125 @@
+[
+  {
+    "ticket_id": "VAL-0001",
+    "channel": "forum",
+    "customer_tier": "business",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "api_key_issue",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as api key issue with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-AUTH-004, DOC-INT-001, DOC-BILL-003) were found.",
+    "retrieved_doc_ids": [
+      "DOC-AUTH-004",
+      "DOC-INT-001",
+      "DOC-BILL-003"
+    ],
+    "retrieval_scores": [
+      0.6944,
+      0.605,
+      0.5607
+    ],
+    "citations": [
+      "DOC-AUTH-004"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "6 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 1.316,
+    "throttle_s": 0.0,
+    "tokens_used": 1959,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 194,
+    "response_chars": 528
+  },
+  {
+    "ticket_id": "VAL-0002",
+    "channel": "chat",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "unclear_request",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Ticket lacks specific context or problem description, making classification impossible.",
+    "retrieved_doc_ids": [],
+    "retrieval_scores": [],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.294,
+    "throttle_s": 0.0,
+    "tokens_used": 559,
+    "llm_calls": 1,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 48,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0003",
+    "channel": "docs_comment",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "non_fluent",
+    "intent": "unclear_request",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Vague complaint without specific symptoms or context to identify the issue.",
+    "retrieved_doc_ids": [],
+    "retrieval_scores": [],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.353,
+    "throttle_s": 0.0,
+    "tokens_used": 574,
+    "llm_calls": 1,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 106,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0004",
+    "channel": "email",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "intent": "authentication_failure",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as authentication failure with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-AUTH-002, DOC-PERF-001, DOC-INT-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-AUTH-002",
+      "DOC-PERF-001",
+      "DOC-INT-002"
+    ],
+    "retrieval_scores": [
+      0.6998,
+      0.5296,
+      0.4995
+    ],
+    "citations": [
+      "DOC-AUTH-002"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "6 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 1.65,
+    "throttle_s": 0.0,
+    "tokens_used": 1987,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 143,
+    "response_chars": 557
+  },
+  {
+    "ticket_id": "VAL-0005",
+    "channel": "chat",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "api_key_issue",
+    "urgency": "medium",
+    "confidence": 0.85,
+    "action": "auto_respond",
+    "reason": "Classified as api key issue with 85% confidence, at or above the 75% bar, and 1 supporting documentation passage (DOC-API-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-API-002"
+    ],
+    "retrieval_scores": [
+      0.6571
+    ],
+    "citations": [
+      "DOC-API-002"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "2 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.85 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 10.002,
+    "throttle_s": 9.0,
+    "tokens_used": 1438,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 108,
+    "response_chars": 186
+  },
+  {
+    "ticket_id": "VAL-0006",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "authentication_failure",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as authentication failure with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-AUTH-001, DOC-AUTH-002, DOC-AUTH-003) were found.",
+    "retrieved_doc_ids": [
+      "DOC-AUTH-001",
+      "DOC-AUTH-002",
+      "DOC-AUTH-003"
+    ],
+    "retrieval_scores": [
+      0.6413,
+      0.5621,
+      0.5561
+    ],
+    "citations": [
+      "DOC-AUTH-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "8 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 13.968,
+    "throttle_s": 11.0,
+    "tokens_used": 2117,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 256,
+    "response_chars": 636
+  },
+  {
+    "ticket_id": "VAL-0007",
+    "channel": "chat",
+    "customer_tier": "business",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "intent": "unclear_request",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. No specific technical issue described, only a request for urgent contact.",
+    "retrieved_doc_ids": [],
+    "retrieval_scores": [],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 27.554,
+    "throttle_s": 27.0,
+    "tokens_used": 563,
+    "llm_calls": 1,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 55,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0008",
+    "channel": "chat",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "configuration_help",
+    "urgency": "low",
+    "confidence": 0.85,
+    "action": "auto_respond",
+    "reason": "Classified as configuration help with 85% confidence, at or above the 75% bar, and 1 supporting documentation passage (DOC-ACCT-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-ACCT-001"
+    ],
+    "retrieval_scores": [
+      0.6917
+    ],
+    "citations": [
+      "DOC-ACCT-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.85 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 9.146,
+    "throttle_s": 8.0,
+    "tokens_used": 1505,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 130,
+    "response_chars": 321
+  },
+  {
+    "ticket_id": "VAL-0009",
+    "channel": "docs_comment",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "compliance_request",
+    "urgency": "medium",
+    "confidence": 0.85,
+    "action": "escalate",
+    "reason": "Tickets classified as compliance request are always handled by a person, however confident the classifier is. Customer needs audit logs to demonstrate compliance with data access logging requirements.",
+    "retrieved_doc_ids": [
+      "DOC-SEC-003",
+      "DOC-SEC-001",
+      "DOC-DATA-001"
+    ],
+    "retrieval_scores": [
+      0.7098,
+      0.5772,
+      0.4984
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 11.396,
+    "throttle_s": 11.0,
+    "tokens_used": 593,
+    "llm_calls": 1,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 142,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0010",
+    "channel": "docs_comment",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "billing_query",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as billing query with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-BILL-001, DOC-INT-002, DOC-BILL-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-BILL-001",
+      "DOC-INT-002",
+      "DOC-BILL-002"
+    ],
+    "retrieval_scores": [
+      0.7328,
+      0.6025,
+      0.5689
+    ],
+    "citations": [
+      "DOC-BILL-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 9.433,
+    "throttle_s": 8.0,
+    "tokens_used": 1878,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 184,
+    "response_chars": 544
+  },
+  {
+    "ticket_id": "VAL-0011",
+    "channel": "forum",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "rollback_request",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as rollback request with 95% confidence, at or above the 75% bar, and 2 supporting documentation passages (DOC-DEPLOY-002, DOC-API-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-002",
+      "DOC-API-002"
+    ],
+    "retrieval_scores": [
+      0.6827,
+      0.5162
+    ],
+    "citations": [
+      "DOC-DEPLOY-002"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 22.436,
+    "throttle_s": 21.0,
+    "tokens_used": 1866,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 222,
+    "response_chars": 555
+  },
+  {
+    "ticket_id": "VAL-0012",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "intent": "rollback_request",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as rollback request with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-DEPLOY-002, DOC-AUTH-001, DOC-DEPLOY-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-002",
+      "DOC-AUTH-001",
+      "DOC-DEPLOY-001"
+    ],
+    "retrieval_scores": [
+      0.7529,
+      0.477,
+      0.4599
+    ],
+    "citations": [
+      "DOC-DEPLOY-002"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "5 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 23.497,
+    "throttle_s": 22.0,
+    "tokens_used": 1888,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 185,
+    "response_chars": 524
+  },
+  {
+    "ticket_id": "VAL-0013",
+    "channel": "docs_comment",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "billing_query",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "The system could not produce an answer it was able to evidence, so the ticket was passed to an agent. Specific identification of the unknown service on the customer's invoice.",
+    "retrieved_doc_ids": [
+      "DOC-BILL-001",
+      "DOC-BILL-003"
+    ],
+    "retrieval_scores": [
+      0.6936,
+      0.5296
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 21.574,
+    "throttle_s": 20.0,
+    "tokens_used": 1775,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": true,
+    "errors": [],
+    "ticket_length": 148,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0014",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "intent": "rollback_request",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as rollback request with 95% confidence, at or above the 75% bar, and 2 supporting documentation passages (DOC-DEPLOY-002, DOC-BILL-003) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-002",
+      "DOC-BILL-003"
+    ],
+    "retrieval_scores": [
+      0.6521,
+      0.4609
+    ],
+    "citations": [
+      "DOC-DEPLOY-002"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "5 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 16.41,
+    "throttle_s": 15.0,
+    "tokens_used": 1859,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 202,
+    "response_chars": 460
+  },
+  {
+    "ticket_id": "VAL-0015",
+    "channel": "forum",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "unclear_request",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Ticket explicitly requests urgent call but provides no specific technical details or symptoms.",
+    "retrieved_doc_ids": [],
+    "retrieval_scores": [],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 17.566,
+    "throttle_s": 17.0,
+    "tokens_used": 569,
+    "llm_calls": 1,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 75,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0016",
+    "channel": "chat",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "performance_degradation",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as performance degradation with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-PERF-002, DOC-AUTH-002, DOC-DEPLOY-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-PERF-002",
+      "DOC-AUTH-002",
+      "DOC-DEPLOY-001"
+    ],
+    "retrieval_scores": [
+      0.5504,
+      0.4579,
+      0.4377
+    ],
+    "citations": [
+      "DOC-PERF-002"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "5 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 8.186,
+    "throttle_s": 7.0,
+    "tokens_used": 1807,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 140,
+    "response_chars": 315
+  },
+  {
+    "ticket_id": "VAL-0017",
+    "channel": "docs_comment",
+    "customer_tier": "standard",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "intent": "unclear_request",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Ticket provides no specific details, symptoms, or context to identify the issue.",
+    "retrieved_doc_ids": [],
+    "retrieval_scores": [],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 13.387,
+    "throttle_s": 13.0,
+    "tokens_used": 563,
+    "llm_calls": 1,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 41,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0018",
+    "channel": "email",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "api_usage_question",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as api usage question with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-API-002, DOC-AUTH-002, DOC-DEPLOY-004) were found.",
+    "retrieved_doc_ids": [
+      "DOC-API-002",
+      "DOC-AUTH-002",
+      "DOC-DEPLOY-004"
+    ],
+    "retrieval_scores": [
+      0.7096,
+      0.548,
+      0.4817
+    ],
+    "citations": [
+      "DOC-API-002"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "5 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 8.336,
+    "throttle_s": 7.0,
+    "tokens_used": 1848,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 145,
+    "response_chars": 377
+  },
+  {
+    "ticket_id": "VAL-0019",
+    "channel": "email",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "non_fluent",
+    "intent": "account_access",
+    "urgency": "medium",
+    "confidence": 0.85,
+    "action": "auto_respond",
+    "reason": "Classified as account access with 85% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-ACCT-001, DOC-SEC-001, DOC-ACCT-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-ACCT-001",
+      "DOC-SEC-001",
+      "DOC-ACCT-002"
+    ],
+    "retrieval_scores": [
+      0.6299,
+      0.5391,
+      0.5205
+    ],
+    "citations": [
+      "DOC-ACCT-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.85 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 20.56,
+    "throttle_s": 19.0,
+    "tokens_used": 1839,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 127,
+    "response_chars": 598
+  },
+  {
+    "ticket_id": "VAL-0020",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "feature_request",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "Tickets classified as feature request are always handled by a person, however confident the classifier is. Customer requests custom retention and staged rollout capabilities, indicating new feature needs.",
+    "retrieved_doc_ids": [
+      "DOC-ONB-002",
+      "DOC-DATA-002",
+      "DOC-DEPLOY-001"
+    ],
+    "retrieval_scores": [
+      0.6004,
+      0.5431,
+      0.5241
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 17.427,
+    "throttle_s": 17.0,
+    "tokens_used": 583,
+    "llm_calls": 1,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 129,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0021",
+    "channel": "chat",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "rollback_request",
+    "urgency": "high",
+    "confidence": 0.98,
+    "action": "auto_respond",
+    "reason": "Classified as rollback request with 98% confidence, at or above the 75% bar, and 1 supporting documentation passage (DOC-DEPLOY-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-002"
+    ],
+    "retrieval_scores": [
+      0.6059
+    ],
+    "citations": [
+      "DOC-DEPLOY-002"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.98 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 4.091,
+    "throttle_s": 3.0,
+    "tokens_used": 1529,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 176,
+    "response_chars": 400
+  },
+  {
+    "ticket_id": "VAL-0022",
+    "channel": "docs_comment",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "performance_degradation",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as performance degradation with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-PERF-002, DOC-DEPLOY-001, DOC-BILL-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-PERF-002",
+      "DOC-DEPLOY-001",
+      "DOC-BILL-001"
+    ],
+    "retrieval_scores": [
+      0.5831,
+      0.4919,
+      0.473
+    ],
+    "citations": [
+      "DOC-PERF-002"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "5 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 20.352,
+    "throttle_s": 19.0,
+    "tokens_used": 1868,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 168,
+    "response_chars": 442
+  },
+  {
+    "ticket_id": "VAL-0023",
+    "channel": "email",
+    "customer_tier": "business",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "onboarding",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as onboarding with 95% confidence, at or above the 75% bar, and 2 supporting documentation passages (DOC-ONB-002, DOC-DEPLOY-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-ONB-002",
+      "DOC-DEPLOY-001"
+    ],
+    "retrieval_scores": [
+      0.5134,
+      0.4641
+    ],
+    "citations": [
+      "DOC-ONB-002"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "5 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 19.665,
+    "throttle_s": 18.0,
+    "tokens_used": 1954,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 153,
+    "response_chars": 662
+  },
+  {
+    "ticket_id": "VAL-0024",
+    "channel": "chat",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "api_key_issue",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as api key issue with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-AUTH-004, DOC-ONB-002, DOC-SEC-003) were found.",
+    "retrieved_doc_ids": [
+      "DOC-AUTH-004",
+      "DOC-ONB-002",
+      "DOC-SEC-003"
+    ],
+    "retrieval_scores": [
+      0.5592,
+      0.5275,
+      0.4691
+    ],
+    "citations": [
+      "DOC-AUTH-004"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "5 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 27.411,
+    "throttle_s": 26.011,
+    "tokens_used": 1764,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 120,
+    "response_chars": 339
+  },
+  {
+    "ticket_id": "VAL-0025",
+    "channel": "chat",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "intent": "deployment_failure",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as deployment failure with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-DEPLOY-001, DOC-ONB-001, DOC-ONB-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-001",
+      "DOC-ONB-001",
+      "DOC-ONB-002"
+    ],
+    "retrieval_scores": [
+      0.6521,
+      0.5003,
+      0.4945
+    ],
+    "citations": [
+      "DOC-DEPLOY-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 17.24,
+    "throttle_s": 16.0,
+    "tokens_used": 1825,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 141,
+    "response_chars": 574
+  },
+  {
+    "ticket_id": "VAL-0026",
+    "channel": "email",
+    "customer_tier": "business",
+    "customer_region": "latin_america",
+    "language_fluency": "non_fluent",
+    "intent": "data_residency",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as data residency with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-DATA-003, DOC-DATA-002, DOC-ACCT-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DATA-003",
+      "DOC-DATA-002",
+      "DOC-ACCT-002"
+    ],
+    "retrieval_scores": [
+      0.6461,
+      0.6073,
+      0.5284
+    ],
+    "citations": [
+      "DOC-DATA-003"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 21.493,
+    "throttle_s": 20.0,
+    "tokens_used": 1821,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 194,
+    "response_chars": 388
+  },
+  {
+    "ticket_id": "VAL-0027",
+    "channel": "email",
+    "customer_tier": "enterprise",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "billing_query",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as billing query with 95% confidence, at or above the 75% bar, and 2 supporting documentation passages (DOC-BILL-003, DOC-BILL-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-BILL-003",
+      "DOC-BILL-001"
+    ],
+    "retrieval_scores": [
+      0.7059,
+      0.6627
+    ],
+    "citations": [
+      "DOC-BILL-001",
+      "DOC-BILL-003"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "6 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 13.423,
+    "throttle_s": 12.0,
+    "tokens_used": 1869,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 147,
+    "response_chars": 504
+  },
+  {
+    "ticket_id": "VAL-0028",
+    "channel": "email",
+    "customer_tier": "business",
+    "customer_region": "asia_pacific",
+    "language_fluency": "non_fluent",
+    "intent": "deployment_failure",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as deployment failure with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-DEPLOY-003, DOC-DEPLOY-001, DOC-DEPLOY-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-003",
+      "DOC-DEPLOY-001",
+      "DOC-DEPLOY-002"
+    ],
+    "retrieval_scores": [
+      0.7057,
+      0.6291,
+      0.6003
+    ],
+    "citations": [
+      "DOC-DEPLOY-003"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "6 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 19.544,
+    "throttle_s": 18.0,
+    "tokens_used": 1938,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 141,
+    "response_chars": 616
+  },
+  {
+    "ticket_id": "VAL-0029",
+    "channel": "chat",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "onboarding",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "The system could not produce an answer it was able to evidence, so the ticket was passed to an agent. Onboarding guide location, console navigation tips, and initial setup steps.",
+    "retrieved_doc_ids": [
+      "DOC-DATA-002",
+      "DOC-DATA-001",
+      "DOC-INT-002"
+    ],
+    "retrieval_scores": [
+      0.5395,
+      0.5285,
+      0.5272
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 25.28,
+    "throttle_s": 24.0,
+    "tokens_used": 1603,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": true,
+    "errors": [],
+    "ticket_length": 121,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0030",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "feature_request",
+    "urgency": "low",
+    "confidence": 0.98,
+    "action": "escalate",
+    "reason": "Tickets classified as feature request are always handled by a person, however confident the classifier is. Customer explicitly asks if a specific feature is on the roadmap.",
+    "retrieved_doc_ids": [
+      "DOC-ONB-002",
+      "DOC-ACCT-002",
+      "DOC-API-003"
+    ],
+    "retrieval_scores": [
+      0.5892,
+      0.4967,
+      0.4955
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 4.397,
+    "throttle_s": 4.0,
+    "tokens_used": 586,
+    "llm_calls": 1,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 134,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0031",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "rollback_request",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as rollback request with 95% confidence, at or above the 75% bar, and 2 supporting documentation passages (DOC-DEPLOY-002, DOC-BILL-003) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-002",
+      "DOC-BILL-003"
+    ],
+    "retrieval_scores": [
+      0.656,
+      0.4646
+    ],
+    "citations": [
+      "DOC-DEPLOY-002"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "5 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 9.51,
+    "throttle_s": 8.0,
+    "tokens_used": 1947,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 207,
+    "response_chars": 635
+  },
+  {
+    "ticket_id": "VAL-0032",
+    "channel": "chat",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "feature_request",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "Tickets classified as feature request are always handled by a person, however confident the classifier is. Customer requests a new capability for granular spend controls.",
+    "retrieved_doc_ids": [
+      "DOC-BILL-003",
+      "DOC-ACCT-002",
+      "DOC-DATA-002"
+    ],
+    "retrieval_scores": [
+      0.6918,
+      0.6497,
+      0.5929
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 23.727,
+    "throttle_s": 23.114,
+    "tokens_used": 588,
+    "llm_calls": 1,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 151,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0033",
+    "channel": "forum",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "webhook_issue",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as webhook issue with 95% confidence, at or above the 75% bar, and 1 supporting documentation passage (DOC-API-003) were found.",
+    "retrieved_doc_ids": [
+      "DOC-API-003"
+    ],
+    "retrieval_scores": [
+      0.7993
+    ],
+    "citations": [
+      "DOC-API-003"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 7.334,
+    "throttle_s": 6.057,
+    "tokens_used": 1568,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 171,
+    "response_chars": 382
+  },
+  {
+    "ticket_id": "VAL-0034",
+    "channel": "email",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "rollback_request",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as rollback request with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-DEPLOY-002, DOC-AUTH-001, DOC-DEPLOY-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-002",
+      "DOC-AUTH-001",
+      "DOC-DEPLOY-001"
+    ],
+    "retrieval_scores": [
+      0.7529,
+      0.477,
+      0.4599
+    ],
+    "citations": [
+      "DOC-DEPLOY-002"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "5 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 0.006,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 185,
+    "response_chars": 524
+  },
+  {
+    "ticket_id": "VAL-0035",
+    "channel": "chat",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "unclear_request",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Ticket provides no specific details, symptoms, or context to identify the issue.",
+    "retrieved_doc_ids": [],
+    "retrieval_scores": [],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 12.446,
+    "throttle_s": 12.0,
+    "tokens_used": 560,
+    "llm_calls": 1,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 31,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0036",
+    "channel": "forum",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "onboarding",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as onboarding with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-ONB-001, DOC-DATA-002, DOC-DEPLOY-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-ONB-001",
+      "DOC-DATA-002",
+      "DOC-DEPLOY-001"
+    ],
+    "retrieval_scores": [
+      0.5405,
+      0.5308,
+      0.5254
+    ],
+    "citations": [
+      "DOC-ONB-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "7 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 10.259,
+    "throttle_s": 9.0,
+    "tokens_used": 1851,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 160,
+    "response_chars": 407
+  },
+  {
+    "ticket_id": "VAL-0037",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "data_residency",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as data residency with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-DATA-003, DOC-DATA-002, DOC-ACCT-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DATA-003",
+      "DOC-DATA-002",
+      "DOC-ACCT-001"
+    ],
+    "retrieval_scores": [
+      0.7066,
+      0.5039,
+      0.4767
+    ],
+    "citations": [
+      "DOC-DATA-003"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "6 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 22.575,
+    "throttle_s": 21.0,
+    "tokens_used": 1823,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 147,
+    "response_chars": 386
+  },
+  {
+    "ticket_id": "VAL-0038",
+    "channel": "forum",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "performance_degradation",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as performance degradation with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-PERF-001, DOC-DATA-003, DOC-API-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-PERF-001",
+      "DOC-DATA-003",
+      "DOC-API-002"
+    ],
+    "retrieval_scores": [
+      0.7445,
+      0.5545,
+      0.5161
+    ],
+    "citations": [
+      "DOC-PERF-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "8 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 22.706,
+    "throttle_s": 21.0,
+    "tokens_used": 2120,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 194,
+    "response_chars": 773
+  },
+  {
+    "ticket_id": "VAL-0039",
+    "channel": "forum",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "api_key_issue",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as api key issue with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-SEC-001, DOC-AUTH-004, DOC-INT-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-SEC-001",
+      "DOC-AUTH-004",
+      "DOC-INT-001"
+    ],
+    "retrieval_scores": [
+      0.655,
+      0.6323,
+      0.5322
+    ],
+    "citations": [
+      "DOC-AUTH-004"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "2 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 31.539,
+    "throttle_s": 30.0,
+    "tokens_used": 1795,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 187,
+    "response_chars": 299
+  },
+  {
+    "ticket_id": "VAL-0040",
+    "channel": "email",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "billing_query",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "The system could not produce an answer it was able to evidence, so the ticket was passed to an agent. Specific identification of the unknown service on the customer's invoice.",
+    "retrieved_doc_ids": [
+      "DOC-BILL-001",
+      "DOC-BILL-003"
+    ],
+    "retrieval_scores": [
+      0.6936,
+      0.5296
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 11.389,
+    "throttle_s": 10.0,
+    "tokens_used": 1803,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": true,
+    "errors": [],
+    "ticket_length": 148,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0041",
+    "channel": "email",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "billing_query",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "The system could not produce an answer it was able to evidence, so the ticket was passed to an agent. Specific identification of the unknown service on the customer's invoice.",
+    "retrieved_doc_ids": [
+      "DOC-BILL-001",
+      "DOC-BILL-003"
+    ],
+    "retrieval_scores": [
+      0.6936,
+      0.5296
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.002,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": true,
+    "errors": [],
+    "ticket_length": 148,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0042",
+    "channel": "chat",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "configuration_help",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as configuration help with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-ACCT-002, DOC-DEPLOY-004, DOC-BILL-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-ACCT-002",
+      "DOC-DEPLOY-004",
+      "DOC-BILL-001"
+    ],
+    "retrieval_scores": [
+      0.6411,
+      0.5992,
+      0.5384
+    ],
+    "citations": [
+      "DOC-DEPLOY-004"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 16.145,
+    "throttle_s": 15.0,
+    "tokens_used": 1736,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 123,
+    "response_chars": 408
+  },
+  {
+    "ticket_id": "VAL-0043",
+    "channel": "forum",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "security_incident",
+    "urgency": "high",
+    "confidence": 1.0,
+    "action": "escalate",
+    "reason": "Tickets classified as security incident are always handled by a person, however confident the classifier is. Possible security incident: the ticket reports a suspected compromise.",
+    "retrieved_doc_ids": [
+      "DOC-SEC-001",
+      "DOC-SEC-002",
+      "DOC-AUTH-001"
+    ],
+    "retrieval_scores": [
+      0.7134,
+      0.5361,
+      0.524
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.003,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 0,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 170,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0044",
+    "channel": "chat",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "billing_query",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as billing query with 95% confidence, at or above the 75% bar, and 2 supporting documentation passages (DOC-BILL-001, DOC-BILL-003) were found.",
+    "retrieved_doc_ids": [
+      "DOC-BILL-001",
+      "DOC-BILL-003"
+    ],
+    "retrieval_scores": [
+      0.6017,
+      0.43
+    ],
+    "citations": [
+      "DOC-BILL-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 23.73,
+    "throttle_s": 22.0,
+    "tokens_used": 1875,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 111,
+    "response_chars": 574
+  },
+  {
+    "ticket_id": "VAL-0045",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "data_export",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as data export with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-DATA-001, DOC-API-002, DOC-SEC-003) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DATA-001",
+      "DOC-API-002",
+      "DOC-SEC-003"
+    ],
+    "retrieval_scores": [
+      0.7096,
+      0.6063,
+      0.5575
+    ],
+    "citations": [
+      "DOC-DATA-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 19.207,
+    "throttle_s": 18.0,
+    "tokens_used": 1743,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 170,
+    "response_chars": 303
+  },
+  {
+    "ticket_id": "VAL-0046",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "non_fluent",
+    "intent": "api_usage_question",
+    "urgency": "medium",
+    "confidence": 0.85,
+    "action": "auto_respond",
+    "reason": "Classified as api usage question with 85% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-API-002, DOC-SEC-001, DOC-AUTH-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-API-002",
+      "DOC-SEC-001",
+      "DOC-AUTH-002"
+    ],
+    "retrieval_scores": [
+      0.7252,
+      0.526,
+      0.4939
+    ],
+    "citations": [
+      "DOC-API-002"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "6 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.85 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 16.277,
+    "throttle_s": 15.0,
+    "tokens_used": 1864,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 124,
+    "response_chars": 526
+  },
+  {
+    "ticket_id": "VAL-0047",
+    "channel": "chat",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "rate_limit",
+    "urgency": "medium",
+    "confidence": 0.85,
+    "action": "auto_respond",
+    "reason": "Classified as rate limit with 85% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-API-001, DOC-INT-002, DOC-AUTH-004) were found.",
+    "retrieved_doc_ids": [
+      "DOC-API-001",
+      "DOC-INT-002",
+      "DOC-AUTH-004"
+    ],
+    "retrieval_scores": [
+      0.6541,
+      0.5194,
+      0.5023
+    ],
+    "citations": [
+      "DOC-API-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.85 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 28.279,
+    "throttle_s": 27.0,
+    "tokens_used": 1751,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 125,
+    "response_chars": 364
+  },
+  {
+    "ticket_id": "VAL-0048",
+    "channel": "chat",
+    "customer_tier": "standard",
+    "customer_region": "latin_america",
+    "language_fluency": "non_fluent",
+    "intent": "security_incident",
+    "urgency": "high",
+    "confidence": 1.0,
+    "action": "escalate",
+    "reason": "Tickets classified as security incident are always handled by a person, however confident the classifier is. Possible security incident: the ticket reports a suspected compromise.",
+    "retrieved_doc_ids": [
+      "DOC-SEC-001",
+      "DOC-AUTH-001",
+      "DOC-SEC-002"
+    ],
+    "retrieval_scores": [
+      0.5972,
+      0.521,
+      0.4814
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.004,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 0,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 158,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0049",
+    "channel": "email",
+    "customer_tier": "enterprise",
+    "customer_region": "asia_pacific",
+    "language_fluency": "non_fluent",
+    "intent": "api_key_issue",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as api key issue with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-AUTH-004, DOC-ONB-002, DOC-SEC-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-AUTH-004",
+      "DOC-ONB-002",
+      "DOC-SEC-002"
+    ],
+    "retrieval_scores": [
+      0.6806,
+      0.5259,
+      0.5216
+    ],
+    "citations": [
+      "DOC-AUTH-004"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 15.585,
+    "throttle_s": 14.0,
+    "tokens_used": 1813,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 165,
+    "response_chars": 396
+  },
+  {
+    "ticket_id": "VAL-0050",
+    "channel": "email",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "onboarding",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as onboarding with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-ONB-001, DOC-DEPLOY-001, DOC-ONB-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-ONB-001",
+      "DOC-DEPLOY-001",
+      "DOC-ONB-002"
+    ],
+    "retrieval_scores": [
+      0.5726,
+      0.5225,
+      0.4944
+    ],
+    "citations": [
+      "DOC-ONB-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "5 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 18.635,
+    "throttle_s": 17.0,
+    "tokens_used": 1841,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 166,
+    "response_chars": 400
+  },
+  {
+    "ticket_id": "VAL-0051",
+    "channel": "forum",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "intent": "configuration_help",
+    "urgency": "medium",
+    "confidence": 0.65,
+    "action": "escalate",
+    "reason": "The classifier was 65% sure this is a configuration help, below the 75% bar for answering without review.",
+    "retrieved_doc_ids": [
+      "DOC-INT-002",
+      "DOC-SEC-003",
+      "DOC-PERF-001"
+    ],
+    "retrieval_scores": [
+      0.7214,
+      0.5223,
+      0.5093
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 16.504,
+    "throttle_s": 16.0,
+    "tokens_used": 611,
+    "llm_calls": 1,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 174,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0052",
+    "channel": "chat",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "account_access",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as account access with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-INT-002, DOC-AUTH-001, DOC-BILL-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-INT-002",
+      "DOC-AUTH-001",
+      "DOC-BILL-001"
+    ],
+    "retrieval_scores": [
+      0.5474,
+      0.5379,
+      0.4939
+    ],
+    "citations": [
+      "DOC-AUTH-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 11.701,
+    "throttle_s": 10.0,
+    "tokens_used": 1880,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 238,
+    "response_chars": 412
+  },
+  {
+    "ticket_id": "VAL-0053",
+    "channel": "chat",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "billing_query",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as billing query with 95% confidence, at or above the 75% bar, and 2 supporting documentation passages (DOC-BILL-001, DOC-BILL-003) were found.",
+    "retrieved_doc_ids": [
+      "DOC-BILL-001",
+      "DOC-BILL-003"
+    ],
+    "retrieval_scores": [
+      0.6017,
+      0.43
+    ],
+    "citations": [
+      "DOC-BILL-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 0.005,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 111,
+    "response_chars": 574
+  },
+  {
+    "ticket_id": "VAL-0054",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "data_residency",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as data residency with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-DATA-003, DOC-DATA-002, DOC-ACCT-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DATA-003",
+      "DOC-DATA-002",
+      "DOC-ACCT-002"
+    ],
+    "retrieval_scores": [
+      0.6488,
+      0.6109,
+      0.4956
+    ],
+    "citations": [
+      "DOC-DATA-003"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 14.037,
+    "throttle_s": 13.0,
+    "tokens_used": 1743,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 178,
+    "response_chars": 338
+  },
+  {
+    "ticket_id": "VAL-0055",
+    "channel": "chat",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "intent": "api_key_issue",
+    "urgency": "low",
+    "confidence": 0.85,
+    "action": "auto_respond",
+    "reason": "Classified as api key issue with 85% confidence, at or above the 75% bar, and 1 supporting documentation passage (DOC-INT-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-INT-001"
+    ],
+    "retrieval_scores": [
+      0.6454
+    ],
+    "citations": [
+      "DOC-INT-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.85 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 19.239,
+    "throttle_s": 18.0,
+    "tokens_used": 1549,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 162,
+    "response_chars": 436
+  },
+  {
+    "ticket_id": "VAL-0056",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "deployment_failure",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as deployment failure with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-DEPLOY-003, DOC-DEPLOY-001, DOC-ONB-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-003",
+      "DOC-DEPLOY-001",
+      "DOC-ONB-001"
+    ],
+    "retrieval_scores": [
+      0.6309,
+      0.6062,
+      0.5767
+    ],
+    "citations": [
+      "DOC-DEPLOY-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "6 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 17.743,
+    "throttle_s": 16.0,
+    "tokens_used": 1918,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 149,
+    "response_chars": 527
+  },
+  {
+    "ticket_id": "VAL-0057",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "deployment_failure",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as deployment failure with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-DEPLOY-001, DOC-ONB-001, DOC-DEPLOY-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-001",
+      "DOC-ONB-001",
+      "DOC-DEPLOY-002"
+    ],
+    "retrieval_scores": [
+      0.7841,
+      0.585,
+      0.5558
+    ],
+    "citations": [
+      "DOC-DEPLOY-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "8 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 21.578,
+    "throttle_s": 19.722,
+    "tokens_used": 2016,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 195,
+    "response_chars": 769
+  },
+  {
+    "ticket_id": "VAL-0058",
+    "channel": "docs_comment",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "intent": "api_key_issue",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as api key issue with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-AUTH-004, DOC-INT-001, DOC-BILL-003) were found.",
+    "retrieved_doc_ids": [
+      "DOC-AUTH-004",
+      "DOC-INT-001",
+      "DOC-BILL-003"
+    ],
+    "retrieval_scores": [
+      0.7112,
+      0.6007,
+      0.5525
+    ],
+    "citations": [
+      "DOC-AUTH-004"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "6 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 31.722,
+    "throttle_s": 30.0,
+    "tokens_used": 1950,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 202,
+    "response_chars": 528
+  },
+  {
+    "ticket_id": "VAL-0059",
+    "channel": "docs_comment",
+    "customer_tier": "enterprise",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "configuration_help",
+    "urgency": "medium",
+    "confidence": 0.85,
+    "action": "auto_respond",
+    "reason": "Classified as configuration help with 85% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-DEPLOY-004, DOC-DATA-003, DOC-ACCT-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-004",
+      "DOC-DATA-003",
+      "DOC-ACCT-002"
+    ],
+    "retrieval_scores": [
+      0.6801,
+      0.5149,
+      0.5077
+    ],
+    "citations": [
+      "DOC-DEPLOY-004"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.85 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 26.697,
+    "throttle_s": 25.112,
+    "tokens_used": 1785,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 186,
+    "response_chars": 361
+  },
+  {
+    "ticket_id": "VAL-0060",
+    "channel": "email",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "webhook_issue",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as webhook issue with 95% confidence, at or above the 75% bar, and 1 supporting documentation passage (DOC-API-003) were found.",
+    "retrieved_doc_ids": [
+      "DOC-API-003"
+    ],
+    "retrieval_scores": [
+      0.7641
+    ],
+    "citations": [
+      "DOC-API-003"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 15.593,
+    "throttle_s": 14.0,
+    "tokens_used": 1536,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 164,
+    "response_chars": 308
+  },
+  {
+    "ticket_id": "VAL-0061",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "webhook_issue",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as webhook issue with 95% confidence, at or above the 75% bar, and 1 supporting documentation passage (DOC-API-003) were found.",
+    "retrieved_doc_ids": [
+      "DOC-API-003"
+    ],
+    "retrieval_scores": [
+      0.7641
+    ],
+    "citations": [
+      "DOC-API-003"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 0.003,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 164,
+    "response_chars": 308
+  },
+  {
+    "ticket_id": "VAL-0062",
+    "channel": "docs_comment",
+    "customer_tier": "business",
+    "customer_region": "asia_pacific",
+    "language_fluency": "non_fluent",
+    "intent": "integration_help",
+    "urgency": "high",
+    "confidence": 0.85,
+    "action": "auto_respond",
+    "reason": "Classified as integration help with 85% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-INT-002, DOC-INT-001, DOC-PERF-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-INT-002",
+      "DOC-INT-001",
+      "DOC-PERF-001"
+    ],
+    "retrieval_scores": [
+      0.6881,
+      0.5259,
+      0.5086
+    ],
+    "citations": [
+      "DOC-INT-002"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.85 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 17.596,
+    "throttle_s": 16.265,
+    "tokens_used": 1759,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 142,
+    "response_chars": 367
+  },
+  {
+    "ticket_id": "VAL-0063",
+    "channel": "email",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "account_access",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as account access with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-ACCT-001, DOC-BILL-002, DOC-AUTH-003) were found.",
+    "retrieved_doc_ids": [
+      "DOC-ACCT-001",
+      "DOC-BILL-002",
+      "DOC-AUTH-003"
+    ],
+    "retrieval_scores": [
+      0.6413,
+      0.6409,
+      0.6214
+    ],
+    "citations": [
+      "DOC-ACCT-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 12.247,
+    "throttle_s": 11.0,
+    "tokens_used": 1773,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 178,
+    "response_chars": 334
+  },
+  {
+    "ticket_id": "VAL-0064",
+    "channel": "chat",
+    "customer_tier": "business",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "intent": "api_usage_question",
+    "urgency": "medium",
+    "confidence": 0.92,
+    "action": "auto_respond",
+    "reason": "Classified as api usage question with 92% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-API-002, DOC-AUTH-002, DOC-DATA-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-API-002",
+      "DOC-AUTH-002",
+      "DOC-DATA-001"
+    ],
+    "retrieval_scores": [
+      0.6874,
+      0.5529,
+      0.5093
+    ],
+    "citations": [
+      "DOC-API-002"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.92 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 20.413,
+    "throttle_s": 19.0,
+    "tokens_used": 1805,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 132,
+    "response_chars": 366
+  },
+  {
+    "ticket_id": "VAL-0065",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "billing_query",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as billing query with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-BILL-001, DOC-BILL-002, DOC-BILL-003) were found.",
+    "retrieved_doc_ids": [
+      "DOC-BILL-001",
+      "DOC-BILL-002",
+      "DOC-BILL-003"
+    ],
+    "retrieval_scores": [
+      0.7158,
+      0.5495,
+      0.4943
+    ],
+    "citations": [
+      "DOC-BILL-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 14.12,
+    "throttle_s": 13.0,
+    "tokens_used": 1831,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 141,
+    "response_chars": 413
+  },
+  {
+    "ticket_id": "VAL-0066",
+    "channel": "forum",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "intent": "data_residency",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as data residency with 95% confidence, at or above the 75% bar, and 2 supporting documentation passages (DOC-DATA-003, DOC-DATA-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DATA-003",
+      "DOC-DATA-002"
+    ],
+    "retrieval_scores": [
+      0.6513,
+      0.595
+    ],
+    "citations": [
+      "DOC-DATA-003"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "5 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 20.426,
+    "throttle_s": 19.0,
+    "tokens_used": 1886,
+    "llm_calls": 2,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 210,
+    "response_chars": 490
+  },
+  {
+    "ticket_id": "VAL-0067",
+    "channel": "docs_comment",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "security_incident",
+    "urgency": "high",
+    "confidence": 0.98,
+    "action": "escalate",
+    "reason": "Tickets classified as security incident are always handled by a person, however confident the classifier is. Unrecognized IP and unauthorized resource creation indicate active security breach.",
+    "retrieved_doc_ids": [
+      "DOC-SEC-001",
+      "DOC-SEC-003",
+      "DOC-SEC-002"
+    ],
+    "retrieval_scores": [
+      0.7746,
+      0.6383,
+      0.5248
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 18.467,
+    "throttle_s": 18.0,
+    "tokens_used": 623,
+    "llm_calls": 1,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 222,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0068",
+    "channel": "email",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "non_fluent",
+    "intent": "security_incident",
+    "urgency": "high",
+    "confidence": 0.98,
+    "action": "escalate",
+    "reason": "Tickets classified as security incident are always handled by a person, however confident the classifier is. Unrecognized activity and unauthorized resource creation indicate a potential security breach.",
+    "retrieved_doc_ids": [
+      "DOC-SEC-001",
+      "DOC-SEC-003",
+      "DOC-SEC-002"
+    ],
+    "retrieval_scores": [
+      0.7797,
+      0.6354,
+      0.5265
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 2.521,
+    "throttle_s": 2.0,
+    "tokens_used": 621,
+    "llm_calls": 1,
+    "cache_hits": 0,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 198,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0069",
+    "channel": "chat",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "configuration_help",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as configuration help with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-ACCT-002, DOC-DEPLOY-004, DOC-BILL-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-ACCT-002",
+      "DOC-DEPLOY-004",
+      "DOC-BILL-001"
+    ],
+    "retrieval_scores": [
+      0.6411,
+      0.5992,
+      0.5384
+    ],
+    "citations": [
+      "DOC-DEPLOY-004"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 0.005,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 123,
+    "response_chars": 408
+  },
+  {
+    "ticket_id": "VAL-0070",
+    "channel": "docs_comment",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "unclear_request",
+    "urgency": "medium",
+    "confidence": 0.0,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Classifier unavailable; routed to a human by the confidence floor. (ModelUnavailable)",
+    "retrieved_doc_ids": [
+      "DOC-AUTH-003",
+      "DOC-ACCT-001",
+      "DOC-DEPLOY-003"
+    ],
+    "retrieval_scores": [
+      0.742,
+      0.6245,
+      0.5382
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.067,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 0,
+    "cache_hits": 0,
+    "degraded": true,
+    "errors": [
+      "classification_fallback"
+    ],
+    "ticket_length": 192,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0071",
+    "channel": "docs_comment",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "unclear_request",
+    "urgency": "medium",
+    "confidence": 0.0,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Classifier unavailable; routed to a human by the confidence floor. (ModelUnavailable)",
+    "retrieved_doc_ids": [
+      "DOC-BILL-003",
+      "DOC-DATA-002",
+      "DOC-INT-002"
+    ],
+    "retrieval_scores": [
+      0.7864,
+      0.496,
+      0.4791
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.07,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 0,
+    "cache_hits": 0,
+    "degraded": true,
+    "errors": [
+      "classification_fallback"
+    ],
+    "ticket_length": 196,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0072",
+    "channel": "docs_comment",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "unclear_request",
+    "urgency": "medium",
+    "confidence": 0.0,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Classifier unavailable; routed to a human by the confidence floor. (ModelUnavailable)",
+    "retrieved_doc_ids": [
+      "DOC-BILL-001",
+      "DOC-BILL-002",
+      "DOC-INT-002"
+    ],
+    "retrieval_scores": [
+      0.7454,
+      0.5832,
+      0.5283
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.071,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 0,
+    "cache_hits": 0,
+    "degraded": true,
+    "errors": [
+      "classification_fallback"
+    ],
+    "ticket_length": 141,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0073",
+    "channel": "forum",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "intent": "unclear_request",
+    "urgency": "medium",
+    "confidence": 0.0,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Classifier unavailable; routed to a human by the confidence floor. (ModelUnavailable)",
+    "retrieved_doc_ids": [
+      "DOC-BILL-001",
+      "DOC-INT-002",
+      "DOC-BILL-002"
+    ],
+    "retrieval_scores": [
+      0.73,
+      0.5421,
+      0.542
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.068,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 0,
+    "cache_hits": 0,
+    "degraded": true,
+    "errors": [
+      "classification_fallback"
+    ],
+    "ticket_length": 117,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0074",
+    "channel": "docs_comment",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "unclear_request",
+    "urgency": "medium",
+    "confidence": 0.0,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Classifier unavailable; routed to a human by the confidence floor. (ModelUnavailable)",
+    "retrieved_doc_ids": [
+      "DOC-ACCT-001",
+      "DOC-SEC-001"
+    ],
+    "retrieval_scores": [
+      0.7504,
+      0.4779
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.067,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 0,
+    "cache_hits": 0,
+    "degraded": true,
+    "errors": [
+      "classification_fallback"
+    ],
+    "ticket_length": 162,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0075",
+    "channel": "docs_comment",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "unclear_request",
+    "urgency": "medium",
+    "confidence": 0.0,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Classifier unavailable; routed to a human by the confidence floor. (ModelUnavailable)",
+    "retrieved_doc_ids": [
+      "DOC-AUTH-004",
+      "DOC-SEC-001",
+      "DOC-ONB-002"
+    ],
+    "retrieval_scores": [
+      0.6648,
+      0.5639,
+      0.5262
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.079,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 0,
+    "cache_hits": 0,
+    "degraded": true,
+    "errors": [
+      "classification_fallback"
+    ],
+    "ticket_length": 143,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0076",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "latin_america",
+    "language_fluency": "fluent",
+    "intent": "unclear_request",
+    "urgency": "medium",
+    "confidence": 0.0,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Classifier unavailable; routed to a human by the confidence floor. (ModelUnavailable)",
+    "retrieved_doc_ids": [
+      "DOC-DATA-003",
+      "DOC-DATA-002",
+      "DOC-ACCT-002"
+    ],
+    "retrieval_scores": [
+      0.6539,
+      0.6085,
+      0.537
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.068,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 0,
+    "cache_hits": 0,
+    "degraded": true,
+    "errors": [
+      "classification_fallback"
+    ],
+    "ticket_length": 184,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0077",
+    "channel": "chat",
+    "customer_tier": "business",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "unclear_request",
+    "urgency": "medium",
+    "confidence": 0.0,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Classifier unavailable; routed to a human by the confidence floor. (ModelUnavailable)",
+    "retrieved_doc_ids": [
+      "DOC-BILL-001",
+      "DOC-ACCT-002",
+      "DOC-BILL-002"
+    ],
+    "retrieval_scores": [
+      0.7103,
+      0.519,
+      0.4721
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.07,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 0,
+    "cache_hits": 0,
+    "degraded": true,
+    "errors": [
+      "classification_fallback"
+    ],
+    "ticket_length": 121,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0078",
+    "channel": "docs_comment",
+    "customer_tier": "business",
+    "customer_region": "asia_pacific",
+    "language_fluency": "non_fluent",
+    "intent": "unclear_request",
+    "urgency": "medium",
+    "confidence": 0.0,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Classifier unavailable; routed to a human by the confidence floor. (ModelUnavailable)",
+    "retrieved_doc_ids": [
+      "DOC-PERF-003",
+      "DOC-DATA-002",
+      "DOC-DEPLOY-001"
+    ],
+    "retrieval_scores": [
+      0.6001,
+      0.5841,
+      0.516
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.064,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 0,
+    "cache_hits": 0,
+    "degraded": true,
+    "errors": [
+      "classification_fallback"
+    ],
+    "ticket_length": 123,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0079",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "non_fluent",
+    "intent": "unclear_request",
+    "urgency": "medium",
+    "confidence": 0.0,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Classifier unavailable; routed to a human by the confidence floor. (ModelUnavailable)",
+    "retrieved_doc_ids": [
+      "DOC-DATA-003",
+      "DOC-DATA-002",
+      "DOC-ONB-002"
+    ],
+    "retrieval_scores": [
+      0.6248,
+      0.6236,
+      0.4735
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.064,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 0,
+    "cache_hits": 0,
+    "degraded": true,
+    "errors": [
+      "classification_fallback"
+    ],
+    "ticket_length": 211,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0080",
+    "channel": "chat",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "unclear_request",
+    "urgency": "medium",
+    "confidence": 0.0,
+    "action": "escalate",
+    "reason": "Tickets classified as unclear request are always handled by a person, however confident the classifier is. Classifier unavailable; routed to a human by the confidence floor. (ModelUnavailable)",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-003",
+      "DOC-DEPLOY-002",
+      "DOC-DEPLOY-001"
+    ],
+    "retrieval_scores": [
+      0.6676,
+      0.5775,
+      0.4898
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.066,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 0,
+    "cache_hits": 0,
+    "degraded": true,
+    "errors": [
+      "classification_fallback"
+    ],
+    "ticket_length": 176,
+    "response_chars": 163
+  }
+]
