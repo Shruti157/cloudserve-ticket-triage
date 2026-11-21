@@ -188,6 +188,7 @@ the reported figures were produced with.
 | `CONFIDENCE_THRESHOLD` | `0.75` | Below this, a ticket goes to a person |
 | `RETRIEVAL_MIN_SCORE` | `0.45` | Below this, retrieval returns nothing |
 | `RETRIEVAL_TOP_K` | `3` | Maximum articles per ticket |
+| `RETRIEVAL_WHOLE_DOCUMENT` | `true` | Whether generation sees the whole article or only the matching section. Set `false` to reproduce the experiment in `docs/governance.md` R-09 |
 | `TOKENS_PER_MINUTE` | `8000` | Free-tier pacing; raise it if your tier is larger |
 | `KILL_SWITCH_PATH` | `./storage/KILL_SWITCH` | Create this file to stop automatic answering |
 
@@ -222,7 +223,7 @@ src/static/     one HTML file: the demo page served at /, no build step
 prompts/        versioned prompt files, each naming the requirements it serves
 evaluation/     the harness, the metrics, the fairness audit, and the results
 scripts/        preflight, discovery, retrieval tuning, induced failures, secret scan
-tests/          117 tests; no API key and no network required
+tests/          118 tests; no API key and no network required
 data/           the ticket sets, the 29-article corpus, the guardrail triggers
 docs/           problem statement, architecture decisions, governance, build notes
 storage/        gitignored: the decision log, the response cache, the kill switch

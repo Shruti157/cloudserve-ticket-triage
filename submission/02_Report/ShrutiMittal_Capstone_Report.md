@@ -629,21 +629,49 @@ at 1,600 characters. Its generate calls average 957 tokens; mine average
 1,342. I am giving the model substantially more text in which to find a
 quotable but irrelevant sentence.
 
-The change made was to the prompt. **PR-02 v1.6** makes the relevance
+Two changes were available, and they were tried one at a time so that each
+result would be attributable. Both were measured on the same 24-ticket
+subset: the 14 tickets that were answered and should not have been, plus 10
+of the 36 correctly answered tickets drawn at random as controls, so that a
+change which buys escalations by refusing everything is visible as such.
+
+The first change was to the prompt. **PR-02 v1.6** makes the relevance
 judgement the first decision rather than a consequence of the grounding rule,
 and names the failure explicitly: that a passage one can quote is not
 evidence the passage is relevant, and that a confident answer to a question
 the passages do not cover is a failure even when every quotation in it is
-genuine.
+genuine. **It changed nothing. Zero of the 14 were escalated, and one of the
+10 controls was lost.** The instruction is read and obeyed — the control it
+lost was refused with the correct reasoning, that the passages explained how
+to read an invoice but did not contain the customer's own billing data — so
+this is not a wiring failure. On these 14 the model simply judges the
+passages relevant, and being told more emphatically not to does not change
+that judgement.
 
-**This fix is unmeasured, and that is stated here rather than left to be
-noticed.** The daily token budget was exhausted by the run that found the
-problem, and validating a prompt change requires another run. The passage
-granularity change was deliberately *not* made at the same time, because two
-simultaneous changes would leave neither attributable — a correct
-methodological decision that is also, in a project with an eight-hour budget
-and a hard token cap, how a known defect comes to be documented rather than
-fixed.
+The second change was passage granularity, the mechanism §7.5 identifies
+above: sending generation the matching section rather than the whole article.
+This acts on the cause, and it partly worked — **8 of the 14 escalated** — but
+it **lost 4 of the 10 controls**. The same narrowing that removes the
+irrelevant sentence a model could quote also removes the Resolution steps
+that answer a ticket matched on its Symptoms. Projected onto the full 80
+tickets, first contact resolution falls from 62.5% to roughly 34.5%, against
+a 60% target. It trades a correctness failure for a coverage failure twice
+its size, so it was not adopted; the behaviour is retained as the
+`RETRIEVAL_WHOLE_DOCUMENT` setting, defaulting to the unchanged behaviour,
+so the experiment can be repeated rather than re-derived.
+
+Both subset results rest on small samples — 8 of 14 has a 95% interval of 33
+to 79%, and 4 of 10 one of 17 to 69% — so the direction is trustworthy and
+the magnitudes are not.
+
+**The defect is therefore measured, understood, and unfixed, and that is
+stated here rather than left to be noticed.** What the two experiments
+together show is that it is not reachable by the two cheap levers. The
+honest reading is that the system clears its 60% target only because it
+answers 14 tickets it should not; corrected for those, it sits at the
+labelled ceiling rather than above it. A real fix needs a relevance judgement
+that is separate from the generation call and separately checkable —
+§10 sets out the shape of one — and that was beyond the remaining budget.
 
 ### 7.6 Limits of what was measured
 
@@ -855,10 +883,13 @@ defects including one that would have failed the gate.
 
 ### 10.2 What remains uncertain
 
-**Whether the v1.6 prompt change fixes the relevance failure.** It is
-reasoned from a named mechanism and from a working reference implementation,
-and it is unmeasured. Validating it on the 14 failing tickets plus controls
-needs roughly 35,000 tokens; a full comparable run needs about 115,000.
+**How to fix the relevance failure at all.** The two cheap levers have now
+been measured on the 14 failing tickets plus 10 controls (§7.5) and neither
+is usable: the prompt change moved nothing, and narrowing the passages fixed
+8 of 14 at the cost of 4 of 10 controls, which projects to a worse system.
+What remains untried is a relevance judgement made separately from the
+generation call, so that it can be checked separately; I did not have the
+budget to build and evaluate one.
 
 Beyond that, I do not think the underlying question has a clean answer. I can
 make a model more reluctant to answer and I can measure the result, but I
@@ -875,10 +906,15 @@ whether agents would trust a drafted reply enough to send it (needs a trial).
 
 ### 10.3 What I would do next
 
-**Immediately.** Validate v1.6 on the failing tickets. If it does not hold,
-switch generation to 800-character chunks, which is what the reference
-implementation does and would also cut generation tokens by about 40%. Then
-implement FR-15 so the degraded-subset reporting stops being a manual step.
+**Immediately.** Both cheap fixes have been tried and neither works (§7.5),
+so the next step is the one that was skipped: a relevance check that is not
+the generation call. The cheapest honest version is a separate, single
+question per passage — does this passage contain what is needed to answer
+this ticket — scored before generation and recorded as its own decision, so
+it can be evaluated against the `answerable_from_docs` labels on its own
+rather than only through the answer it produces. That is measurable in a way
+a prompt instruction is not. Then implement FR-15 so the degraded-subset
+reporting stops being a manual step.
 
 **Before any deployment.** Explain the residual 33-point channel disparity.
 Shipping a measured, unexplained gap of that size would be indefensible even

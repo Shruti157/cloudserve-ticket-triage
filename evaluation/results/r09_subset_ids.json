@@ -1,0 +1,42 @@
+{
+  "purpose": "Subset used to measure the two R-09 mitigations (docs/governance.md).",
+  "selected_from": "data/validation_tickets.json",
+  "baseline_run": "run-20261121T084235Z",
+  "rule": {
+    "failures": "every ticket the baseline auto-answered whose label says escalate",
+    "controls": "10 of the 36 correctly auto-answered tickets, random.seed(7)"
+  },
+  "failures": [
+    "VAL-0004",
+    "VAL-0014",
+    "VAL-0016",
+    "VAL-0022",
+    "VAL-0024",
+    "VAL-0025",
+    "VAL-0026",
+    "VAL-0034",
+    "VAL-0037",
+    "VAL-0038",
+    "VAL-0046",
+    "VAL-0055",
+    "VAL-0060",
+    "VAL-0066"
+  ],
+  "controls": [
+    "VAL-0008",
+    "VAL-0010",
+    "VAL-0021",
+    "VAL-0027",
+    "VAL-0042",
+    "VAL-0044",
+    "VAL-0047",
+    "VAL-0054",
+    "VAL-0056",
+    "VAL-0063"
+  ],
+  "materialise": "python -c \"import json;ids=set(sum((json.load(open('evaluation/results/r09_subset_ids.json'))[k] for k in ('failures','controls')),[]));json.dump([t for t in json.load(open('data/validation_tickets.json')) if t['ticket_id'] in ids],open('/tmp/r09_subset.json','w'))\"",
+  "result": {
+    "PR-02 v1.6 (prompt only)": "0 of 14 escalated, 9 of 10 controls kept",
+    "RETRIEVAL_WHOLE_DOCUMENT=false": "8 of 14 escalated, 6 of 10 controls kept"
+  }
+}

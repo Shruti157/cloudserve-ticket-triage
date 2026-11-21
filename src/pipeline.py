@@ -218,6 +218,7 @@ class Pipeline:
                 ticket.text,
                 top_k=self.config.retrieval_top_k,
                 min_score=self.config.retrieval_min_score,
+                whole_document=self.config.retrieval_whole_document,
             )
         except Exception as exc:  # noqa: BLE001 - degrade, do not stop
             log.warning("Retrieval failed for %s: %s", ticket.ticket_id, exc)

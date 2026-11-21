@@ -76,6 +76,14 @@ class Config:
     confidence_threshold: float = 0.75
     retrieval_top_k: int = 3
     retrieval_min_score: float = 0.45
+    # Whether generation sees the whole article a matching section belongs to,
+    # or only the section itself. Exposed because it is the variable behind the
+    # over-answering measured in run-20261121T084235Z: a whole article almost
+    # always contains some sentence worth quoting, so a model asked to ground
+    # its answer can satisfy that instruction without the passage addressing
+    # the question. Narrowing the text is the only lever tried so far that acts
+    # on the cause rather than asking the model to be more careful.
+    retrieval_whole_document: bool = True
     tokens_per_minute: int = 8000
     request_timeout_s: float = 60.0
     max_attempts: int = 4
@@ -116,6 +124,8 @@ def load_config(env_file: str | os.PathLike[str] | None = None) -> Config:
         confidence_threshold=float(os.getenv("CONFIDENCE_THRESHOLD", "0.75")),
         retrieval_top_k=int(os.getenv("RETRIEVAL_TOP_K", "3")),
         retrieval_min_score=float(os.getenv("RETRIEVAL_MIN_SCORE", "0.45")),
+        retrieval_whole_document=os.getenv("RETRIEVAL_WHOLE_DOCUMENT", "true").strip().lower()
+        not in {"false", "0", "no"},
         tokens_per_minute=int(os.getenv("TOKENS_PER_MINUTE", "8000")),
         request_timeout_s=float(os.getenv("REQUEST_TIMEOUT_S", "60")),
         max_attempts=int(os.getenv("MAX_ATTEMPTS", "4")),

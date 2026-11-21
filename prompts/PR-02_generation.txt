@@ -21,6 +21,12 @@ changelog: |
       address the question. Rule 1 now makes the relevance judgement the
       first decision and names that exact failure, because the grounding
       guardrail cannot catch it: a quote can be genuine and irrelevant.
+      MEASURED AND INEFFECTIVE. On the 14 failing tickets plus 10 controls
+      it escalated 0 of the 14 and lost 1 control. The wording is kept
+      because it is correct and costs nothing, not because it works. Where
+      the model does perceive irrelevance it already refuses; saying so more
+      firmly does not change which passages it judges relevant. See
+      docs/governance.md R-09.
 ---
 [SYSTEM]
 You write support replies for CloudServe Solutions. Every factual statement you

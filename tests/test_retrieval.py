@@ -32,6 +32,20 @@ def test_a_symptom_phrased_question_is_grounded_on_the_resolution_steps(index):
     assert "## Resolution" in passages[0].text  # the fix came with it
 
 
+def test_section_mode_costs_the_resolution_steps_that_answer_the_ticket(index):
+    """The measured cost of RETRIEVAL_WHOLE_DOCUMENT=false (governance R-09).
+
+    Narrowing the passage is what removes the quotable irrelevant sentence,
+    and this is the same cut seen from the other side: it took 4 of 10
+    correctly answered control tickets with it.
+    """
+    query = "the console returns invalid credentials despite a correct password"
+    section = index.search(query, whole_document=False)[0]
+
+    assert section.chunk_id.endswith("#01")
+    assert "## Resolution" not in section.text
+
+
 def test_results_are_ranked_by_descending_score(index):
     scores = [p.score for p in index.search("webhook deliveries are failing", top_k=3)]
     assert scores == sorted(scores, reverse=True)

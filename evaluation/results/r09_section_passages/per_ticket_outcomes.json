@@ -1,0 +1,1155 @@
+[
+  {
+    "ticket_id": "VAL-0004",
+    "channel": "email",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "intent": "authentication_failure",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "The system could not produce an answer it was able to evidence, so the ticket was passed to an agent. The customer is asking for help with MFA codes being rejected. The only available passage (DOC-AUTH-002) is a title 'Multi-factor authentication setup and recovery' with no body text explaining how to fix rejected codes or troubleshoot authentication failures. Therefore, I cannot provide a grounded",
+    "retrieved_doc_ids": [
+      "DOC-AUTH-002",
+      "DOC-PERF-001",
+      "DOC-INT-002"
+    ],
+    "retrieval_scores": [
+      0.6998,
+      0.5296,
+      0.4995
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.004,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": true,
+    "errors": [],
+    "ticket_length": 143,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0008",
+    "channel": "chat",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "configuration_help",
+    "urgency": "low",
+    "confidence": 0.85,
+    "action": "auto_respond",
+    "reason": "Classified as configuration help with 85% confidence, at or above the 75% bar, and 1 supporting documentation passage (DOC-ACCT-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-ACCT-001"
+    ],
+    "retrieval_scores": [
+      0.6917
+    ],
+    "citations": [
+      "DOC-ACCT-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.85 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 0.004,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 130,
+    "response_chars": 267
+  },
+  {
+    "ticket_id": "VAL-0010",
+    "channel": "docs_comment",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "billing_query",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "The system could not produce an answer it was able to evidence, so the ticket was passed to an agent. The customer asked for help understanding why their invoice was higher than expected. Passage 1 mentions 'Understanding your invoice and usage breakdown' but provides no actual content, steps, or explanations to answer the specific question about the cause of the increase. Passage 2 is about monitor",
+    "retrieved_doc_ids": [
+      "DOC-BILL-001",
+      "DOC-INT-002",
+      "DOC-BILL-002"
+    ],
+    "retrieval_scores": [
+      0.7328,
+      0.6025,
+      0.5689
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.003,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": true,
+    "errors": [],
+    "ticket_length": 184,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0014",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "intent": "rollback_request",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "The system could not produce an answer it was able to evidence, so the ticket was passed to an agent. The customer asked for help rolling back a failed release. Passage 1 has a title about rolling back a failed release but contains no steps, instructions, or details on how to perform the rollback. Therefore, I cannot provide a grounded answer.",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-002",
+      "DOC-BILL-003"
+    ],
+    "retrieval_scores": [
+      0.6521,
+      0.4609
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.002,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": true,
+    "errors": [],
+    "ticket_length": 202,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0016",
+    "channel": "chat",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "performance_degradation",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "The system could not produce an answer it was able to evidence, so the ticket was passed to an agent. The customer is asking about performance degradation during peak hours despite having autoscaling enabled. Passage 1 (DOC-PERF-002) mentions 'Autoscaling behaviour and instance limits' but provides no actual content, details, or troubleshooting steps to explain why autoscaling might not be coping or",
+    "retrieved_doc_ids": [
+      "DOC-PERF-002",
+      "DOC-AUTH-002",
+      "DOC-DEPLOY-001"
+    ],
+    "retrieval_scores": [
+      0.5504,
+      0.4579,
+      0.4377
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.001,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": true,
+    "errors": [],
+    "ticket_length": 140,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0021",
+    "channel": "chat",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "rollback_request",
+    "urgency": "high",
+    "confidence": 0.98,
+    "action": "escalate",
+    "reason": "The system could not produce an answer it was able to evidence, so the ticket was passed to an agent. The customer asked for the fastest safe route to roll back a broken release. The reference passage only provides the title 'Rolling back a failed release' and the applicable services, but contains no procedural instructions or details on how to perform the rollback.",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-002"
+    ],
+    "retrieval_scores": [
+      0.6059
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.001,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": true,
+    "errors": [],
+    "ticket_length": 176,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0022",
+    "channel": "docs_comment",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "performance_degradation",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "The system could not produce an answer it was able to evidence, so the ticket was passed to an agent. The customer is asking about performance issues during peak hours with autoscaling enabled. Passage 1 mentions 'Autoscaling behaviour and instance limits' but provides no details on how it works or why it might fail to scale. Passage 2 discusses health check failures during database incidents, which",
+    "retrieved_doc_ids": [
+      "DOC-PERF-002",
+      "DOC-DEPLOY-001",
+      "DOC-BILL-001"
+    ],
+    "retrieval_scores": [
+      0.5831,
+      0.4919,
+      0.473
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.002,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": true,
+    "errors": [],
+    "ticket_length": 168,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0024",
+    "channel": "chat",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "api_key_issue",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as api key issue with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-AUTH-004, DOC-ONB-002, DOC-SEC-003) were found.",
+    "retrieved_doc_ids": [
+      "DOC-AUTH-004",
+      "DOC-ONB-002",
+      "DOC-SEC-003"
+    ],
+    "retrieval_scores": [
+      0.5592,
+      0.5275,
+      0.4691
+    ],
+    "citations": [
+      "DOC-AUTH-004"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 0.008,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 120,
+    "response_chars": 359
+  },
+  {
+    "ticket_id": "VAL-0025",
+    "channel": "chat",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "intent": "deployment_failure",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as deployment failure with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-DEPLOY-001, DOC-ONB-001, DOC-ONB-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-001",
+      "DOC-ONB-001",
+      "DOC-ONB-002"
+    ],
+    "retrieval_scores": [
+      0.6521,
+      0.5003,
+      0.4945
+    ],
+    "citations": [
+      "DOC-DEPLOY-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 0.005,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 141,
+    "response_chars": 428
+  },
+  {
+    "ticket_id": "VAL-0026",
+    "channel": "email",
+    "customer_tier": "business",
+    "customer_region": "latin_america",
+    "language_fluency": "non_fluent",
+    "intent": "data_residency",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "The system could not produce an answer it was able to evidence, so the ticket was passed to an agent. The customer needs to know how to check their current region and how to migrate or configure data residency to the EU. Passage 1 lists 'The organisation was created in a region that no longer suits the requirement' as a common cause but provides no steps or instructions on how to resolve it or chang",
+    "retrieved_doc_ids": [
+      "DOC-DATA-003",
+      "DOC-DATA-002",
+      "DOC-ACCT-002"
+    ],
+    "retrieval_scores": [
+      0.6461,
+      0.6073,
+      0.5284
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.002,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": true,
+    "errors": [],
+    "ticket_length": 194,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0027",
+    "channel": "email",
+    "customer_tier": "enterprise",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "billing_query",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as billing query with 95% confidence, at or above the 75% bar, and 2 supporting documentation passages (DOC-BILL-003, DOC-BILL-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-BILL-003",
+      "DOC-BILL-001"
+    ],
+    "retrieval_scores": [
+      0.7059,
+      0.6627
+    ],
+    "citations": [
+      "DOC-BILL-001",
+      "DOC-BILL-003"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 0.002,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 147,
+    "response_chars": 341
+  },
+  {
+    "ticket_id": "VAL-0034",
+    "channel": "email",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "rollback_request",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as rollback request with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-DEPLOY-002, DOC-AUTH-001, DOC-DEPLOY-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-002",
+      "DOC-AUTH-001",
+      "DOC-DEPLOY-001"
+    ],
+    "retrieval_scores": [
+      0.7529,
+      0.477,
+      0.4599
+    ],
+    "citations": [
+      "DOC-DEPLOY-002"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "5 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 0.002,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 185,
+    "response_chars": 508
+  },
+  {
+    "ticket_id": "VAL-0037",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "data_residency",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as data residency with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-DATA-003, DOC-DATA-002, DOC-ACCT-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DATA-003",
+      "DOC-DATA-002",
+      "DOC-ACCT-001"
+    ],
+    "retrieval_scores": [
+      0.7066,
+      0.5039,
+      0.4767
+    ],
+    "citations": [
+      "DOC-DATA-003"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "1 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 0.003,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 147,
+    "response_chars": 258
+  },
+  {
+    "ticket_id": "VAL-0038",
+    "channel": "forum",
+    "customer_tier": "standard",
+    "customer_region": "asia_pacific",
+    "language_fluency": "fluent",
+    "intent": "performance_degradation",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "The system could not produce an answer it was able to evidence, so the ticket was passed to an agent. The customer is asking for help with a specific performance degradation (p95 latency doubling). Passage 1 (DOC-PERF-001) is titled 'Diagnosing elevated response latency' but contains no actual diagnostic steps, causes, or solutions, only the title and applicability. Therefore, it does not provide th",
+    "retrieved_doc_ids": [
+      "DOC-PERF-001",
+      "DOC-DATA-003",
+      "DOC-API-002"
+    ],
+    "retrieval_scores": [
+      0.7445,
+      0.5545,
+      0.5161
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.003,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": true,
+    "errors": [],
+    "ticket_length": 194,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0042",
+    "channel": "chat",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "configuration_help",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as configuration help with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-ACCT-002, DOC-DEPLOY-004, DOC-BILL-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-ACCT-002",
+      "DOC-DEPLOY-004",
+      "DOC-BILL-001"
+    ],
+    "retrieval_scores": [
+      0.6411,
+      0.5992,
+      0.5384
+    ],
+    "citations": [
+      "DOC-DEPLOY-004"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 0.002,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 123,
+    "response_chars": 477
+  },
+  {
+    "ticket_id": "VAL-0044",
+    "channel": "chat",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "billing_query",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "The system could not produce an answer it was able to evidence, so the ticket was passed to an agent. The customer asked for an explanation of specific charges on their invoice. The available passages only contain titles and scope information (e.g., 'Understanding your invoice and usage breakdown') but do not contain the actual content explaining how to interpret line items or identify services.",
+    "retrieved_doc_ids": [
+      "DOC-BILL-001",
+      "DOC-BILL-003"
+    ],
+    "retrieval_scores": [
+      0.6017,
+      0.43
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.003,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": true,
+    "errors": [],
+    "ticket_length": 111,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0046",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "non_fluent",
+    "intent": "api_usage_question",
+    "urgency": "medium",
+    "confidence": 0.85,
+    "action": "escalate",
+    "reason": "The system could not produce an answer it was able to evidence, so the ticket was passed to an agent. The customer asks for the correct method to page through large results and how to fix duplicate or missing records. The provided passage only contains the title 'Pagination and handling large result sets' and does not contain any instructions, code examples, or troubleshooting steps.",
+    "retrieved_doc_ids": [
+      "DOC-API-002",
+      "DOC-SEC-001",
+      "DOC-AUTH-002"
+    ],
+    "retrieval_scores": [
+      0.7252,
+      0.526,
+      0.4939
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.001,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": true,
+    "errors": [],
+    "ticket_length": 124,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0047",
+    "channel": "chat",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "fluent",
+    "intent": "rate_limit",
+    "urgency": "medium",
+    "confidence": 0.85,
+    "action": "auto_respond",
+    "reason": "Classified as rate limit with 85% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-API-001, DOC-INT-002, DOC-AUTH-004) were found.",
+    "retrieved_doc_ids": [
+      "DOC-API-001",
+      "DOC-INT-002",
+      "DOC-AUTH-004"
+    ],
+    "retrieval_scores": [
+      0.6541,
+      0.5194,
+      0.5023
+    ],
+    "citations": [
+      "DOC-API-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.85 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 0.002,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 125,
+    "response_chars": 324
+  },
+  {
+    "ticket_id": "VAL-0054",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "data_residency",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "The system could not produce an answer it was able to evidence, so the ticket was passed to an agent. The customer requested a specific document or confirmation regarding the physical location of their data. Passage 1 mentions 'Data residency and regional storage' as a topic but provides no details, locations, or downloadable resources. Passage 2 discusses backups and is irrelevant to data residency",
+    "retrieved_doc_ids": [
+      "DOC-DATA-003",
+      "DOC-DATA-002",
+      "DOC-ACCT-002"
+    ],
+    "retrieval_scores": [
+      0.6488,
+      0.6109,
+      0.4956
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.001,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": true,
+    "errors": [],
+    "ticket_length": 178,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0055",
+    "channel": "chat",
+    "customer_tier": "business",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "intent": "api_key_issue",
+    "urgency": "low",
+    "confidence": 0.85,
+    "action": "auto_respond",
+    "reason": "Classified as api key issue with 85% confidence, at or above the 75% bar, and 1 supporting documentation passage (DOC-INT-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-INT-001"
+    ],
+    "retrieval_scores": [
+      0.6454
+    ],
+    "citations": [
+      "DOC-INT-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.85 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 0.002,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 162,
+    "response_chars": 390
+  },
+  {
+    "ticket_id": "VAL-0056",
+    "channel": "email",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "deployment_failure",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as deployment failure with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-DEPLOY-003, DOC-DEPLOY-001, DOC-ONB-001) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DEPLOY-003",
+      "DOC-DEPLOY-001",
+      "DOC-ONB-001"
+    ],
+    "retrieval_scores": [
+      0.6309,
+      0.6062,
+      0.5767
+    ],
+    "citations": [
+      "DOC-DEPLOY-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "2 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 0.002,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 149,
+    "response_chars": 289
+  },
+  {
+    "ticket_id": "VAL-0060",
+    "channel": "email",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "webhook_issue",
+    "urgency": "high",
+    "confidence": 0.95,
+    "action": "escalate",
+    "reason": "The system could not produce an answer it was able to evidence, so the ticket was passed to an agent. The customer reports that signature verification fails despite following the documentation to compute the signature over the parsed body. The reference passage only lists the topic 'Webhook delivery, retries and signature verification' but does not contain the specific technical details or troublesh",
+    "retrieved_doc_ids": [
+      "DOC-API-003"
+    ],
+    "retrieval_scores": [
+      0.7641
+    ],
+    "citations": [],
+    "guardrails": [],
+    "response_sent": false,
+    "response_text": "",
+    "latency_s": 0.001,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": true,
+    "errors": [],
+    "ticket_length": 164,
+    "response_chars": 163
+  },
+  {
+    "ticket_id": "VAL-0063",
+    "channel": "email",
+    "customer_tier": "business",
+    "customer_region": "europe",
+    "language_fluency": "fluent",
+    "intent": "account_access",
+    "urgency": "medium",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as account access with 95% confidence, at or above the 75% bar, and 3 supporting documentation passages (DOC-ACCT-001, DOC-BILL-002, DOC-AUTH-003) were found.",
+    "retrieved_doc_ids": [
+      "DOC-ACCT-001",
+      "DOC-BILL-002",
+      "DOC-AUTH-003"
+    ],
+    "retrieval_scores": [
+      0.6413,
+      0.6409,
+      0.6214
+    ],
+    "citations": [
+      "DOC-ACCT-001"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "3 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 28.944,
+    "throttle_s": 28.0,
+    "tokens_used": 1092,
+    "llm_calls": 2,
+    "cache_hits": 1,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 178,
+    "response_chars": 308
+  },
+  {
+    "ticket_id": "VAL-0066",
+    "channel": "forum",
+    "customer_tier": "enterprise",
+    "customer_region": "north_america",
+    "language_fluency": "non_fluent",
+    "intent": "data_residency",
+    "urgency": "low",
+    "confidence": 0.95,
+    "action": "auto_respond",
+    "reason": "Classified as data residency with 95% confidence, at or above the 75% bar, and 2 supporting documentation passages (DOC-DATA-003, DOC-DATA-002) were found.",
+    "retrieved_doc_ids": [
+      "DOC-DATA-003",
+      "DOC-DATA-002"
+    ],
+    "retrieval_scores": [
+      0.6513,
+      0.595
+    ],
+    "citations": [
+      "DOC-DATA-003"
+    ],
+    "guardrails": [
+      {
+        "name": "private_data",
+        "status": "pass",
+        "detail": "No identifying data detected."
+      },
+      {
+        "name": "grounding",
+        "status": "pass",
+        "detail": "4 citation(s) resolved to retrieved text."
+      },
+      {
+        "name": "instruction_integrity",
+        "status": "pass",
+        "detail": "No override attempt detected."
+      },
+      {
+        "name": "tone_and_scope",
+        "status": "pass",
+        "detail": "No commitments made."
+      },
+      {
+        "name": "confidence_floor",
+        "status": "pass",
+        "detail": "Confidence 0.95 at or above 0.75."
+      }
+    ],
+    "response_sent": true,
+    "response_text": "",
+    "latency_s": 0.004,
+    "throttle_s": 0.0,
+    "tokens_used": 0,
+    "llm_calls": 2,
+    "cache_hits": 2,
+    "degraded": false,
+    "errors": [],
+    "ticket_length": 210,
+    "response_chars": 417
+  }
+]

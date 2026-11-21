@@ -81,7 +81,7 @@ it rejects a short true quote.
 | ID | Risk | Likelihood | Impact | Control | Residual |
 |---|---|---|---|---|---|
 | R-01 | A confident, fluent, wrong answer reaches a customer because it was **fabricated** | Medium | High | Verbatim-span grounding check; retrieval returns nothing below the floor; generation sees only retrieved text | Low |
-| R-09 | A confident, fluent, wrong answer reaches a customer because the passage it quotes is **genuine but irrelevant** | **Measured at 13 in 80** | High | Prompt instruction only (PR-02 v1.6). No mechanical check exists | **High** |
+| R-09 | A confident, fluent, wrong answer reaches a customer because the passage it quotes is **genuine but irrelevant** | **Measured at 13 in 80** | High | **None that works.** Two were measured on 22 November and neither was adopted; see below. No mechanical check exists | **High** |
 | R-02 | A security or compliance ticket is answered automatically | Low | Severe | Hard class rule in `src/route.py`, ahead of any model call | Very low |
 | R-03 | Customer attributes influence routing | Low | Severe | `src/route.py` is a pure function that reads no tier, region or fluency field; fairness audit segments every run | Very low |
 | R-04 | The provider fails mid-run and the run reports success | Medium | High | Typed `ModelUnavailable`; every caller degrades to escalation and flags `degraded`; six induced failure cases in `scripts/induce_failures.py` | Low |
@@ -102,12 +102,44 @@ them was verbatim correct. The model found a real sentence in a real passage
 that did not address the question.
 
 Grounding verifies that a quote is *real*. Nothing here verifies that the
-passage is *relevant*, and those are different properties. The residual is
-recorded as High because the only control is a prompt instruction, prompt
-instructions are not guarantees, and the current wording is not yet measured.
-Raising the confidence threshold would not help — 13 of the 14 scored between
-0.85 and 0.95 — and neither would raising the retrieval floor, since top
-scores on correct and incorrect answers have medians of 0.669 and 0.652.
+passage is *relevant*, and those are different properties. Raising the
+confidence threshold would not help — 13 of the 14 scored between 0.85 and
+0.95 — and neither would raising the retrieval floor, since top scores on
+correct and incorrect answers have medians of 0.669 and 0.652.
+
+**Two mitigations were measured on 22 November and neither was adopted.**
+Both were tried separately, on the same subset of the 14 failing tickets plus
+10 correctly answered controls, so that each result is attributable and so
+that a change which buys escalations by refusing everything is visible.
+
+1. **PR-02 v1.6**, which makes relevance the first decision and states that a
+   quotable passage is not necessarily a relevant one. It escalated **0 of
+   the 14** and cost 1 of the 10 controls. The instruction is obeyed where
+   the model perceives irrelevance — the lost control was refused with
+   correct reasoning — so the limit is the model's judgement, not the
+   wording. The wording is retained because it is correct and costs nothing,
+   **not because it works.**
+2. **Section-level passages** (`RETRIEVAL_WHOLE_DOCUMENT=false`), sending
+   generation the matching section instead of the whole article. This acts on
+   the mechanism and escalated **8 of the 14**, but lost **4 of the 10**
+   controls, because the narrowing that removes the quotable irrelevant
+   sentence also removes the Resolution steps that answer a ticket matched on
+   its Symptoms. Projected to the full set it drops first contact resolution
+   from 62.5% to about 34.5% against a 60% target. Not adopted; the default
+   is unchanged and the setting exists so the experiment can be repeated.
+
+The outcomes of both runs are in `evaluation/results/r09_prompt_only/` and
+`evaluation/results/r09_section_passages/`, and the subset is defined by
+`evaluation/results/r09_subset_ids.json`, which carries the selection rule
+and the command that rebuilds the ticket file from `data/` rather than
+duplicating the ticket text.
+
+The residual is therefore recorded as High with no working control, which is
+the accurate statement. Both results come from small samples (8 of 14 has a
+95% interval of 33–79%), so the direction is reliable and the sizes are not.
+A control that would actually reduce this risk has to judge relevance outside
+the generation call so that the judgement can itself be measured against the
+`answerable_from_docs` labels; that is specified but not built.
 
 R-07 is listed as accepted rather than solved on purpose. Nothing in this
 system detects that an article has become untrue. `scripts/discovery.py`
