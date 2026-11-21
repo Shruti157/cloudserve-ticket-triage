@@ -69,9 +69,17 @@ python -m evaluation.harness --input data/validation_tickets.json \
 # 2. Run the tests.
 python -m pytest tests/ -v
 
-# 3. Start the API, then open http://127.0.0.1:8000/docs
+# 3. Start the API, then open http://127.0.0.1:8000
 python -m src.api
 ```
+
+The root serves a page for watching a ticket go through: paste one in, or use
+one of five prepared cases, and see the classification, the articles
+retrieved with their scores, all five guardrail results and the audit trail
+for that ticket. It is a view over `POST /ticket` and
+`GET /ticket/{id}/decisions` and holds no state of its own, so anything it
+shows can be reproduced with `curl`. The API itself is documented at
+`/docs`.
 
 `--input` and `--output` are both required arguments and neither has a
 default. The harness processes whatever is in the file it is given, however
@@ -210,10 +218,11 @@ procedure is in [`docs/governance.md`](docs/governance.md).
 
 ```
 src/            the system.      ingest → classify → retrieve → route → generate → validate
+src/static/     one HTML file: the demo page served at /, no build step
 prompts/        versioned prompt files, each naming the requirements it serves
 evaluation/     the harness, the metrics, the fairness audit, and the results
 scripts/        preflight, discovery, retrieval tuning, induced failures, secret scan
-tests/          114 tests; no API key and no network required
+tests/          117 tests; no API key and no network required
 data/           the ticket sets, the 29-article corpus, the guardrail triggers
 docs/           problem statement, architecture decisions, governance, build notes
 storage/        gitignored: the decision log, the response cache, the kill switch

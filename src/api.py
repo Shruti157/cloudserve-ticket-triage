@@ -14,10 +14,11 @@ from __future__ import annotations
 
 import logging
 from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import Any
 
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import PlainTextResponse, RedirectResponse
+from fastapi import FastAPI, HTTPException, Response
+from fastapi.responses import FileResponse, PlainTextResponse, RedirectResponse
 from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
 from pydantic import BaseModel, Field
 
@@ -122,15 +123,22 @@ def process_ticket(request: TicketRequest) -> dict[str, Any]:
     }
 
 
-@app.get("/", include_in_schema=False)
-def index() -> RedirectResponse:
-    """Send the root to the docs.
+DEMO_PAGE = Path(__file__).parent / "static" / "demo.html"
 
-    There is no UI of its own here; the interactive schema is the interface.
-    Anyone who starts the server and opens the address it printed should land
-    somewhere useful rather than on a 404 that reads as a broken server.
+
+@app.get("/", include_in_schema=False)
+def index() -> Response:
+    """A page for watching the system work, at the address the server prints.
+
+    The interface of record is this API and `/docs` documents it. The page is
+    a view over the same two endpoints anyone else would call, holding no
+    state of its own, and exists because the guardrail results and the
+    decision log are easier to judge when they are seen rather than read out
+    of JSON.
     """
-    return RedirectResponse("/docs")
+    if not DEMO_PAGE.exists():
+        return RedirectResponse("/docs")
+    return FileResponse(DEMO_PAGE)
 
 
 @app.get("/ticket/{ticket_id}/decisions")

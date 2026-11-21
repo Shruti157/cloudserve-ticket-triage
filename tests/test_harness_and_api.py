@@ -247,8 +247,33 @@ def test_the_ticket_endpoint_accepts_a_minimal_body(api_client, monkeypatch):
     assert payload["reason"]
 
 
-def test_the_root_sends_you_to_the_docs(api_client):
-    """There is no UI of its own; a bare root 404 reads as a broken server."""
+def test_the_root_serves_the_demo_page(api_client):
+    """A bare root 404 reads as a broken server to anyone following the README."""
     response = api_client.get("/", follow_redirects=False)
-    assert response.status_code in (307, 308)
-    assert response.headers["location"] == "/docs"
+    assert response.status_code == 200
+    assert "CloudServe support triage" in response.text
+
+
+def test_the_demo_page_only_calls_endpoints_that_exist(api_client):
+    """The page is a view over the API, so it must not invent routes.
+
+    It is one static file with no build step, which means nothing else would
+    notice if a path in it went stale after an endpoint was renamed.
+    """
+    import re
+
+    page = api_client.get("/").text
+    documented = set(api_client.get("/openapi.json").json()["paths"])
+
+    # Normalise `/ticket/${encodeURIComponent(id)}/decisions` to the templated
+    # form OpenAPI publishes, so a real path can be compared against a real route.
+    called = set()
+    for raw in re.findall(r"""fetch\(\s*["'`](/[^"'`]*)""", page):
+        called.add(re.sub(r"\$\{[^}]*\}", "{param}", raw))
+
+    assert called, "the page fetches nothing, so this test is not checking anything"
+    for path in called:
+        templated = re.sub(r"\{[^}]*\}", "{}", path)
+        if any(re.sub(r"\{[^}]*\}", "{}", d) == templated for d in documented):
+            continue
+        raise AssertionError(f"{path} is called by the demo page and is not a route")
