@@ -62,8 +62,18 @@ the documentation at all. Every citation in them was verbatim correct. The
 grounding guardrail, which is the control the whole design rests on, passed
 all of them, because the quotes were genuine and the passages were merely
 irrelevant. Groundedness and relevance are different properties, and only one
-of them can be checked mechanically. That finding, its mechanism and the
-change made in response are the subject of sections 7, 8 and 9.
+of them can be checked mechanically.
+
+Both available remedies were then measured, separately, on the fourteen
+failing tickets plus ten controls. **Neither worked.** Making the prompt
+state the relevance rule first changed nothing at all; narrowing the
+passages sent to generation fixed eight of the fourteen but lost four of the
+ten controls, which projects to a worse system overall. A second
+implementation of the same brief, which reports a better 68.8%, turns out to
+share the failure at a higher rate and never to test for it. The defect
+therefore ships, measured and documented rather than assumed, with the
+remedies ruled out on evidence. That finding, its mechanism and the two
+experiments are the subject of sections 7, 8 and 9.
 
 ---
 
@@ -1004,23 +1014,38 @@ using the **500 development tickets** in `data/development_tickets.json` via
 stratified 22-ticket sample of the development set
 (`evaluation/results/model_comparison.json`).
 
-The evaluation set was run three times, and the report is explicit about
+The evaluation set was run five times, and the report is explicit about
 which run produced which number:
 
 1. **13 November** — truncated at ticket 61 by the token cap. Its figures are
    not quoted as results anywhere in this report.
 2. **21 November, partial attempts** — aborted early, no report produced.
 3. **21 November, `run-20261121T084235Z`** — the complete 80-ticket
-   unattended run. **Every figure in section 7 comes from this run.**
+   unattended run. **Every figure in section 7 comes from this run**, except
+   the two experiments in §7.5.
+4. **22 November, `r09_prompt_only`** — a 24-ticket subset, measuring the
+   v1.6 prompt change.
+5. **22 November, `r09_section_passages`** — the same 24 tickets, measuring
+   section-level passages.
+
+Runs 4 and 5 need care, because they are the one place in this project where
+the evaluation set informed a decision about the system. They were used to
+**reject** two changes, not to select a configuration: the shipped settings
+are the ones that produced run 3, unchanged. Had either experiment been
+adopted, the honest course would have been to re-run the full set and report
+that instead, and §7.5 says so. The 24 tickets were chosen by their outcome
+in run 3 rather than at random, which makes the subset suitable for asking
+whether a change helps those cases and unsuitable for producing any headline
+figure; none is quoted from them.
 
 Two changes were made *after* seeing evaluation results, and both are
 declared rather than folded in silently. The grounding quote floor was
 lowered from six words to four after run 1 showed it blocking 21 verbatim-
 correct citations; this is a defect fix rather than tuning, and the evidence
 is in `docs/governance.md`. The generation prompt was revised to v1.6 after
-run 3 exposed the relevance failure; **that change is not reflected in any
-number in this report**, because the token budget was exhausted before it
-could be measured.
+run 3 exposed the relevance failure; run 4 then showed it has no effect, so
+**no number in section 7 other than those in §7.5 is affected by it**, and
+the behaviour it describes is the behaviour run 3 measured.
 
 ---
 
